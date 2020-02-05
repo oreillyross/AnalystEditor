@@ -1,2 +1,0 @@
-# AnalystEditor
-Created with CodeSandbox
