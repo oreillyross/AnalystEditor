@@ -9,6 +9,15 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import {
+  makeExecutableSchema,
+  addMockFunctionsToSchema
+} from 'graphql-tools';
+import { graphql, buildClientSchema  } from 'graphql'
+
+import * as introspectionSchema from './schema.json'
+const GraphQlSchemaObject = buildClientSchema(introspectionSchema)
+
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
@@ -17,6 +26,10 @@ const client = new ApolloClient({
     mode: "cors"
   }
 });
+
+
+
+
 
 const ARTICLES = gql`
   {
