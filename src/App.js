@@ -8,15 +8,7 @@ import "react-toggle/style.css";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-import {
-  makeExecutableSchema,
-  addMockFunctionsToSchema
-} from 'graphql-tools';
-import { graphql, buildClientSchema  } from 'graphql'
 
-import * as introspectionSchema from './schema.json'
-const GraphQlSchemaObject = buildClientSchema(introspectionSchema)
 
 
 // the Apollo cache is set up automatically
@@ -28,16 +20,6 @@ const client = new ApolloClient({
 });
 
 
-
-
-
-const ARTICLES = gql`
-  {
-    Settings {
-      AutomatedSearch
-    }
-  }
-`;
 
 const StyledDashboard = styled.div`
   display: grid;
@@ -64,24 +46,11 @@ function NotFound() {
 }
 
 function Admin() {
-  const { error, loading, data } = useQuery(ARTICLES);
-  if (loading) return <div> Loading</div>;
-  if (error) return <div>Error </div>;
-  if (data) {
-    return (
-      <div>
-        <h3>Admin screen</h3>
-
-        <StyledToggleOption>
-          <span>Automated Search on</span>
-          <Toggle
-            defaultChecked={data.Settings[0].AutomatedSearch}
-            icons={false}
-          />
-        </StyledToggleOption>
+  return (
+    <div>
+      Admin
       </div>
-    );
-  }
+  )
 }
 
 function Home() {
