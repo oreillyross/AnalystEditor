@@ -5,15 +5,19 @@ import { ArticleTable } from "./ArticleTable";
 import { Router, Link } from "@reach/router";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
-import ApolloClient from "apollo-boost";
+import ApolloClient from "apollo-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import link from './http-link'
+import { articles } from './graphql-queries'
 
-
+console.log(articles)
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
-  uri: "https://horizon-me.herokuapp.com/v1/graphql",
+  link,
+  cache: new InMemoryCache(),
   fetchOptions: {
     mode: "cors"
   }
@@ -54,7 +58,12 @@ function Admin() {
 }
 
 function Home() {
-  return <div>Welcome</div>;
+  const {loading, error, data} = useQuery(articles)
+  if (loading) return null
+  if (error) return <div>Error</div>
+  if (data) console.log(data)
+  return ( 
+  <div>Welcome</div>)
 }
 
 export default function App() {
