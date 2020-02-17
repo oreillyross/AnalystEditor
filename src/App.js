@@ -11,6 +11,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import link from './http-link'
 import { articles } from './graphql-queries'
+import Landing from './landing'
 
 console.log(articles)
 
