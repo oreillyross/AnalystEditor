@@ -8,12 +8,10 @@ import "react-toggle/style.css";
 import ApolloClient from "apollo-client";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import link from './http-link'
-import { articles } from './graphql-queries'
-import Landing from './landing'
-
-console.log(articles)
+import { InMemoryCache } from "apollo-cache-inmemory";
+import link from "./http-link";
+import { articles } from "./graphql-queries";
+import Landing from "./landing";
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
@@ -23,8 +21,6 @@ const client = new ApolloClient({
     mode: "cors"
   }
 });
-
-
 
 const StyledDashboard = styled.div`
   display: grid;
@@ -51,20 +47,15 @@ function NotFound() {
 }
 
 function Admin() {
-  return (
-    <div>
-      Admin
-      </div>
-  )
+  return <div>Admin</div>;
 }
 
 function Home() {
-  const {loading, error, data} = useQuery(articles)
-  if (loading) return null
-  if (error) return <div>Error</div>
-  if (data) console.log(data)
-  return ( 
-  <div>Welcome</div>)
+  const { loading, error, data } = useQuery(articles);
+  if (loading) return null;
+  if (error) return <div>Error</div>;
+  if (data) console.log(data);
+  return <div>Welcome</div>;
 }
 
 export default function App() {
