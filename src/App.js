@@ -55,7 +55,7 @@ function Home() {
   if (loading) return null;
   if (error) return <div>Error</div>;
   if (data) console.log(data);
-  return <div>Welcome</div>;
+  return <Landing />;
 }
 
 export default function App() {

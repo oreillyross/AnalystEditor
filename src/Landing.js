@@ -1,9 +1,23 @@
-import React from 'react'
+// src/App.js
 
-export default function Landing() {
+import React from "react";
+import NavBar from "./components/NavBar";
+import { useAuth0 } from "./react-auth0-spa";
+
+function Landing() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div>
-      Landing page where one can login etc.
-      </div>
-  )
+    <div className="App">
+      <header>
+        <NavBar />
+      </header>
+    </div>
+  );
 }
+
+export default Landing;
