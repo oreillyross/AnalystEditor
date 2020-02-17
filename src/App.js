@@ -11,7 +11,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import link from "./http-link";
 import { articles } from "./graphql-queries";
-import Landing from "./landing";
+import Landing from "./Landing";
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
