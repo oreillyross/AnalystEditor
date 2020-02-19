@@ -12,6 +12,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import link from "./http-link";
 import { articles } from "./graphql-queries";
 import Landing from "./Landing";
+import SourceForm from './forms/SourceForm'
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
@@ -47,7 +48,14 @@ function NotFound() {
 }
 
 function Admin() {
-  return <div>Admin</div>;
+  return (
+  <div><div>Admin</div>
+  <SourceForm/>
+
+  </div>
+    
+  )
+
 }
 
 function Home() {
