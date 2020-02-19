@@ -9,7 +9,7 @@ import {
   FormLabel,
   Paper
 } from "@material-ui/core";
-//import "../style.css";
+import "../style.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -37,16 +37,18 @@ const SourceForm = () => {
   });
   return (
     <Paper>
-      <FormLabel className="form-label"> Source Form</FormLabel>
+      
       <form
         className={classes.root}
         autoComplete="off"
         onSubmit={formik.handleSubmit}
       >
+        <FormLabel className="form-label"> Source Form</FormLabel>
         <div>
-          <InputLabel>Name</InputLabel>
           <TextField
             id="sourceName"
+            className={classes.textField}
+            margin="dense"
             name="sourceName"
             variant="outlined"
             required
@@ -61,6 +63,8 @@ const SourceForm = () => {
             id="sourceDescription"
             name="sourceDescription"
             multiline
+            rows={4}
+            margin="dense"
             label="Description"
             variant="outlined"
             fullWidth
@@ -72,6 +76,7 @@ const SourceForm = () => {
           <TextField
             id="sourceUrl"
             name="sourceUrl"
+            margin="dense"
             variant="outlined"
             label="Hyperlink"
             type="url"
