@@ -10,6 +10,20 @@ import {
   Paper
 } from "@material-ui/core";
 import "../style.css";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+const ADD_SOURCE = gql`
+  mutation AddSource($name: String!, $description: String, $url: String) {
+    insert_Sources(
+      objects: { name: $name, description: $description, url: $url }
+    ) {
+      returning {
+        id
+      }
+    }
+  }
+`;
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,6 +39,8 @@ const useStyles = makeStyles(theme => ({
 const SourceForm = () => {
   const classes = useStyles();
 
+  const [addSource, { data }] = useMutation(ADD_SOURCE);
+
   const formik = useFormik({
     initialValues: {
       sourceName: "",
@@ -32,12 +48,19 @@ const SourceForm = () => {
       sourceUrl: ""
     },
     onSubmit: values => {
+      addSource({
+        variables: {
+          name: values.sourceName,
+          description: values.sourceDescription,
+          url: values.sourceUrl
+        }
+      });
+
       alert(JSON.stringify(values, null, 2));
     }
   });
   return (
     <Paper>
-      
       <form
         className={classes.root}
         autoComplete="off"
