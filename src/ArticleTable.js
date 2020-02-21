@@ -7,12 +7,30 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+
+
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650
   }
 });
+
+const GET_ARTICLES = gql`
+  query getArticles {
+  Articles {
+    id
+    title
+    author
+    url
+    Article_Source_Link {
+      name
+    }
+  }
+}
+`
 
 const articles = [
   {
@@ -26,9 +44,16 @@ const articles = [
 
 
 export function ArticleTable() {
+  
   const classes = useStyles();
+  const {loading, error, data } = useQuery(GET_ARTICLES)
 
-  return (
+  if (loading) return null
+  if (error) return <div>Oops</div>
+
+  
+  if (data) {
+    return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
@@ -41,13 +66,13 @@ export function ArticleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {articles.map(row => (
-            <TableRow key={row.articleName}>
-              <TableCell component="th" scope="row">
-                <a href={row.articleHref} target='_blank' rel='noopener noreferrer'>{row.articleName}</a>
+          {data.Articles.map(row => (
+            <TableRow key={row.title}>
+              <TableCell >
+                <a href={row.url} target='_blank' rel='noopener noreferrer'>{row.title}</a>
               </TableCell>
-              <TableCell align="left">{row.articleSource}</TableCell>
-              <TableCell align="right">{row.articleTagCount}</TableCell>
+              <TableCell align="left">{row.Article_Source_Link.name}</TableCell>
+              <TableCell align="right"></TableCell>
               <TableCell align="right">{row.ArticleIndicationCount}</TableCell>
               <TableCell align="right">{row.articleScenarioCount}</TableCell>
             </TableRow>
@@ -56,4 +81,5 @@ export function ArticleTable() {
       </Table>
     </TableContainer>
   );
+}
 }
