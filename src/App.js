@@ -85,6 +85,9 @@ export default function App() {
           <Link to="/articles">
             <Button>Articles</Button>
           </Link>
+          <Link to="/articles">
+            <Button>Events</Button>
+          </Link>
         </StyledNavigation>
         <Router>
           <Home path="/" />
