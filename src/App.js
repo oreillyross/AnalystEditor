@@ -14,7 +14,7 @@ import httplink from "./http-link";
 import errorlink from './error-link'
 import { articles } from "./graphql-queries";
 import Landing from "./Landing";
-import SourceForm from './forms/SourceForm'
+import { Admin } from "./Admin";
 
 const link = new ApolloLink.from([errorlink, httplink])
 
@@ -51,17 +51,6 @@ function NotFound() {
   return <div>Not found</div>;
 }
 
-function Admin() {
-  return (
-  <div><div>Admin</div>
-  <SourceForm/>
-
-  </div>
-    
-  )
-
-}
-
 function Home() {
   const { loading, error, data } = useQuery(articles);
   if (loading) return null;
@@ -85,8 +74,11 @@ export default function App() {
           <Link to="/articles">
             <Button>Articles</Button>
           </Link>
-          <Link to="/articles">
+          <Link to="/events">
             <Button>Events</Button>
+          </Link>
+          <Link to="/tags">
+            <Button>Tags</Button>
           </Link>
         </StyledNavigation>
         <Router>
