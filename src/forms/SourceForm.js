@@ -12,6 +12,8 @@ import {
 import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { makeStyles } from "@material-ui/core/styles";
+
 
 const ADD_SOURCE = gql`
   mutation AddSource($name: String!, $description: String, $url: String) {
@@ -25,7 +27,7 @@ const ADD_SOURCE = gql`
   }
 `;
 
-import { makeStyles } from "@material-ui/core/styles";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,11 +38,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
+function showDialog() {
+  alert('added record')
+}
+
 const SourceForm = () => {
   const classes = useStyles();
 
-  const [addSource, { data }] = useMutation(ADD_SOURCE);
-
+  const [addSource, { data, loading, error }] = useMutation(ADD_SOURCE, {onCompleted: () => {
+    showDialog()
+  }});
+  if (error) console.log(error)
+  if (data) console.log(data)
   const formik = useFormik({
     initialValues: {
       sourceName: "",
@@ -54,9 +64,9 @@ const SourceForm = () => {
           description: values.sourceDescription,
           url: values.sourceUrl
         }
-      });
+      }).then(result => console.log(result));
 
-      alert(JSON.stringify(values, null, 2));
+      
     }
   });
   return (

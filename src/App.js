@@ -6,13 +6,17 @@ import { Router, Link } from "@reach/router";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import ApolloClient from "apollo-client";
+import { ApolloLink } from 'apollo-link';
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
-import link from "./http-link";
+import httplink from "./http-link";
+import errorlink from './error-link'
 import { articles } from "./graphql-queries";
 import Landing from "./Landing";
 import SourceForm from './forms/SourceForm'
+
+const link = new ApolloLink.from([errorlink, httplink])
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
