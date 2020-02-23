@@ -15,6 +15,7 @@ import errorlink from './error-link'
 import { articles } from "./graphql-queries";
 import Landing from "./Landing";
 import { Admin } from "./Admin";
+import  EventTable  from './EventTable'
 
 const link = new ApolloLink.from([errorlink, httplink])
 
@@ -86,6 +87,7 @@ export default function App() {
 
           <ArticleTable path="/articles" />
           <Admin path="/admin" />
+<EventTable path='/events'/>
           <NotFound default />
         </Router>
       </StyledDashboard>
