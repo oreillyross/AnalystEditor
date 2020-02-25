@@ -1,23 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import { ArticleTable } from "./ArticleTable";
+import { ArticleTable } from "./tables/ArticleTable";
 import { Router, Link } from "@reach/router";
 import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import ApolloClient from "apollo-client";
-import { ApolloLink } from 'apollo-link';
+import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { useQuery } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
-import errorlink from './error-link'
+import errorlink from "./error-link";
 import { articles } from "./graphql-queries";
-import Landing from "./Landing";
-import { Admin } from "./Admin";
-import  EventTable  from './EventTable'
+import Landing from "./views/Landing";
+import { Admin } from "./views/Admin";
+import Event from "./views/Event";
+import Article from "./views/Article";
+import EventTable from "./tables/EventTable";
 
-const link = new ApolloLink.from([errorlink, httplink])
+const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
@@ -83,11 +85,12 @@ export default function App() {
           </Link>
         </StyledNavigation>
         <Router>
-          <Home path="/" />
+          <Event path="/" />
 
           <ArticleTable path="/articles" />
           <Admin path="/admin" />
-<EventTable path='/events'/>
+          <EventTable path="/events" />
+          <Article path="/article/:id" />
           <NotFound default />
         </Router>
       </StyledDashboard>
