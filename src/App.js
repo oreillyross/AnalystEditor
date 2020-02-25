@@ -1,23 +1,18 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
-import { ArticleTable } from "./tables/ArticleTable";
 import { Router, Link } from "@reach/router";
-import Toggle from "react-toggle";
 import "react-toggle/style.css";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { useQuery } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
-import { articles } from "./graphql-queries";
-import Landing from "./views/Landing";
 import { Admin } from "./views/Admin";
 import Event from "./views/Event";
-import Article from "./views/Article";
 import EventTable from "./tables/EventTable";
+import Articles from './views/Articles'
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -45,21 +40,10 @@ const StyledNavigation = styled.div`
   border-bottom: 1px solid lightgray;
 `;
 
-const StyledToggleOption = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-`;
+
 
 function NotFound() {
   return <div>Not found</div>;
-}
-
-function Home() {
-  const { loading, error, data } = useQuery(articles);
-  if (loading) return null;
-  if (error) return <div>Error</div>;
-  if (data) console.log(data);
-  return <Landing />;
 }
 
 export default function App() {
@@ -87,10 +71,9 @@ export default function App() {
         <Router>
           <Event path="/" />
 
-          <ArticleTable path="/articles" />
+          <Articles path="/articles" />
           <Admin path="/admin" />
           <EventTable path="/events" />
-          <Article path="/article/:id" />
           <NotFound default />
         </Router>
       </StyledDashboard>

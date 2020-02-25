@@ -1,57 +1,32 @@
-import React from 'react'
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import { makeStyles } from "@material-ui/core/styles";
-import Article from "../views/Article";
+import React from "react";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import ArticleTable from '../tables/ArticleTable'
 
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650
+const GET_ARTICLES = gql`
+  query getArticles {
+    Articles {
+      id
+      title
+      author
+      url
+      Article_Source_Link {
+        name
+      }
+    }
   }
-});
+`;
 
-function Articles({articles}) {
-  
-  const classes = useStyles();
-  
-  return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Article</TableCell>
-            <TableCell align="left">Source</TableCell>
-            <TableCell align="right">Tags</TableCell>
-            <TableCell align="right">Indications</TableCell>
-            <TableCell align="right">Scenarios</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {articles.map(row => (
-            <TableRow key={row.title}>
-              <TableCell>
-                <a href={`/article/${row.id}`}>{row.title}</a>
-              </TableCell>
-              <TableCell align="left">
-                {row.Article_Source_Link.name}
-              </TableCell>
-              <TableCell align="right" />
-              <TableCell align="right">
-                {row.ArticleIndicationCount}
-              </TableCell>
-              <TableCell align="right">{row.articleScenarioCount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  );
+function Articles() {
+
+  const { loading, error, data } = useQuery(GET_ARTICLES);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Oops</div>;
+  if (data) {
+    const articles = data.Articles
+    return <ArticleTable articles={articles}/>
+  }
 }
 
 export default Articles
