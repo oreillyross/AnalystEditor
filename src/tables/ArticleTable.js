@@ -39,7 +39,7 @@ function ArticleTable({articles}) {
                 <a href={`/article/${row.id}`}>{row.title}</a>
               </TableCell>
               <TableCell align="left">
-                {row.Article_Source_Link.name}
+                {(row.Article_Source_Link) ? row.Article_Source_Link.name : ''  }
               </TableCell>
               <TableCell align="right" />
               <TableCell align="right">

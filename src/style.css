@@ -1,3 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+body {
+  max-width: 500px;
+  font-family: Roboto, sans-serif;
+  line-height: 1.4;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+
 * {
   padding: .7rem;
 }
@@ -11,6 +21,8 @@ form {
 background-color: rgb(224, 224, 230);
 width: 100%
 }
+
+
 
 /* * { background-color: rgba(255,0,0,.2); }
 * * { background-color: rgba(0,255,0,.2); }

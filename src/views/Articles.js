@@ -25,6 +25,7 @@ function Articles() {
   if (error) return <div>Oops</div>;
   if (data) {
     const articles = data.Articles
+    console.log(data.Articles)
     return <ArticleTable articles={articles}/>
   }
 }
