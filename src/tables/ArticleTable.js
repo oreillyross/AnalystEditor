@@ -37,7 +37,7 @@ function ArticleTable({articles}) {
           {articles.map(row => (
             <TableRow key={row.title}>
               <TableCell>
-                <Button component='a' fullWidth>{row.title}</Button>
+                <Button onClick={} component='a' fullWidth>{row.title}</Button>
               </TableCell>
               <TableCell align="left">
                 {(row.Article_Source_Link) ? row.Article_Source_Link.name : ''  }
