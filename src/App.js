@@ -70,7 +70,6 @@ export default function App() {
         </StyledNavigation>
         <Router>
           <Event path="/" />
-
           <Articles path="/articles" />
           <Admin path="/admin" />
           <EventTable path="/events" />

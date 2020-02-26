@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import ArticleTable from '../tables/ArticleTable'
+import ArticleTable from "../tables/ArticleTable";
 
 const GET_ARTICLES = gql`
   query getArticles {
@@ -18,16 +18,20 @@ const GET_ARTICLES = gql`
 `;
 
 function Articles() {
-
   const { loading, error, data } = useQuery(GET_ARTICLES);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Oops</div>;
-  if (data) {
-    const articles = data.Articles
-    console.log(data.Articles)
-    return <ArticleTable articles={articles}/>
+  const [article, setArticle] = React.useState({});
+  if (!(Object.entries(article).length === 0 && article.constructor === Object))
+    return <div>Here is an article</div>;
+  
+    if (loading) return <div>Loading...</div>;
+  
+    if (error) return <div>Oops</div>;
+  
+    if (data) {
+    const articles = data.Articles;
+    console.log(data.Articles);
+    return <ArticleTable articles={articles} />;
   }
 }
 
-export default Articles
+export default Articles;

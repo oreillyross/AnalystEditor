@@ -6,6 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from '@material-ui/core/Button'
 import { makeStyles } from "@material-ui/core/styles";
 
 
@@ -36,7 +37,7 @@ function ArticleTable({articles}) {
           {articles.map(row => (
             <TableRow key={row.title}>
               <TableCell>
-                <a href={`/article/${row.id}`}>{row.title}</a>
+                <Button component='a' fullWidth>{row.title}</Button>
               </TableCell>
               <TableCell align="left">
                 {(row.Article_Source_Link) ? row.Article_Source_Link.name : ''  }
