@@ -1,14 +1,16 @@
 import React from "react";
 import { Chip } from "@material-ui/core";
-import LocationCityIcon from '@material-ui/icons/LocationCity';
+import getIcon from '../utils/tag_icons'
 
-function Tag({ name }) {
+
+
+function Tag({ name, type }) {
   if (!name) return null;
-
+  console.log(getIcon(type))
   return (
     <div>
       <Chip
-        icon={<LocationCityIcon/>}
+        icon={getIcon(type)}
         label={name}
         onDelete={() => alert("delete")}
         variant="outlined"

@@ -8,7 +8,7 @@ function KeywordTable() {
       many keywords in a line and have a add keyword button at top with input at
       top for searching, if it doeas not appear, i.e. keyword list is blank then
       switch search button to add button
-<Tag name='Lebanese Bank'/>
+<Tag name='Lebanese Bank' type='place'/>
     </div>
   );
 }
