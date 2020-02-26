@@ -1,12 +1,9 @@
 import React from "react";
 import { Chip } from "@material-ui/core";
-import getIcon from '../utils/tag_icons'
-
-
+import getIcon from "../utils/tag_icons";
 
 function Tag({ name, type }) {
   if (!name) return null;
-  console.log(getIcon(type))
   return (
     <div>
       <Chip

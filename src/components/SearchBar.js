@@ -1,12 +1,14 @@
-import React from 'react'
-import { Input } from '@material-ui/core'
+import React from "react";
+import { Input } from "@material-ui/core";
 
-function SearchBar() {
-  return (
+
+function SearchBar({ placeholder = "Search" }) {
+  
+ return (
     <div>
-      <Input placeholder='search for a source here'/>  
+      <Input placeholder={placeholder} />
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;

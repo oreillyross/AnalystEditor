@@ -1,16 +1,44 @@
 import React from "react";
-import Tag from '../components/Tag'
+import Tag from "../components/Tag";
+import { Paper } from "@material-ui/core";
+import SearchBar from "../components/SearchBar";
+import gql from "graphql-tag";
+import { useQuery } from "@apollo/react-hooks";
+import styled from "styled-components";
+
+const GET_KEYWORDS = gql`
+  query getKeywords {
+    Keywords {
+      id
+      name
+    }
+  }
+`;
+
+const StyledTags = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
 
 function KeywordTable() {
-  return (
-    <div>
-      The idea here is that all keywords will print out in a grid format, fit as
-      many keywords in a line and have a add keyword button at top with input at
-      top for searching, if it doeas not appear, i.e. keyword list is blank then
-      switch search button to add button
-<Tag name='Lebanese Bank' type='place'/>
-    </div>
-  );
+  const { loading, data, error } = useQuery(GET_KEYWORDS);
+  if (loading) return null;
+  if (error) return <div>Oops, something went wrong...</div>;
+  if (data)
+    return (
+      <div>
+        Keywords
+        <div>
+          <SearchBar />
+        </div>
+        <StyledTags>
+          {data.Keywords.map(keyword => (
+            <Tag name={keyword.name} type="place" />
+          ))}
+        </StyledTags>
+      </div>
+    );
 }
 
-export default KeywordTable
+export default KeywordTable;
