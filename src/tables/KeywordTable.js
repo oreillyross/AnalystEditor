@@ -1,4 +1,5 @@
 import React from "react";
+import Tag from '../components/Tag'
 
 function KeywordTable() {
   return (
@@ -7,6 +8,7 @@ function KeywordTable() {
       many keywords in a line and have a add keyword button at top with input at
       top for searching, if it doeas not appear, i.e. keyword list is blank then
       switch search button to add button
+<Tag/>
     </div>
   );
 }
