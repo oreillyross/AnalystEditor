@@ -1,11 +1,19 @@
-import React from 'react'
+import React from "react";
+import { Chip, FaceIcon } from "@material-ui/core";
 
-function Tag() {
+function Tag({ name }) {
+  if (!name) return null;
+
   return (
     <div>
-     Tag 
-      </div>
-  )
+      <Chip
+        label={name}
+        onDelete={() => alert("delete")}
+        variant="outlined"
+        color="primary"
+      />
+    </div>
+  );
 }
 
-export default Tag
+export default Tag;
