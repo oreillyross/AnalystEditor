@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   }
 });
 
-function ArticleTable({articles}) {
+function ArticleTable({articles, viewArticle}) {
   
   const classes = useStyles();
   
@@ -37,7 +37,7 @@ function ArticleTable({articles}) {
           {articles.map(row => (
             <TableRow key={row.title}>
               <TableCell>
-                <Button onClick={} component='a' fullWidth>{row.title}</Button>
+                <Button onClick={() => viewArticle(row)} component='a' fullWidth>{row.title}</Button>
               </TableCell>
               <TableCell align="left">
                 {(row.Article_Source_Link) ? row.Article_Source_Link.name : ''  }

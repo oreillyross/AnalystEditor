@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 body {
-  max-width: 500px;
+  max-width: 800px;
   font-family: Roboto, sans-serif;
   line-height: 1.4;
   margin: 0 auto;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 * {
