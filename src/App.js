@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
 import { Router, Link } from "@reach/router";
-import "react-toggle/style.css";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";

@@ -10,7 +10,7 @@ const useStyles = makeStyles({
   }
 });
 
-function GenericSearchBar({ placeholder = "Search" }) {
+function GenericSearchBar({ placeholder = "Search", value, onChange }) {
   const classes = useStyles();
   return (
     <div>
@@ -19,6 +19,8 @@ function GenericSearchBar({ placeholder = "Search" }) {
         placeholder={placeholder}
         fullWidth
         autoFocus
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
