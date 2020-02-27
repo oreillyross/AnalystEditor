@@ -5,7 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   input: {
     color: "red",
-    padding: 0
+    padding: '0 0 0 1.2rem',
+    borderRadius: '0 25px 25px 0'
   }
 });
 
@@ -17,6 +18,7 @@ function GenericSearchBar({ placeholder = "Search" }) {
         className={classes.input}
         placeholder={placeholder}
         fullWidth
+        autoFocus
       />
     </div>
   );
