@@ -1,6 +1,5 @@
 import React from "react";
 import Tag from "../components/Tag";
-import { Paper } from "@material-ui/core";
 import SearchBar from "../components/SearchBar";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
@@ -35,7 +34,7 @@ function KeywordTable() {
         </div>
         <StyledTags>
           {data.Keywords.map(keyword => (
-            <Tag name={keyword.name} type={keyword.typeKeyword} />
+            <Tag key={keyword.name} name={keyword.name} type={keyword.typeKeyword} />
           ))}
         </StyledTags>
       </div>

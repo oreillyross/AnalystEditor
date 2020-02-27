@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import ArticleTable from "../tables/ArticleTable";
-import { Button, Backdrop, CircularProgress } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import styled from 'styled-components'
 
 const StyledArticleAuthor = styled.div`
@@ -32,13 +32,11 @@ const GET_ARTICLES = gql`
 function Articles() {
   const { loading, error, data } = useQuery(GET_ARTICLES);
   const [article, setArticle] = React.useState({});
-  const [open, setOpen] = React.useState(false)
   const viewArticle = (row) => {
     setArticle(row)
   }
-  
+  if (loading) return null
   if (!(Object.entries(article).length === 0 && article.constructor === Object)) {
-    console.log(article)
     return (
     <div>
     <div>{article.title}</div>
@@ -51,19 +49,12 @@ function Articles() {
     )
   }
   
-    if (loading) {
-      return (
-        <Backdrop open={open}>
-  <CircularProgress color="inherit" />
-</Backdrop>
-      )
-    }
+    
   
     if (error) return <div>Oops</div>;
   
     if (data) {
     const articles = data.Articles;
-    console.log(data.Articles);
     return <ArticleTable viewArticle={viewArticle} articles={articles} />;
   }
 }

@@ -35,7 +35,6 @@ function EventTable() {
 
   if (loading) return null;
   if (error) return <div>Oops</div>;
-  if (data) console.log(data)
   if (data) {
     return (
       <TableContainer component={Paper}>
