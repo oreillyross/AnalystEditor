@@ -1,7 +1,7 @@
 import React from "react";
 import { OutlinedInput } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Formik } from "formik";
 
 const useStyles = makeStyles({
   input: {
@@ -15,23 +15,22 @@ function GenericSearchBar({
   showAddButton,
   placeholder = "Search",
   value,
-  onChange,
-  
+  onChange
 }) {
   const classes = useStyles();
   
   return (
-      <div>
+    
+      
       <OutlinedInput
-          className={classes.input}
-          placeholder={placeholder}
-          fullWidth
-          autoFocus
-          value={value}
-          onChange={onChange}
-        />
-    {showAddButton ? <button>Add</button>: null} 
-      </div>
+        className={classes.input}
+        placeholder={placeholder}
+        fullWidth
+        autoFocus
+        value={value}
+        onChange={onChange}
+      />
+      
     
   );
 }
