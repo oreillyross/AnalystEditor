@@ -1,7 +1,7 @@
 import React from "react";
 import { OutlinedInput } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import AddButton from "./AddButton";
+
 
 const useStyles = makeStyles({
   input: {
@@ -15,23 +15,14 @@ function GenericSearchBar({
   showAddButton,
   placeholder = "Search",
   value,
-  onChange
+  onChange,
+  
 }) {
   const classes = useStyles();
+  
   return (
-    <div>
-      {showAddButton ? (
-        <OutlinedInput
-          className={classes.input}
-          placeholder={placeholder}
-          fullWidth
-          autoFocus
-          value={value}
-          onChange={onChange}
-          endAdornment={<AddButton />}
-        />
-      ) : (
-        <OutlinedInput
+      <div>
+      <OutlinedInput
           className={classes.input}
           placeholder={placeholder}
           fullWidth
@@ -39,8 +30,9 @@ function GenericSearchBar({
           value={value}
           onChange={onChange}
         />
-      )}
-    </div>
+    {showAddButton ? <button>Add</button>: null} 
+      </div>
+    
   );
 }
 

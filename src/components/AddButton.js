@@ -10,13 +10,11 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-function AddButton() {
+function AddButton({onClick}) {
   return (
     <StyledDiv>
       <AddCircleOutlineIcon
-        onClick={() => {
-          alert("record added");
-        }}
+        onClick={onClick}
       />
     </StyledDiv>
   );

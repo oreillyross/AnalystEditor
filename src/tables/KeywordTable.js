@@ -39,6 +39,12 @@ function KeywordTable() {
   const onChange = event => {
     setValue(event.target.value);
   };
+
+  const onClick = () => {
+   
+      alert("record added");
+    
+  }
   if (loading) return null;
   if (error) return <div>Oops, something went wrong...</div>;
   if (data) {
@@ -56,6 +62,7 @@ function KeywordTable() {
               showAddButton={false}
               value={value}
               onChange={onChange}
+              onClick={onClick}
             />
           </div>
           <StyledTags>
