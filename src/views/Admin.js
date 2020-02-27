@@ -8,12 +8,13 @@ export function Admin() {
   return (
     <div>
       <div>Admin</div>
+      <KeywordTable />
       <SearchBar />
       <div>
         <SourceTable />
       </div>
       <SourceForm />
-      <KeywordTable />
+      
     </div>
   );
 }

@@ -11,6 +11,7 @@ const GET_KEYWORDS = gql`
     Keywords {
       id
       name
+      typeKeyword
     }
   }
 `;
@@ -34,7 +35,7 @@ function KeywordTable() {
         </div>
         <StyledTags>
           {data.Keywords.map(keyword => (
-            <Tag name={keyword.name} type="place" />
+            <Tag name={keyword.name} type={keyword.typeKeyword} />
           ))}
         </StyledTags>
       </div>
