@@ -11,7 +11,8 @@ import errorlink from "./error-link";
 import { Admin } from "./views/Admin";
 import EventTable from "./tables/EventTable";
 import Articles from './views/Articles'
-import KeywordForm from './forms/KeywordForm'
+import TextSelect from './components/TextSelect'
+import { article } from './components/article'
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -68,7 +69,7 @@ export default function App() {
           </Link>
         </StyledNavigation>
         <Router>
-          <KeywordForm path="/" />
+          <TextSelect article={article} path="/" />
           <Articles path="/articles" />
           <Admin path="/admin" />
           <EventTable path="/events" />
