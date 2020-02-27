@@ -9,7 +9,7 @@ const Fuse = require("fuse.js");
 
 const fuseOptions = {
   shouldSort: true,
-  threshold: 0.6,
+  threshold: 0.0,
   location: 0,
   distance: 100,
   maxPatternLength: 32,
@@ -36,7 +36,6 @@ const StyledTags = styled.div`
 function KeywordTable() {
   const { loading, data, error } = useQuery(GET_KEYWORDS);
   const [value, setValue] = React.useState("");
-
   const onChange = event => {
     setValue(event.target.value);
   };
@@ -47,28 +46,54 @@ function KeywordTable() {
     let keywords = [];
     const fuse = new Fuse(serverkeywords, fuseOptions);
     const result = fuse.search(value);
-    if (result.length === 0) {
+    if (result.length === 0 && value === "") {
       keywords = serverkeywords;
+      return (
+        <div>
+          Keywords
+          <div>
+            <SearchBar
+              showAddButton={false}
+              value={value}
+              onChange={onChange}
+            />
+          </div>
+          <StyledTags>
+            {keywords.map(keyword => (
+              <Tag
+                key={keyword.name}
+                name={keyword.name}
+                type={keyword.typeKeyword}
+              />
+            ))}
+          </StyledTags>
+        </div>
+      );
     } else {
       keywords = result;
-    }
-    return (
-      <div>
-        Keywords
+      const showAddButton = keywords.length === 0;
+      return (
         <div>
-          <SearchBar value={value} onChange={onChange} />
-        </div>
-        <StyledTags>
-          {keywords.map(keyword => (
-            <Tag
-              key={keyword.name}
-              name={keyword.name}
-              type={keyword.typeKeyword}
+          Keywords
+          <div>
+            <SearchBar
+              showAddButton={showAddButton}
+              value={value}
+              onChange={onChange}
             />
-          ))}
-        </StyledTags>
-      </div>
-    );
+          </div>
+          <StyledTags>
+            {keywords.map(keyword => (
+              <Tag
+                key={keyword.name}
+                name={keyword.name}
+                type={keyword.typeKeyword}
+              />
+            ))}
+          </StyledTags>
+        </div>
+      );
+    }
   }
 }
 
