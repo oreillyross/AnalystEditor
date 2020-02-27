@@ -9,9 +9,9 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
 import { Admin } from "./views/Admin";
-import Event from "./views/Event";
 import EventTable from "./tables/EventTable";
 import Articles from './views/Articles'
+import KeywordForm from './forms/KeywordForm'
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -68,7 +68,7 @@ export default function App() {
           </Link>
         </StyledNavigation>
         <Router>
-          <Event path="/" />
+          <KeywordForm path="/" />
           <Articles path="/articles" />
           <Admin path="/admin" />
           <EventTable path="/events" />

@@ -46,11 +46,12 @@ function showDialog() {
 const SourceForm = () => {
   const classes = useStyles();
 
-  const [addSource, { data, loading, error }] = useMutation(ADD_SOURCE, {onCompleted: () => {
+  const [addSource, { data, error }] = useMutation(ADD_SOURCE, {onCompleted: () => {
     showDialog()
   }});
   if (error) console.log(error)
   if (data) console.log(data)
+ 
   const formik = useFormik({
     initialValues: {
       sourceName: "",
