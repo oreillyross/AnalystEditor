@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
+import TextSelectModal from './TextSelectModal'
+import TextSelector from './TextSelector'
 
 
 const StyledArticleAuthor = styled.div`
@@ -9,13 +11,12 @@ const StyledArticleAuthor = styled.div`
 `;
 
 function ArticleTextSelect({article, resetArticle}) {
+  console.log(article)
   return (
     <div>
     <div>{article.title}</div>
 <StyledArticleAuthor>by {article.author}</StyledArticleAuthor>
-    <blockquote>
-{article.text}
-    </blockquote>
+    <TextSelector article={article}/>
     <Button onClick={resetArticle}>Return to articles</Button>
     </div>
   )

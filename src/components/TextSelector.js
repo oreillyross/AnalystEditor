@@ -1,6 +1,15 @@
 import React from "react";
 import { TextArea } from "semantic-ui-react";
-import TagDisplay from "./TagDisplay";
+import { TextareaAutosize, makeStyles  } from '@material-ui/core'
+
+const useStyles = makeStyles({
+  textarea: {
+  width: '100%',
+  height: '100%', 
+  boxSizing: 'border-box',
+  fontSize: '1.4rem'
+  }
+})
 
 function getSelectedText() {
   const txtarea = document.getElementById("txtarea");
@@ -9,30 +18,24 @@ function getSelectedText() {
   return txtarea.value.substring(start, finish);
 }
 
+
+
 const TextSelector = ({ article, selectText }) => {
-  const { title, source, publishedDateTime, url, text, initialTags } = article;
+  const classes = useStyles()
+  const { text } = article;
+  
   return (
-    <div style={{ padding: "1.2rem" }}>
-      <a href={url} rel="noreferrer noopener" target="_blank">
-        <h1>{title}</h1>
-      </a>
-
-      <h2>
-        by the {source} <span> published on: {publishedDateTime}</span>{" "}
-      </h2>
-
-      <div style={{ textAlign: "center" }}>
-        <TextArea
+   
+      <div style={{ textAlign: "left" }}>
+        <TextareaAutosize
           id="txtarea"
           onMouseUp={() => selectText(getSelectedText())}
-          rows={20}
-          style={{ width: "90%", padding: "1.2rem" }}
           value={text}
+          className={classes.textarea}
         />
-        <TagDisplay tags={initialTags} />
+       
       </div>
-    </div>
-  );
-};
+  )
+}
 
 export default TextSelector;
