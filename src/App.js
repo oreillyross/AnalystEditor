@@ -17,6 +17,7 @@ import NewArticleForm from "./forms/NewArticleForm";
 import KeywordForm from "./forms/KeywordForm";
 import TagForm from "./forms/TagForm";
 import SearchTagBar from "./components/SearchTagBar";
+import Tags from './views/Tags'
 
 
 const link = new ApolloLink.from([errorlink, httplink]);
@@ -67,7 +68,7 @@ export default function App() {
           <Link to="/events">
             <Button>Events</Button>
           </Link>
-          <Link to="forms/newtag">
+          <Link to="/tags">
             <Button>Tags</Button>
           </Link>
         </StyledNavigation>
@@ -78,9 +79,7 @@ export default function App() {
           <EventTable path="/events" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
-          <TagForm path="forms/newtag">
-            <SearchTagBar path='search'/>  
-          </TagForm>
+          <Tags path="tags"/>
           <NotFound default />
         </Router>
       </StyledDashboard>

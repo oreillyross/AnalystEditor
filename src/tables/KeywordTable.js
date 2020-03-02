@@ -1,15 +1,6 @@
 import React from 'react'
 import Tag from "../components/Tag";
-import styled from "styled-components";
-
-
-
-
-const StyledTags = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
+import { StyledTags } from '../styles/common'
 
 function KeywordTable({keywords}) {
   
