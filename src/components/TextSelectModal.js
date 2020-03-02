@@ -5,6 +5,7 @@ import { Button, Header, Modal } from "semantic-ui-react";
 const TextSelectModal = ({
   open,
   articleSelectedText,
+  article,
   cancelSelection,
   saveSnippet,
   // onTagDelete,
@@ -12,13 +13,10 @@ const TextSelectModal = ({
 }) => {
   const {
     title,
-    source,
-    publishedDateTime,
+    Article_Source_Link,
     url,
-    selectedText,
-   // tags
-  } = articleSelectedText;
-
+  } = article;
+  
   return (
     <Modal
       closeIcon
@@ -36,11 +34,11 @@ const TextSelectModal = ({
           </a>
         </Header>
         <p style={{ padding: "1.2rem" }}>
-          by {source} <span>published on {publishedDateTime}</span>
+          by {Article_Source_Link.name}
         </p>
       </Modal.Description>
       <Modal.Content>
-        <div style={{ padding: "1.2rem" }}>{selectedText}</div>
+        <div style={{ padding: "1.2rem" }}>{articleSelectedText}</div>
       </Modal.Content>
       <Modal.Actions>
         {/* <Tags initialTags={tags} onDelete={onTagDelete} addTag={addTag} /> */}
