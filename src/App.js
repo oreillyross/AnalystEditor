@@ -10,9 +10,14 @@ import httplink from "./http-link";
 import errorlink from "./error-link";
 import { Admin } from "./views/Admin";
 import EventTable from "./tables/EventTable";
-import Articles from './views/Articles'
-import TextSelect from './components/TextSelect'
-import { article } from './components/article'
+import Articles from "./views/Articles";
+import TextSelect from "./components/TextSelect";
+import { article } from "./components/article";
+import NewArticleForm from "./forms/NewArticleForm";
+import KeywordForm from "./forms/KeywordForm";
+import TagForm from "./forms/TagForm";
+import SearchTagBar from "./components/SearchTagBar";
+
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -40,8 +45,6 @@ const StyledNavigation = styled.div`
   border-bottom: 1px solid lightgray;
 `;
 
-
-
 function NotFound() {
   return <div>Not found</div>;
 }
@@ -64,7 +67,7 @@ export default function App() {
           <Link to="/events">
             <Button>Events</Button>
           </Link>
-          <Link to="/tags">
+          <Link to="forms/newtag">
             <Button>Tags</Button>
           </Link>
         </StyledNavigation>
@@ -73,6 +76,11 @@ export default function App() {
           <Articles path="/articles" />
           <Admin path="/admin" />
           <EventTable path="/events" />
+          <NewArticleForm path="forms/newarticle" />
+          <KeywordForm path="forms/newkeyword" />
+          <TagForm path="forms/newtag">
+            <SearchTagBar path='search'/>  
+          </TagForm>
           <NotFound default />
         </Router>
       </StyledDashboard>
