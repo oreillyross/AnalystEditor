@@ -31,6 +31,7 @@
     "react-moment": "0.9.7",
     "react-scripts": "3.0.1",
     "react-toggle": "4.1.1",
+    "react-use-fuse": "0.5.2",
     "semantic-ui-react": "0.88.2",
     "styled-components": "5.0.0",
     "yup": "0.28.1"

@@ -14,6 +14,7 @@ const SearchTagBar = () => {
     >
       {props => (
         <Form
+        autoComplete='off'
           style={{ backgroundColor: "white" }}
           onSubmit={props.handleSubmit}
         >
@@ -21,7 +22,7 @@ const SearchTagBar = () => {
             icon="tags"
             iconPosition="left"
             action={{
-              type: "submit",
+              type: "search",
               content: "search",
               onClick: () => {
                 alert("clciked");
