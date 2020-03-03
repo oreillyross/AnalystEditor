@@ -2,8 +2,8 @@ import React from "react";
 import { Formik } from "formik";
 import { Form, Button } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
-import  DatePicker   from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+
 
 
 const addArticle = () => {
@@ -11,8 +11,6 @@ const addArticle = () => {
 };
 
 function NewArticleForm() {
-  
-
   return (
     <div>
       <StyledHeader>Add new article</StyledHeader>
@@ -48,20 +46,18 @@ function NewArticleForm() {
                 onBlur={props.handleBlur}
                 value={props.values.title}
                 name="title"
-                label='a date'
-                fullWidth
+                label="a date"
               />
-              
-              {props.errors.title && <div>{props.errors.title}</div>}
-            <label>Date</label>
-              <DatePicker
-                name='published'
-                dateFormat='MMMM d yyyy'
-                selected={props.values.published}
-                onChange={date => props.setFieldValue('published', date)}
 
+              {props.errors.title && <div>{props.errors.title}</div>}
+              <label>Date</label>
+              <DatePicker
+                name="published"
+                dateFormat="MMMM d yyyy"
+                selected={props.values.published}
+                onChange={date => props.setFieldValue("published", date)}
               />
-              </Form.Field>
+            </Form.Field>
 
             <Button basic color="blue" fluid type="submit">
               Submit
