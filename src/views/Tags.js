@@ -11,7 +11,7 @@ import useFuse from "react-use-fuse";
 
 const options = {
   shouldSort: true,
-  threshold: 0.2,
+  threshold: 0.1,
   location: 0,
   distance: 100,
   maxPatternLength: 32,
@@ -28,21 +28,9 @@ const GET_TAGS = gql`
   }
 `;
 
-const initialState = {
-  tagName: ""
-};
-
-const tagReducer = (state, { field, value }) => {
-  return {
-    ...state,
-    [field]: value
-  };
-};
-
 function Tags() {
-  const [state, dispatch] = React.useReducer(tagReducer, initialState);
-  const { tagName } = state;
   const { data, loading } = useQuery(GET_TAGS);
+  const [value, setValue] = React.useState("");
   const [tags, setTags] = React.useState([]);
   const { result, search } = useFuse({ data: tags, options });
 
@@ -55,14 +43,15 @@ function Tags() {
   if (loading) return null;
 
   function onChange(e) {
-    dispatch({ field: e.target.name, value: e.target.value });
-    search(tagName);
+    setValue(e.target.value);
+    search(e.target.value);
   }
 
   return (
     <Paper elevation={2}>
       <StyledHeader>Tags </StyledHeader>
       <Input
+        autocomplete="off"
         icon="tags"
         iconPosition="left"
         action={{
@@ -77,7 +66,7 @@ function Tags() {
         fluid
         placeholder="search for a tag here..."
         type="text"
-        value={tagName}
+        value={value}
         onChange={onChange}
       />
       <Tagtable tags={result} />
