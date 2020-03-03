@@ -6,8 +6,11 @@ import { Paper } from "@material-ui/core";
 import { StyledHeader } from "../styles/common";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import { Input } from "semantic-ui-react";
+import { Input, Button, Form } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
+import styled from 'styled-components'
+
+
 
 const options = {
   shouldSort: true,
@@ -50,17 +53,11 @@ function Tags() {
   return (
     <Paper elevation={2}>
       <StyledHeader>Tags </StyledHeader>
+     
       <Input
-        autocomplete="off"
+        autoComplete="off"
         icon="tags"
         iconPosition="left"
-        action={{
-          type: "search",
-          content: "search",
-          onClick: () => {
-            alert("clciked");
-          }
-        }}
         labelPosition="right"
         name="tagName"
         fluid
@@ -69,6 +66,8 @@ function Tags() {
         value={value}
         onChange={onChange}
       />
+      {(result.length === 0) ? <Button fluid basic color='blue'>Add New Tag</Button> : null}
+     
       <Tagtable tags={result} />
     </Paper>
   );
