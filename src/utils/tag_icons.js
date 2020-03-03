@@ -5,6 +5,8 @@ import PersonPinCircleIcon from '@material-ui/icons/PersonPinCircle';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import HealingIcon from '@material-ui/icons/Healing';
 import HomeWorkIcon from '@material-ui/icons/HomeWork';
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
+
 
 function getIcon(type) {
   switch (type) {
@@ -14,7 +16,7 @@ function getIcon(type) {
     case 'group': return <PeopleAltIcon/>
     case 'hazard': return <HealingIcon/>
     case 'organisation': return <HomeWorkIcon/>
-    default: return null
+    default: return <TurnedInNotIcon/>
   }
 }
 

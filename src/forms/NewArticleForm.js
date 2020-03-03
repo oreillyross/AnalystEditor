@@ -1,26 +1,20 @@
 import React from 'react'
-import { Formik, Form } from 'formik'
-import { FormControl, OutlinedInput, Button, makeStyles } from '@material-ui/core'
+import { Formik } from 'formik'
+import { Form, Button } from 'semantic-ui-react'
 import { StyledHeader } from '../styles/common'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
-const useStyles = makeStyles({
-  header: {
-    margin: 'auto',
-    lineHeight:' 51px',
-    verticalAlign: 'middle',
-  },
-  input: {
 
-  }
-});
 
 const addArticle = () => {
   //placeholder
 }
 
 function NewArticleForm() {
-  const classes = useStyles();
   
+  const [articleDate, setArticleDate] = React.useState(new Date())
+
   return (
     <div>
       <StyledHeader>Add new article</StyledHeader>
@@ -38,7 +32,7 @@ function NewArticleForm() {
         validate={values => {
           const errors = {};
           if (!values.title) {
-            errors.title = "A keyword is required";
+            errors.title = "A title is required";
           }
           return errors;
         }}
@@ -48,9 +42,9 @@ function NewArticleForm() {
             style={{ backgroundColor: "white" }}
             onSubmit={props.handleSubmit}
           >
-            <FormControl fullWidth>
-              <OutlinedInput
-                className={classes.input}
+            <Form.Field>
+              <label>Title </label>
+              <input
                 type="text"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
@@ -58,11 +52,17 @@ function NewArticleForm() {
                 name="title"
                 fullWidth
               />
-              {props.errors.name && <div>{props.errors.name}</div>}
-              <Button fullWidth type="submit">
+              <label> Date</label>
+                <DatePicker selected={articleDate} onChange={date => setArticleDate(date)}/>
+              {props.errors.title && <div>{props.errors.title}</div>}
+              </Form.Field>
+              
+              <Button basic color='blue fluid' type="submit">
                 Submit
               </Button>
-            </FormControl>
+              
+              
+            
           </Form>
         )}
       </Formik>

@@ -15,8 +15,6 @@ import TextSelect from "./components/TextSelect";
 import { article } from "./components/article";
 import NewArticleForm from "./forms/NewArticleForm";
 import KeywordForm from "./forms/KeywordForm";
-import TagForm from "./forms/TagForm";
-import SearchTagBar from "./components/SearchTagBar";
 import Tags from './views/Tags'
 
 
