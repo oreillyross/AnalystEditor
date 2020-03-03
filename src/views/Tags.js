@@ -1,16 +1,11 @@
 import React from "react";
 import Tagtable from "../tables/TagTable";
-import TagForm from "../forms/TagForm";
-import SearchTagBar from "../components/SearchTagBar";
 import { Paper } from "@material-ui/core";
 import { StyledHeader } from "../styles/common";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
-import { Input, Button, Form } from "semantic-ui-react";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
-import styled from 'styled-components'
-
-
 
 const options = {
   shouldSort: true,
@@ -31,12 +26,25 @@ const GET_TAGS = gql`
   }
 `;
 
+const ADD_TAG = gql`
+  mutation addTag($name: String) {
+    __typename
+    insert_Tags(objects: { name: $name }) {
+      returning {
+        id
+        name
+      }
+      affected_rows
+    }
+  }
+`;
+
 function Tags() {
   const { data, loading } = useQuery(GET_TAGS);
   const [value, setValue] = React.useState("");
   const [tags, setTags] = React.useState([]);
-  const { result, search } = useFuse({ data: tags, options });
-
+  const { result, search, reset } = useFuse({ data: tags, options });
+  const [addTag] = useMutation(ADD_TAG);
   React.useEffect(() => {
     if (data) {
       setTags(data.Tags);
@@ -50,10 +58,31 @@ function Tags() {
     search(e.target.value);
   }
 
+  const onAddTag = () => {
+    if (value !== "") {
+      addTag({
+        variables: { name: value },
+        update(cache, { data }) {
+          const getExistingTags = cache.readQuery({ query: GET_TAGS });
+          const existingTags = getExistingTags ? getExistingTags.Tags : [];
+          const newTag = data.insert_Tags ? data.insert_Tags.returning[0] : {};
+          cache.writeQuery({
+            query: GET_TAGS,
+            data: { Tags: [newTag, ...existingTags] }
+          });
+        }
+      }).then(() => {
+        
+        setValue("");
+        reset();
+      });
+    }
+  };
+
   return (
     <Paper elevation={2}>
       <StyledHeader>Tags </StyledHeader>
-     
+
       <Input
         autoComplete="off"
         icon="tags"
@@ -66,8 +95,12 @@ function Tags() {
         value={value}
         onChange={onChange}
       />
-      {(result.length === 0) ? <Button fluid basic color='blue'>Add New Tag</Button> : null}
-     
+      {result.length === 0 ? (
+        <Button fluid basic color="blue" onClick={onAddTag}>
+          Add New Tag
+        </Button>
+      ) : null}
+
       <Tagtable tags={result} />
     </Paper>
   );
