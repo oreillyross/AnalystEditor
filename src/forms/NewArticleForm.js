@@ -1,19 +1,55 @@
 import React from "react";
 import { Formik } from "formik";
-import { Form, Button, Message } from "semantic-ui-react";
+import { Form, Button, Message, Dropdown, TextArea } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
 import DatePicker from "react-datepicker";
 import * as yup from "yup";
 import isEmpty from "lodash.isempty";
-import { Dropdown } from "semantic-ui-react";
 import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 const GET_SOURCES = gql`
   query getSources {
     Sources(order_by: { name: asc }) {
       id
       name
+    }
+  }
+`;
+
+const ADD_ARTICLE = gql`
+  mutation addArticle(
+    $title: String!
+    $published: date
+    $author: String
+    $url: String
+    $text: String
+    $source_id: uuid
+  ) {
+    __typename
+    insert_Articles(
+      objects: {
+        title: $title
+        published: $published
+        source_id: $source_id
+        author: $author
+        url: $url
+        text: $text
+      }
+    ) {
+      affected_rows
+      returning {
+        author
+        published
+        id
+        text
+        title
+        url
+        Article_Source_Link {
+          id
+          name
+        }
+      }
     }
   }
 `;
@@ -30,6 +66,8 @@ const newArticleValidSchema = yup.object().shape({
 
 function NewArticleForm() {
   const { data, loading } = useQuery(GET_SOURCES);
+  const [addArticle, { returned_data }] = useMutation(ADD_ARTICLE);
+
   if (loading) return null;
   /*TODO find a better way of pre-loading the sources and keep
   closer to the actual select component*/
@@ -52,10 +90,20 @@ function NewArticleForm() {
             published: new Date(),
             author: "",
             url: "",
-            source_id: ""
+            source_id: "",
+            text: ""
           }}
           onSubmit={(values, actions) => {
-            alert(JSON.stringify(values, null, 2));
+            addArticle({
+              variables: {
+                title: values.title,
+                published: values.published,
+                source_id: values.source_id,
+                author: values.author,
+                url: values.url,
+                text: values.text
+              }
+            });
             actions.setSubmitting(false);
           }}
         >
@@ -118,6 +166,14 @@ function NewArticleForm() {
                   onBlur={handleBlur}
                   value={values.url}
                   name="url"
+                />
+                <label>Text </label>
+                <TextArea
+                  placeholder='copy the text of the article here'
+                  rows={20}
+                  name='text'
+                  value={values.text}
+                  onChange={handleChange}
                 />
               </Form.Field>
               <Message
