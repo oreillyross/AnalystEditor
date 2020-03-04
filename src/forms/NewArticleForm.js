@@ -1,22 +1,34 @@
 import React from "react";
 import { Formik } from "formik";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Message } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
 import DatePicker from "react-datepicker";
+import * as yup from "yup";
+import  isEmpty  from 'lodash.isempty'
 
 
+const newArticleValidSchema = yup.object().shape({
+  title: yup.string().required(),
+  published: yup
+    .date()
+    .required()
+    .default(() => new Date())
+});
 
 const addArticle = () => {
   //placeholder
 };
 
 function NewArticleForm() {
+ 
   return (
     <div>
       <StyledHeader>Add new article</StyledHeader>
       <Formik
+        validationSchema={newArticleValidSchema}
         initialValues={{ title: "", published: new Date() }}
         onSubmit={(values, actions) => {
+          
           alert(JSON.stringify(values, null, 2));
           actions.setSubmitting(false);
           addArticle({
@@ -25,39 +37,46 @@ function NewArticleForm() {
             }
           }).then(result => console.log(result));
         }}
-        validate={values => {
-          const errors = {};
-          if (!values.title) {
-            errors.title = "A title is required";
-          }
-          return errors;
-        }}
       >
-        {props => (
+        {({
+          values,
+          errors,
+          handleBlur,
+          handleChange,
+          handleSubmit,
+          setFieldValue,
+          touched
+        }) => (
           <Form
+            warning={!isEmpty(errors)}
             style={{ backgroundColor: "white" }}
-            onSubmit={props.handleSubmit}
+            onSubmit={handleSubmit}
           >
             <Form.Field>
               <label>Title </label>
               <input
                 type="text"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.title}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.title}
                 name="title"
                 label="a date"
               />
 
-              {props.errors.title && <div>{props.errors.title}</div>}
               <label>Date</label>
               <DatePicker
                 name="published"
                 dateFormat="MMMM d yyyy"
-                selected={props.values.published}
-                onChange={date => props.setFieldValue("published", date)}
+                selected={values.published}
+                onChange={date => setFieldValue("published", date)}
               />
             </Form.Field>
+            <Message
+              warning
+              color='red'
+              header="Oops you seem to be missing some details!"
+              list={[errors.title, errors.published]}
+            />
 
             <Button basic color="blue" fluid type="submit">
               Submit

@@ -84,6 +84,7 @@ function Tags() {
       <StyledHeader>Tags </StyledHeader>
 
       <Input
+        style={{margin: '1.2rem'}}
         autoComplete="off"
         icon="tags"
         iconPosition="left"

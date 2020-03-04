@@ -10,7 +10,8 @@ const StyledTagContainer = styled.div``;
 
 const StyledContainer = styled.div`
   text-align: left;
-  padding-left: 1.3rem;
+  padding-left: .3rem;
+  
 `;
 
 export default function TagDisplay({ tags = {} }) {

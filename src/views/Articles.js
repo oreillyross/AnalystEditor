@@ -3,7 +3,8 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import ArticleTable from "../tables/ArticleTable";
 import ArticleTextSelect from "../components/ArticleTextSelect";
-import { Button } from "@material-ui/core";
+import { Button } from "semantic-ui-react";
+import { StyledHeader } from "../styles/common";
 
 const GET_ARTICLES = gql`
   query getArticles {
@@ -22,8 +23,7 @@ const GET_ARTICLES = gql`
   }
 `;
 
-function Articles({navigate}) {
-  
+function Articles({ navigate }) {
   const { loading, error, data } = useQuery(GET_ARTICLES);
   const [article, setArticle] = React.useState({});
   const viewArticle = row => {
@@ -47,10 +47,17 @@ function Articles({navigate}) {
     const articles = data.Articles;
     return (
       <div>
+        <StyledHeader>Articles</StyledHeader>
         <div>
-          <Button onClick={() => {
-            navigate('/forms/newarticle')
-          }} fullWidth variant="outlined">
+          <Button
+            style={{ margin: "0 2rem" }}
+            onClick={() => {
+              navigate("/forms/newarticle");
+            }}
+            
+            basic
+            color='blue'
+          >
             Add an Article
           </Button>
         </div>
