@@ -27,7 +27,6 @@ function ArticleTable({ articles, viewArticle }) {
             <TableCell>Date</TableCell>
             <TableCell>Article</TableCell>
             <TableCell align="left">Source</TableCell>
-            <TableCell align="right">Tags</TableCell>
             <TableCell align="right">Indications</TableCell>
             <TableCell align="right">Scenarios</TableCell>
           </TableRow>

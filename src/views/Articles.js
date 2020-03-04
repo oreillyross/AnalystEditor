@@ -5,23 +5,9 @@ import ArticleTable from "../tables/ArticleTable";
 import ArticleTextSelect from "../components/ArticleTextSelect";
 import { Button } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
+import { GET_ARTICLES } from '../queries'
 
-const GET_ARTICLES = gql`
-  query getArticles {
-    Articles(order_by: { published: desc_nulls_last }) {
-      id
-      title
-      text
-      published
-      author
-      url
-      Article_Source_Link {
-        id
-        name
-      }
-    }
-  }
-`;
+
 
 function Articles({ navigate }) {
   const { loading, error, data } = useQuery(GET_ARTICLES);

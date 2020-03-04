@@ -7,6 +7,7 @@ import * as yup from "yup";
 import isEmpty from "lodash.isempty";
 import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import { GET_ARTICLES } from "../queries";
 
 const GET_SOURCES = gql`
   query getSources {
@@ -26,7 +27,7 @@ const ADD_ARTICLE = gql`
     $text: String
     $source_id: uuid
   ) {
-    __typename
+    
     insert_Articles(
       objects: {
         title: $title
@@ -39,6 +40,7 @@ const ADD_ARTICLE = gql`
     ) {
       affected_rows
       returning {
+        __typename
         author
         published
         id
@@ -66,7 +68,7 @@ const newArticleValidSchema = yup.object().shape({
 
 function NewArticleForm({ navigate }) {
   const { data, loading } = useQuery(GET_SOURCES);
-  const [addArticle, { returned_data }] = useMutation(ADD_ARTICLE);
+  const [addArticle ] = useMutation(ADD_ARTICLE);
 
   if (loading) return null;
   /*TODO find a better way of pre-loading the sources and keep
@@ -90,7 +92,7 @@ function NewArticleForm({ navigate }) {
             published: new Date(),
             author: "",
             url: "",
-            source_id: "",
+            source_id: null,
             text: ""
           }}
           onSubmit={(values, actions) => {
@@ -102,6 +104,25 @@ function NewArticleForm({ navigate }) {
                 author: values.author,
                 url: values.url,
                 text: values.text
+              },
+              update(cache, { data }) {
+                console.table(data)
+                const getExistingArticles = cache.readQuery({
+                  query: GET_ARTICLES
+                });
+                const existingArticles = getExistingArticles
+                  ? getExistingArticles.Articles
+                  : [];
+                console.log(existingArticles.length)
+                  const newArticle = data.insert_Articles
+                  ? data.insert_Articles.returning[0]
+                  : {};
+                  console.log('NEW ARTICLE' + newArticle.title)
+                cache.writeQuery({
+                  query: GET_ARTICLES,
+                  data: { Articles: { newArticle, ...existingArticles } }
+                });
+               return null 
               }
             }).then(() => {
               navigate("/articles");

@@ -43,6 +43,7 @@ function EventTable() {
             <TableRow>
               <TableCell>Event</TableCell>
               <TableCell>Source</TableCell>
+              <TableCell>Tags</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -53,6 +54,9 @@ function EventTable() {
                 </TableCell>
                 <TableCell>
                   {row.Event_Source_Link.name}
+                </TableCell>
+                <TableCell>
+                  {Math.floor(Math.random() * 20)}
                 </TableCell>
               </TableRow>
             ))}
