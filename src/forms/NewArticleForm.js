@@ -64,7 +64,7 @@ const newArticleValidSchema = yup.object().shape({
   url: yup.string().url()
 });
 
-function NewArticleForm() {
+function NewArticleForm({ navigate }) {
   const { data, loading } = useQuery(GET_SOURCES);
   const [addArticle, { returned_data }] = useMutation(ADD_ARTICLE);
 
@@ -103,6 +103,8 @@ function NewArticleForm() {
                 url: values.url,
                 text: values.text
               }
+            }).then(() => {
+              navigate("/articles");
             });
             actions.setSubmitting(false);
           }}
@@ -169,9 +171,9 @@ function NewArticleForm() {
                 />
                 <label>Text </label>
                 <TextArea
-                  placeholder='copy the text of the article here'
+                  placeholder="copy the text of the article here"
                   rows={20}
-                  name='text'
+                  name="text"
                   value={values.text}
                   onChange={handleChange}
                 />
