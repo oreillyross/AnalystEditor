@@ -7,57 +7,82 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
+import { Select } from "semantic-ui-react";
+import Slider from "@material-ui/core/Slider";
+import { Divider } from "semantic-ui-react";
+
+const marks = [
+  {
+    value: 0,
+    label: "0"
+  },
+  {
+    value: 5,
+    label: "5"
+  },
+  {
+    value: 10,
+    label: "10"
+  }
+];
+
+const indicators = [
+  { value: 1, text: "1" },
+  { value: 2, text: "2" },
+  { value: 3, text: "3" },
+  { value: 4, text: "4" },
+  { value: 5, text: "5" },
+  { value: 6, text: "6" },
+  { value: 7, text: "7" }
+];
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650
-  }
+  },
+  row: {}
 });
-
-const GET_SOURCES = gql`
-  query getSources {
-    Sources {
-      id
-      name
-      url
-    }
-  }
-`;
 
 function IndicatorTable() {
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GET_SOURCES);
-
-  if (loading) return null;
-  if (error) return <div>Oops</div>;
-
-  if (data) {
-    return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Source Name</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.Sources.map(row => (
-              <TableRow key={row.name}>
-                <TableCell>
-                  <a href={row.url} target="_blank" rel="noopener noreferrer">
-                    {row.name}
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Indication</TableCell>
+            <TableCell>Strength</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow className={classes.row}>
+            <TableCell className={classes.row}>
+              1. This is an indicator example, Google takes over the world,
+              mwwwahhh
+            </TableCell>
+            <TableCell>
+              <Slider
+                defaultValue={5}
+                getAriaValueText={0}
+                aria-labelledby="discrete-slider-always"
+                step={1}
+                min={1}
+                max={10}
+                marks={marks}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              2. This is an indicator example, Google takes over the world,
+              mwwwahhh
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default IndicatorTable;
