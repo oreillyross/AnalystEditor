@@ -5,6 +5,7 @@ import { Button, Icon } from 'semantic-ui-react'
 function Chip({name}) {
   return (
     <Button
+    type='button'
     style={{margin: '.3rem', height:'40px', borderRadius: "20px"}}
     basic
     color='blue'>

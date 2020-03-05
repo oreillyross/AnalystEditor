@@ -1,32 +1,24 @@
 import React from "react";
 import styled from "styled-components";
-
-const StyledTag = styled.span`
-  padding-top: 10px
-  margin: .3rem;
-  
-`;
-const StyledTagContainer = styled.div``;
+import Tag from "./Tag";
 
 const StyledContainer = styled.div`
   text-align: left;
-  padding-left: .3rem;
-  
+  padding: 1rem;
 `;
 
 export default function TagDisplay({ tags = {} }) {
   return (
     <StyledContainer>
-      <h3>Tags</h3>
-      <StyledTagContainer>
-        {!tags.length ? (
-          <div data-testid="notags">no tags associated with this article</div>
-        ) : (
-          tags.map(tag => {
-            return <StyledTag key={tag}>{tag};&nbsp;&nbsp; </StyledTag>;
-          })
-        )}
-      </StyledTagContainer>
+      {!tags.length ? (
+        <div style={{ padding: "1rem" }} data-testid="notags">
+          no tags yet
+        </div>
+      ) : (
+        tags.map(tag => {
+          return <Tag key={tag} name={tag} />;
+        })
+      )}
     </StyledContainer>
   );
 }

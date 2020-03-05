@@ -8,7 +8,6 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
-import { Admin } from "./views/Admin";
 import EventTable from "./tables/EventTable";
 import Articles from "./views/Articles";
 import TextSelect from "./components/TextSelect";
@@ -18,6 +17,7 @@ import KeywordForm from "./forms/KeywordForm";
 import Tags from './views/Tags'
 import Keywords from './views/Keywords'
 import Sources from './views/Sources'
+import Search from './views/Search'
 import SourceForm from './forms/SourceForm'
 import EventForm from './forms/EventForm'
 
@@ -79,6 +79,9 @@ export default function App() {
           <Link to="/sources">
             <Button>Sources</Button>
           </Link>
+          <Link to="/search">
+            <Button>Search</Button>
+          </Link>
         </StyledNavigation>
         <Router>
           <TextSelect article={article} path="/" />
@@ -91,6 +94,7 @@ export default function App() {
           <Tags path="/tags"/>
           <Keywords path='/keywords'/>
           <Sources path='/sources' />
+          <Search path='/search' />
           <NotFound default />
         </Router>
       </StyledDashboard>

@@ -9,6 +9,7 @@ function Tag({ name, type }) {
       <Chip
         name={name}
         onDelete={() => alert("delete")}
+        
       />
     
   );

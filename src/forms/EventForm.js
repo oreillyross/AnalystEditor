@@ -1,8 +1,9 @@
 import React from "react";
 import { Formik } from "formik";
 import { StyledHeader } from "../styles/common";
-import SearchTagBar from '../components/SearchTagBar'
-import TagDisplay from '../components/TagDisplay'
+import AddTagBar from "../components/AddTagBar";
+import TagDisplay from "../components/TagDisplay";
+import IndicatorDisplay from "../components/IndicatorDisplay";
 import { Divider, Form, Button, TextArea, Message } from "semantic-ui-react";
 import * as yup from "yup";
 import Grid from "@material-ui/core/Grid";
@@ -50,7 +51,6 @@ function EventForm({
                   <label> Event Text </label>
                   <TextArea
                     rows={3}
-                    
                     name="eventText"
                     value={values.eventText}
                     onChange={handleChange}
@@ -93,22 +93,24 @@ function EventForm({
                     published on {article.published}
                   </p>
                 </Message>
-                
-                  <Form.Field>
-                    <label>Tags</label>
-                    <Paper variant='outlined'>
-<SearchTagBar/>
-<TagDisplay/>
-                    </Paper>
-                    </Form.Field>
-                    <Form.Field>
-                    <label>Indicators</label>
-                    <Paper variant='outlined'>
-<SearchTagBar/>
-                    </Paper>
-                    </Form.Field>
 
-                  
+                <Form.Field>
+                  <label>Tags</label>
+                  <Paper variant="outlined">
+                    <AddTagBar />
+                    <Divider />
+                    <TagDisplay tags={["One", "Two"]} />
+                  </Paper>
+                </Form.Field>
+                <Form.Field>
+                  <label>Indicators</label>
+                  <Paper variant="outlined">
+                    <AddTagBar />
+                    <Divider />
+                    <IndicatorDisplay />
+                  </Paper>
+                </Form.Field>
+
                 <Button fluid basic color="blue" type="submit">
                   {" "}
                   Create Event{" "}
