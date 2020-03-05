@@ -1,9 +1,12 @@
 import React from "react";
 import { Formik } from "formik";
 import { StyledHeader } from "../styles/common";
-import { Divider, Form, Input, Button, TextArea } from "semantic-ui-react";
+import SearchTagBar from '../components/SearchTagBar'
+import TagDisplay from '../components/TagDisplay'
+import { Divider, Form, Button, TextArea, Message } from "semantic-ui-react";
 import * as yup from "yup";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -15,7 +18,14 @@ const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
 });
 
-function EventForm({ selectedEventText, article }) {
+function EventForm({
+  selectedEventText,
+  article = {
+    title: "Coronavirus is here",
+    source: "BBC News",
+    published: "05 March 2020"
+  }
+}) {
   const now = new Date();
 
   return (
@@ -40,7 +50,7 @@ function EventForm({ selectedEventText, article }) {
                   <label> Event Text </label>
                   <TextArea
                     rows={3}
-                    fluid
+                    
                     name="eventText"
                     value={values.eventText}
                     onChange={handleChange}
@@ -48,7 +58,7 @@ function EventForm({ selectedEventText, article }) {
                 </Form.Field>
 
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container >
+                  <Grid container>
                     <Form.Field>
                       <label> Date </label>
                       <KeyboardDatePicker
@@ -61,8 +71,8 @@ function EventForm({ selectedEventText, article }) {
                           "aria-label": "change date"
                         }}
                       />
-                      </Form.Field>
-                      <Form.Field>
+                    </Form.Field>
+                    <Form.Field>
                       <label> Time </label>
                       <KeyboardTimePicker
                         value={values.eventDate}
@@ -75,7 +85,30 @@ function EventForm({ selectedEventText, article }) {
                     </Form.Field>
                   </Grid>
                 </MuiPickersUtilsProvider>
+                <Message info>
+                  <Message.Header>Source of information</Message.Header>
+                  <Divider />
+                  <p>
+                    <strong>{article.title}</strong> by {article.source}{" "}
+                    published on {article.published}
+                  </p>
+                </Message>
+                
+                  <Form.Field>
+                    <label>Tags</label>
+                    <Paper variant='outlined'>
+<SearchTagBar/>
+<TagDisplay/>
+                    </Paper>
+                    </Form.Field>
+                    <Form.Field>
+                    <label>Indicators</label>
+                    <Paper variant='outlined'>
+<SearchTagBar/>
+                    </Paper>
+                    </Form.Field>
 
+                  
                 <Button fluid basic color="blue" type="submit">
                   {" "}
                   Create Event{" "}
