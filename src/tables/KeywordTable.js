@@ -6,7 +6,7 @@ function KeywordTable({keywords}) {
   
   return (
     <div>
-          Keywords
+          
          
           <StyledTags>
             {keywords.map(keyword => (

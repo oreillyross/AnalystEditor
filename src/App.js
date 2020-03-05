@@ -16,6 +16,10 @@ import { article } from "./components/article";
 import NewArticleForm from "./forms/NewArticleForm";
 import KeywordForm from "./forms/KeywordForm";
 import Tags from './views/Tags'
+import Keywords from './views/Keywords'
+import Sources from './views/Sources'
+import SourceForm from './forms/SourceForm'
+import EventForm from './forms/EventForm'
 
 
 const link = new ApolloLink.from([errorlink, httplink]);
@@ -69,15 +73,24 @@ export default function App() {
           <Link to="/tags">
             <Button>Tags</Button>
           </Link>
+          <Link to="/keywords">
+            <Button>Keywords</Button>
+          </Link>
+          <Link to="/sources">
+            <Button>Sources</Button>
+          </Link>
         </StyledNavigation>
         <Router>
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
-          <Admin path="/admin" />
+          <EventForm path="/admin" />
           <EventTable path="/events" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
-          <Tags path="tags"/>
+          <SourceForm path='/forms/newsource'/>
+          <Tags path="/tags"/>
+          <Keywords path='/keywords'/>
+          <Sources path='/sources' />
           <NotFound default />
         </Router>
       </StyledDashboard>
