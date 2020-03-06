@@ -7,7 +7,10 @@ const StyledContainer = styled.div`
   padding: 1rem;
 `;
 
-export default function TagDisplay({ tags = {} }) {
+export default function TagDisplay({ tags = {}, deleteTag }) {
+  
+  
+
   return (
     <StyledContainer>
       {!tags.length ? (
@@ -15,8 +18,8 @@ export default function TagDisplay({ tags = {} }) {
           no tags yet
         </div>
       ) : (
-        tags.map(tag => {
-          return <Tag key={tag} name={tag} />;
+        tags.map((tag, index) => {
+          return <Tag key={index} name={tag} deleteTag={deleteTag(index)} />;
         })
       )}
     </StyledContainer>

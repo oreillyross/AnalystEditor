@@ -1,8 +1,7 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, FieldArray } from "formik";
 import { StyledHeader } from "../styles/common";
 import AddTagBar from "../components/AddTagBar";
-import TagDisplay from "../components/TagDisplay";
 import IndicatorDisplay from "../components/IndicatorDisplay";
 import { Divider, Form, Button, TextArea, Message } from "semantic-ui-react";
 import * as yup from "yup";
@@ -14,10 +13,17 @@ import {
   KeyboardTimePicker,
   KeyboardDatePicker
 } from "@material-ui/pickers";
+import styled from "styled-components";
+import Tag from "../components/Tag";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
 });
+
+const StyledContainer = styled.div`
+  text-align: left;
+  padding: 1rem;
+`;
 
 function EventForm({
   selectedEventText,
@@ -34,7 +40,7 @@ function EventForm({
       <StyledHeader>Event Form </StyledHeader>
       <Divider />
       <Formik
-        initialValues={{ eventText: "", eventDate: now }}
+        initialValues={{ eventText: "", eventDate: now, tags: [{id: '123', name: 'one'}] }}
         validationSchema={eventValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -97,9 +103,39 @@ function EventForm({
                 <Form.Field>
                   <label>Tags</label>
                   <Paper variant="outlined">
-                    <AddTagBar />
-                    <Divider />
-                    <TagDisplay tags={["One", "Two"]} />
+                    <FieldArray name="tags">
+                      {arrayHelpers => {
+                        
+                        return (
+                          <React.Fragment>
+                            <AddTagBar />
+                            <Divider />
+                            <StyledContainer>
+                              {!values.tags.length ? (
+                                <div
+                                  style={{ padding: "1rem" }}
+                                  data-testid="notags"
+                                >
+                                  no tags yet
+                                </div>
+                              ) : (
+                                values.tags.map((tag, index) => {
+                                  return (
+                                    <Tag
+                                      key={tag.id}
+                                      name={tag.name}
+                                      deleteTag={() =>
+                                        arrayHelpers.remove(index)
+                                      }
+                                    />
+                                  );
+                                })
+                              )}
+                            </StyledContainer>
+                          </React.Fragment>
+                        );
+                      }}
+                    </FieldArray>
                   </Paper>
                 </Form.Field>
                 <Form.Field>

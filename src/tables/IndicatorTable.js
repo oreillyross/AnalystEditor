@@ -64,7 +64,6 @@ function IndicatorTable() {
             <TableCell>
               <Slider
                 defaultValue={5}
-                getAriaValueText={0}
                 aria-labelledby="discrete-slider-always"
                 step={1}
                 min={1}

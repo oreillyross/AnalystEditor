@@ -2,13 +2,13 @@ import React from "react";
 import Chip from './Chip'
 
 
-function Tag({ name, type }) {
+function Tag({ name, deleteTag }) {
   if (!name) return null;
   return (
     
       <Chip
         name={name}
-        onDelete={() => alert("delete")}
+        deleteTag={deleteTag}
         
       />
     

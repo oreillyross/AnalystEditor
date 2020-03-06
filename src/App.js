@@ -82,6 +82,12 @@ export default function App() {
           <Link to="/search">
             <Button>Search</Button>
           </Link>
+          <Link to="/scenarios">
+            <Button>Scenarios</Button>
+          </Link>
+          <Link to="/indicators">
+            <Button>Indicators</Button>
+          </Link>
         </StyledNavigation>
         <Router>
           <TextSelect article={article} path="/" />
