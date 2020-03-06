@@ -40,16 +40,26 @@ function EventForm({
 
   const now = new Date();
   const {data: tagData} = useQuery(GET_TAGS)
-  const initialTags = (tagData) ? tagData.Tags : []
+  const [tags, setTags]  = React.useState([])
+
+  React.useEffect(() => {
+   if (tagData) {
+     setTags(tagData.Tags)
+   }
+  }, [tagData])
+
+
  
-  
+  const addTag = selectedItem => e => {
+    console.log(selectedItem)
+  }
 
   return (
     <div>
       <StyledHeader>Event Form </StyledHeader>
       <Divider />
       <Formik
-        initialValues={{ eventText: "", eventDate: now, tags: [{id: '123', name: 'one'}] }}
+        initialValues={{ eventText: "", eventDate: now, tags: [] }}
         validationSchema={eventValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
@@ -117,7 +127,7 @@ function EventForm({
                         
                         return (
                           <React.Fragment>
-                            <AddTagBar initialTags={initialTags}/>
+                            <AddTagBar initialTags={tags} addTag={addTag}/>
                             <Divider />
                             <StyledContainer>
                               {!values.tags.length ? (
