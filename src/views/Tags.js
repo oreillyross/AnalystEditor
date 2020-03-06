@@ -6,6 +6,7 @@ import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
+import { GET_TAGS } from '../queries'
 
 const options = {
   shouldSort: true,
@@ -17,14 +18,7 @@ const options = {
   keys: ["name"]
 };
 
-const GET_TAGS = gql`
-  query getTags {
-    Tags(order_by: { name: asc }) {
-      id
-      name
-    }
-  }
-`;
+
 
 const ADD_TAG = gql`
   mutation addTag($name: String) {

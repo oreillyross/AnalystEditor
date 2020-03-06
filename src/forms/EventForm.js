@@ -15,6 +15,9 @@ import {
 } from "@material-ui/pickers";
 import styled from "styled-components";
 import Tag from "../components/Tag";
+import { GET_TAGS } from '../queries'
+import { useQuery } from '@apollo/react-hooks'
+
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -33,7 +36,13 @@ function EventForm({
     published: "05 March 2020"
   }
 }) {
+
+
   const now = new Date();
+  const {data: tagData} = useQuery(GET_TAGS)
+  const initialTags = (tagData) ? tagData.Tags : []
+ 
+  
 
   return (
     <div>
@@ -108,7 +117,7 @@ function EventForm({
                         
                         return (
                           <React.Fragment>
-                            <AddTagBar />
+                            <AddTagBar initialTags={initialTags}/>
                             <Divider />
                             <StyledContainer>
                               {!values.tags.length ? (

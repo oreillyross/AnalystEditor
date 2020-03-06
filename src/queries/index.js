@@ -18,3 +18,12 @@ export const GET_ARTICLES = gql`
     }
   }
 `;
+
+export const GET_TAGS = gql`
+query getTags {
+  Tags(order_by: { name: asc }) {
+    id
+    name
+  }
+}
+`;

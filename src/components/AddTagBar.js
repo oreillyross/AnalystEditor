@@ -1,27 +1,35 @@
 import React from "react";
 import { Input } from "semantic-ui-react";
+import Downshift from "downshift";
 
-const AddTagBar = () => {
+const AddTagBar = ({ initialTags }) => {
+  console.log(initialTags);
+
   return (
- 
+    <Downshift>
+      {({
+        getInputProps,
+        getItemProps,
+        getLabelProps,
+        isOpen,
+        inputValue,
+        highlightedIndex,
+        selectedItem
+      }) => {
+        return (
+          <div>
           <Input
             icon="tags"
             iconPosition="left"
-            action={{
-              type: "search",
-              content: "Add",
-              onClick: () => {
-                alert("clciked");
-              }
-            }}
-            labelPosition="right"
-            name="name"
             fluid
             placeholder="search for a tag here..."
             type="text"
-            
           />
-    
+          </div>
+        );
+
+      }}
+    </Downshift>
   );
 };
 
