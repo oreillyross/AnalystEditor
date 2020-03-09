@@ -27,3 +27,12 @@ query getTags {
   }
 }
 `;
+
+export const ADD_EVENT = gql`
+  mutation addEvent($sourceID: uuid, $text: String, $created: timestamptz) {
+    __typename
+    insert_Events(objects: { source_id: $sourceID, text: $text, created_at: $created }) {
+      affected_rows
+    }
+  }
+`;

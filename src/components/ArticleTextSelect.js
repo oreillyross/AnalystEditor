@@ -4,6 +4,7 @@ import { Button } from "@material-ui/core";
 import TextSelectModal from "./TextSelectModal";
 import TextSelector from "./TextSelector";
 import { useMutation } from "@apollo/react-hooks";
+import EventForm from "../forms/EventForm";
 import gql from "graphql-tag";
 
 const ADD_EVENT = gql`
@@ -27,7 +28,7 @@ const StyledArticleAuthor = styled.div`
 function ArticleTextSelect({ article, resetArticle }) {
   const [isTextSelected, setisTextSelected] = React.useState(false);
   const [localSelectedText, setlocalSelectedText] = React.useState("");
-  const [ addEvent ] = useMutation(ADD_EVENT, {
+  const [addEvent] = useMutation(ADD_EVENT, {
     onCompleted: () => {
       showDialog();
     }
@@ -43,29 +44,33 @@ function ArticleTextSelect({ article, resetArticle }) {
   };
 
   const saveSnippet = () => {
-    console.log(article.Article_Source_Link)
+    console.log(article.Article_Source_Link);
     addEvent({
       variables: {
         sourceID: article.Article_Source_Link.id,
         text: localSelectedText
       }
     });
-setisTextSelected(false)
+    setisTextSelected(false);
   };
-
+ 
   return (
     <div>
-      <TextSelectModal
-        open={isTextSelected}
-        article={article}
-        articleSelectedText={localSelectedText}
-        cancelSelection={() => setisTextSelected(false)}
-        saveSnippet={saveSnippet}
-      />
-      <div>{article.title}</div>
-      <StyledArticleAuthor>by {article.author}</StyledArticleAuthor>
-      <TextSelector selectText={selectText} article={article} />
-      <Button onClick={resetArticle}>Return to articles</Button>
+      {isTextSelected ? (
+        <EventForm
+          article={article}
+          articleSelectedText={localSelectedText}
+          cancelSelection={() => setisTextSelected(false)}
+          saveSnippet={saveSnippet}
+        />
+      ) : (
+        <React.Fragment>
+          <div>{article.title}</div>
+          <StyledArticleAuthor>by {article.author}</StyledArticleAuthor>
+          <TextSelector selectText={selectText} article={article} />
+          <Button onClick={resetArticle}>Return to articles</Button>
+        </React.Fragment>
+      )}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { Divider, Form, Button, TextArea, Message } from "semantic-ui-react";
 import * as yup from "yup";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -15,8 +16,8 @@ import {
 } from "@material-ui/pickers";
 import styled from "styled-components";
 import Tag from "../components/Tag";
-import { GET_TAGS } from "../queries";
-import { useQuery } from "@apollo/react-hooks";
+import { GET_TAGS, ADD_EVENT } from "../queries";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -28,13 +29,14 @@ const StyledContainer = styled.div`
 `;
 
 function EventForm({
-  selectedEventText,
+  articleSelectedText,
   article = {
     title: "Coronavirus is here",
     source: "BBC News",
     published: "05 March 2020"
   }
 }) {
+  const [addEvent] = useMutation(ADD_EVENT);
   const now = new Date();
   const { data: tagData } = useQuery(GET_TAGS);
   const [tags, setTags] = React.useState([]);
@@ -50,11 +52,21 @@ function EventForm({
       <StyledHeader>Event Form </StyledHeader>
       <Divider />
       <Formik
-        initialValues={{ eventText: "", eventDate: now, tags: [] }}
+        initialValues={{
+          eventText: articleSelectedText,
+          eventDate: now,
+          tags: []
+        }}
         validationSchema={eventValidationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+            addEvent({
+              variables: {
+                sourceID: article.id,
+                text: values.eventText,
+                created: values.eventDate
+              }
+            });
             setSubmitting(false);
           }, 4);
         }}
@@ -65,8 +77,7 @@ function EventForm({
               <Form onSubmit={handleSubmit}>
                 <Form.Field>
                   <label> Event Text </label>
-                  <TextArea
-                    rows={3}
+                  <TextareaAutosize
                     name="eventText"
                     value={values.eventText}
                     onChange={handleChange}
@@ -120,10 +131,11 @@ function EventForm({
                             <AddTagBar
                               initialTags={tags}
                               addTag={selectedItem => {
-                             
                                 if (
                                   selectedItem &&
-                                  !values.tags.some(tag => tag.id === selectedItem.id)
+                                  !values.tags.some(
+                                    tag => tag.id === selectedItem.id
+                                  )
                                 )
                                   arrayHelpers.push(selectedItem);
                               }}
