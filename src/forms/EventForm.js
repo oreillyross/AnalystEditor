@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import DateFnsUtils from "@date-io/date-fns";
+import { format } from "date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
@@ -46,7 +47,7 @@ function EventForm({
       setTags(tagData.Tags);
     }
   }, [tagData]);
-
+  console.log(article.published);
   return (
     <div>
       <StyledHeader>Event Form </StyledHeader>
@@ -62,7 +63,7 @@ function EventForm({
           setTimeout(() => {
             addEvent({
               variables: {
-                sourceID: article.id,
+                sourceID: article.Article_Source_Link.id,
                 text: values.eventText,
                 created: values.eventDate
               }
@@ -116,8 +117,14 @@ function EventForm({
                   <Message.Header>Source of information</Message.Header>
                   <Divider />
                   <p>
-                    <strong>{article.title}</strong> by {article.source}{" "}
-                    published on {article.published}
+                    <strong>{article.title}</strong>{" "}
+                    <div>
+                      <Divider />({article.Article_Source_Link.name}){" "}
+                    </div>{" "}
+                    <div>
+                      published on{" "}
+                      {format(new Date(article.published), "iii do MMM yyyy")}
+                    </div>
                   </p>
                 </Message>
 
