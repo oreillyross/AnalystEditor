@@ -15,9 +15,8 @@ import {
 } from "@material-ui/pickers";
 import styled from "styled-components";
 import Tag from "../components/Tag";
-import { GET_TAGS } from '../queries'
-import { useQuery } from '@apollo/react-hooks'
-
+import { GET_TAGS } from "../queries";
+import { useQuery } from "@apollo/react-hooks";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -36,23 +35,15 @@ function EventForm({
     published: "05 March 2020"
   }
 }) {
-
-
   const now = new Date();
-  const {data: tagData} = useQuery(GET_TAGS)
-  const [tags, setTags]  = React.useState([])
+  const { data: tagData } = useQuery(GET_TAGS);
+  const [tags, setTags] = React.useState([]);
 
   React.useEffect(() => {
-   if (tagData) {
-     setTags(tagData.Tags)
-   }
-  }, [tagData])
-
-
- 
-  const addTag = selectedItem => e => {
-    console.log(selectedItem)
-  }
+    if (tagData) {
+      setTags(tagData.Tags);
+    }
+  }, [tagData]);
 
   return (
     <div>
@@ -124,32 +115,30 @@ function EventForm({
                   <Paper variant="outlined">
                     <FieldArray name="tags">
                       {arrayHelpers => {
-                        
                         return (
                           <React.Fragment>
-                            <AddTagBar initialTags={tags} addTag={addTag}/>
+                            <AddTagBar
+                              initialTags={tags}
+                              addTag={selectedItem => {
+                             
+                                if (
+                                  selectedItem &&
+                                  !values.tags.some(tag => tag.id === selectedItem.id)
+                                )
+                                  arrayHelpers.push(selectedItem);
+                              }}
+                            />
                             <Divider />
                             <StyledContainer>
-                              {!values.tags.length ? (
-                                <div
-                                  style={{ padding: "1rem" }}
-                                  data-testid="notags"
-                                >
-                                  no tags yet
-                                </div>
-                              ) : (
-                                values.tags.map((tag, index) => {
-                                  return (
-                                    <Tag
-                                      key={tag.id}
-                                      name={tag.name}
-                                      deleteTag={() =>
-                                        arrayHelpers.remove(index)
-                                      }
-                                    />
-                                  );
-                                })
-                              )}
+                              {values.tags.map((tag, index) => {
+                                return (
+                                  <Tag
+                                    key={tag.id}
+                                    name={tag.name}
+                                    deleteTag={() => arrayHelpers.remove(index)}
+                                  />
+                                );
+                              })}
                             </StyledContainer>
                           </React.Fragment>
                         );
