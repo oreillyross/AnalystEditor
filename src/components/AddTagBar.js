@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
 
@@ -14,17 +14,33 @@ const options = {
 };
 
 const AddTagBar = ({ initialTags = [], addTag }) => {
+  
   const { result, search, reset } = useFuse({ data: initialTags, options });
+  
+  const [value, setValue] = React.useState('');
+
   return (
     <Downshift
-      itemToString={item => (item ? item.name : "")}
-      initialHighlightedIndex={1}
+      itemToString={value => (value ? value.name : "")}
+      
+      onStateChange={changes => {
+        if (changes.hasOwnProperty("selectedItem")) {
+          setValue(changes.selectedItem.name);
+        } else if (changes.hasOwnProperty("inputValue")) {
+          setValue(changes.inputValue);
+        }
+        if (changes.type === Downshift.stateChangeTypes.keyDownEnter)  {
+          addTag(changes.selectedItem)
+          reset()
+          setValue('')
+        }
+
+      }}
     >
       {({
         getMenuProps,
         getInputProps,
         getItemProps,
-        getLabelProps,
         isOpen,
         inputValue,
         highlightedIndex,
@@ -40,28 +56,12 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                 fluid: true,
                 placeholder: "search for a tag here...",
                 type: "text",
-                onKeyPress: e => {
-                  search(inputValue);
-                  if (e.key === "Enter") {
-                    reset();
-                    clearSelection();
-                  }
-                }
+                onKeyUp: e => search(e.target.value),
+                value,
+                
               })}
             />
-            <Button
-              type="button"
-              onClick={() => {
-                console.log(inputValue !== '')
-                if (selectedItem !== '') {
-                  addTag(selectedItem);
-                  reset();
-                  clearSelection();
-                }
-              }}
-            >
-              Add Tag
-            </Button>
+
             {isOpen ? (
               <div>
                 <ul

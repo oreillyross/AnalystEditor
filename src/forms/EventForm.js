@@ -47,7 +47,7 @@ function EventForm({
       setTags(tagData.Tags);
     }
   }, [tagData]);
-  console.log(article.published);
+
   return (
     <div>
       <StyledHeader>Event Form </StyledHeader>
@@ -116,16 +116,16 @@ function EventForm({
                 <Message info>
                   <Message.Header>Source of information</Message.Header>
                   <Divider />
-                  <p>
+                  <div>
                     <strong>{article.title}</strong>{" "}
                     <div>
                       <Divider />({article.Article_Source_Link.name}){" "}
                     </div>{" "}
-                    <div>
+                    <p>
                       published on{" "}
                       {format(new Date(article.published), "iii do MMM yyyy")}
-                    </div>
-                  </p>
+                    </p>
+                  </div>
                 </Message>
 
                 <Form.Field>
