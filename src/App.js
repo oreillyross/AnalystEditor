@@ -20,13 +20,14 @@ import Sources from './views/Sources'
 import Search from './views/Search'
 import SourceForm from './forms/SourceForm'
 import EventForm from './forms/EventForm'
+import { alink } from './alink.js'
 
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
 const client = new ApolloClient({
-  link,
+  link: alink.concat(link),
   cache: new InMemoryCache(),
   fetchOptions: {
     mode: "cors"
