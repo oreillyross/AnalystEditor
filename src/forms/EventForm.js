@@ -17,7 +17,7 @@ import {
 } from "@material-ui/pickers";
 import styled from "styled-components";
 import Tag from "../components/Tag";
-import { GET_TAGS, ADD_EVENT } from "../queries";
+import { GET_TAGS, ADD_EVENT, ADD_EVENT_TAG_LINK } from "../queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 
 const eventValidationSchema = new yup.object({
@@ -33,11 +33,14 @@ function EventForm({
   articleSelectedText,
   article = {
     title: "Coronavirus is here",
-    source: "BBC News",
+    Article_Source_Link: {
+      name: "BBC News"
+    },
     published: "05 March 2020"
   }
 }) {
   const [addEvent] = useMutation(ADD_EVENT);
+  const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
   const now = new Date();
   const { data: tagData } = useQuery(GET_TAGS);
   const [tags, setTags] = React.useState([]);
@@ -59,17 +62,24 @@ function EventForm({
           tags: []
         }}
         validationSchema={eventValidationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            addEvent({
+        onSubmit={async values => {
+          const { data } = await addEvent({
+            variables: {
+              sourceID: article.Article_Source_Link.id,
+              text: values.eventText,
+              created: values.eventDate
+            }
+          });
+          const eventID = data.insert_Events.returning[0].id;
+          values.tags.map(formTag => {
+            addEventTag({
               variables: {
-                sourceID: article.Article_Source_Link.id,
-                text: values.eventText,
-                created: values.eventDate
+                eventID,
+                tagID: formTag.id
               }
             });
-            setSubmitting(false);
-          }, 4);
+            return "success";
+          });
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => {
