@@ -18,14 +18,14 @@ const useStyles = makeStyles({
 
 const GET_EVENTS = gql`
   query getEvents {
-  Events {
-    id
-    text
-    Event_Source_Link {
-      name
+    Events(order_by: { created_at: desc }) {
+      id
+      text
+      Event_Source_Link {
+        name
+      }
     }
   }
-}
 `;
 
 function EventTable() {
@@ -49,15 +49,9 @@ function EventTable() {
           <TableBody>
             {data.Events.map(row => (
               <TableRow key={row.id}>
-                <TableCell>
-                  {row.text}
-                </TableCell>
-                <TableCell>
-                  {row.Event_Source_Link.name}
-                </TableCell>
-                <TableCell>
-                  {Math.floor(Math.random() * 20)}
-                </TableCell>
+                <TableCell>{row.text}</TableCell>
+                <TableCell>{row.Event_Source_Link.name}</TableCell>
+                <TableCell>{Math.floor(Math.random() * 20)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

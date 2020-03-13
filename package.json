@@ -1,10 +1,8 @@
 {
-  "name": "analysteditor",
+  "name": "bizzle-bub",
   "version": "1.0.0",
-  "description": "Analyst editor",
-  "keywords": [
-    "analysis"
-  ],
+  "description": "",
+  "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",
