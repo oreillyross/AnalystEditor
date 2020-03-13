@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { format } from "date-fns";
 
 const useStyles = makeStyles({
   table: {
@@ -21,6 +22,7 @@ const GET_EVENTS = gql`
     Events(order_by: { created_at: desc }) {
       id
       text
+      created_at
       Event_Source_Link {
         name
       }
@@ -41,6 +43,7 @@ function EventTable() {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
+              <TableCell>Date</TableCell>
               <TableCell>Event</TableCell>
               <TableCell>Source</TableCell>
               <TableCell>Tags</TableCell>
@@ -49,6 +52,7 @@ function EventTable() {
           <TableBody>
             {data.Events.map(row => (
               <TableRow key={row.id}>
+                <TableCell>{format(new Date(row.created_at), 'yyy')}</TableCell>
                 <TableCell>{row.text}</TableCell>
                 <TableCell>{row.Event_Source_Link.name}</TableCell>
                 <TableCell>{Math.floor(Math.random() * 20)}</TableCell>
