@@ -1,16 +1,26 @@
 import React from "react";
-import Chip from './Chip'
+import { Button, Icon } from 'semantic-ui-react'
 
 
 function Tag({ name, deleteTag }) {
   if (!name) return null;
   return (
     
-      <Chip
-        name={name}
-        deleteTag={deleteTag}
-        
-      />
+    <Button
+    type='button'
+    style={{margin: '.3rem', height:'40px', borderRadius: "20px"}}
+    basic
+    color='blue'>
+    
+{name}
+
+<Icon onClick={deleteTag} corner='top right' size='small' name='delete'/>
+
+
+
+
+      </Button>
+  
     
   );
 }

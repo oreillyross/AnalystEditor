@@ -2,11 +2,10 @@ import React from "react";
 import Tagtable from "../tables/TagTable";
 import { Paper } from "@material-ui/core";
 import { StyledHeader } from "../styles/common";
-import gql from "graphql-tag";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
-import { GET_TAGS } from '../queries'
+import { GET_TAGS, ADD_TAG } from '../queries'
 
 const options = {
   shouldSort: true,
@@ -18,20 +17,6 @@ const options = {
   keys: ["name"]
 };
 
-
-
-const ADD_TAG = gql`
-  mutation addTag($name: String) {
-    __typename
-    insert_Tags(objects: { name: $name }) {
-      returning {
-        id
-        name
-      }
-      affected_rows
-    }
-  }
-`;
 
 function Tags() {
   const { data, loading } = useQuery(GET_TAGS);
