@@ -10,7 +10,21 @@ function TagTable({ tags = [] }) {
 
   function deleteTag(id, e) {
     assert(id);
-    queryDeleteTag({ variables: { id } });
+    queryDeleteTag({
+      variables: { id },
+      update(cache, { data }) {
+        console.log(data);
+        const getExistingTags = cache.readQuery({ query: GET_TAGS });
+        const existingTags = getExistingTags ? getExistingTags.Tags : [];
+        const deletedTag = data.delete_Tags
+          ? data.delete_Tags.returning[0]
+          : {};
+        cache.writeQuery({
+          query: GET_TAGS,
+          data: { Tags: existingTags.filter(tag => tag.id !== deletedTag.id) }
+        });
+      }
+    });
   }
 
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import Tagtable from "../tables/TagTable";
+import TagTable from "../tables/TagTable";
 import { Paper } from "@material-ui/core";
 import { StyledHeader } from "../styles/common";
 import { useQuery, useMutation } from "@apollo/react-hooks";
@@ -81,7 +81,7 @@ function Tags() {
         </Button>
       ) : null}
 
-      <Tagtable tags={result} />
+      <TagTable tags={result} />
     </Paper>
   );
 }
