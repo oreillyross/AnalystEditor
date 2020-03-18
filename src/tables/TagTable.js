@@ -2,7 +2,7 @@ import React from "react";
 import { StyledTags } from "../styles/common";
 import { Button, Icon } from "semantic-ui-react";
 import { GET_TAGS, DELETE_TAG } from "../queries";
-import { useQuery, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 const assert = require("assert");
 
 function TagTable({ tags = [] }) {
