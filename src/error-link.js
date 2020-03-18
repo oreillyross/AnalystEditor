@@ -5,8 +5,7 @@ const errorlink = onError(({ graphQLErrors, networkError }) => {
     console.log(graphQLErrors[0].extensions.message);
     if (graphQLErrors[0].message.includes("delete")) {
       //todo put a custom error modal dialog here
-      alert(`Cannot delete this tag becuase it is linked 
-      to events, first remove the 
+      alert(`Cannot delete this tag becuase it is linked to events, first remove the 
       tags from the events.`);
     }
   }
