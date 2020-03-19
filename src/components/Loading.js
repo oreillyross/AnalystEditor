@@ -4,7 +4,7 @@ import { BarLoader } from 'react-css-loaders';
 
 function Loading({message = 'Loading content'}) {
   return ( <div>
-  <Barloader/>
+  <BarLoader/>
 {message}
 </div>
   )
