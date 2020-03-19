@@ -1,5 +1,41 @@
 import gql from "graphql-tag";
 
+export const GET_KEYWORDS = gql`
+  query getKeywords {
+    
+    Keywords(order_by: { name: asc }) {
+      id
+      name
+    }
+  }
+`;
+
+export const ADD_KEYWORD = gql`
+  mutation addKeyword($name: String) {
+    __typename
+    insert_Keywords(objects: { name: $name }) {
+      returning {
+        id
+        name
+      }
+      affected_rows
+    }
+  }
+`;
+
+export const DELETE_KEYWORD = gql`
+mutation deleteKeyword($id: uuid) {
+  __typename
+  delete_Keywords(where: {id: {_eq: $id}}) {
+    affected_rows
+    returning {
+      id
+      name
+    }
+  }
+}`
+
+
 export const GET_ARTICLES = gql`
   query getArticles {
     Articles {
