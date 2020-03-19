@@ -21,7 +21,7 @@ import Search from "./views/Search";
 import SourceForm from "./forms/SourceForm";
 import EventForm from "./forms/EventForm";
 import { alink } from "./alink.js";
-import Tag from "../views/Tag";
+import Tag from "./views/Tag";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
