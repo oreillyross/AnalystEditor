@@ -14,14 +14,14 @@ import TextSelect from "./components/TextSelect";
 import { article } from "./components/article";
 import NewArticleForm from "./forms/NewArticleForm";
 import KeywordForm from "./forms/KeywordForm";
-import Tags from './views/Tags'
-import Keywords from './views/Keywords'
-import Sources from './views/Sources'
-import Search from './views/Search'
-import SourceForm from './forms/SourceForm'
-import EventForm from './forms/EventForm'
-import { alink } from './alink.js'
-
+import Tags from "./views/Tags";
+import Keywords from "./views/Keywords";
+import Sources from "./views/Sources";
+import Search from "./views/Search";
+import SourceForm from "./forms/SourceForm";
+import EventForm from "./forms/EventForm";
+import { alink } from "./alink.js";
+import Tag from "../views/Tag";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -97,11 +97,12 @@ export default function App() {
           <EventTable path="/events" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
-          <SourceForm path='/forms/newsource'/>
-          <Tags path="/tags"/>
-          <Keywords path='/keywords'/>
-          <Sources path='/sources' />
-          <Search path='/search' />
+          <SourceForm path="/forms/newsource" />
+          <Tags path="/tags" />
+          <Keywords path="/keywords" />
+          <Sources path="/sources" />
+          <Search path="/search" />
+          <Tag path="/tag/:id" />
           <NotFound default />
         </Router>
       </StyledDashboard>

@@ -4,6 +4,7 @@ import { Button, Icon } from "semantic-ui-react";
 import { GET_TAGS, DELETE_TAG } from "../queries";
 import { useMutation } from "@apollo/react-hooks";
 const assert = require("assert");
+import { navigate } from "@reach/router";
 
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
@@ -37,6 +38,7 @@ function TagTable({ tags = [] }) {
             style={{ margin: ".3rem", height: "40px", borderRadius: "20px" }}
             basic
             color="blue"
+            onClick={() => navigate(`/tag/${tag.id}`)}
           >
             {tag.name}
 
