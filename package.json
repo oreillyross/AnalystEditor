@@ -47,14 +47,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prettier-watch": "onchange '**/*.js' -- prettier --write {{changed}}"
+    "prettier": "prettier --write src/**/*.{js,css}"
   },
   "eslintConfig": {
     "extends": "react-app"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "npm run prettier"
     }
   },
   "browserslist": {
