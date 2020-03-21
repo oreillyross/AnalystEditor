@@ -1,10 +1,7 @@
-import React from "react"
+import React from "react";
 
 function Scenarios() {
-  return <div>
-		
-THis is where 		
-		Scenarios</div>
+  return <div>ddddddTHis is where Scenarios</div>;
 }
 
-export default Scenarios
+export default Scenarios;
