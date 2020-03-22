@@ -22,7 +22,7 @@ import SourceForm from "./forms/SourceForm";
 import EventForm from "./forms/EventForm";
 import { alink } from "./alink.js";
 import Tag from "./views/Tag";
-
+import Scenarios from "./views/Scenarios";
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
@@ -101,6 +101,7 @@ export default function App() {
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
+          <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />
           <NotFound default />

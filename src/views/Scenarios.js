@@ -1,7 +1,7 @@
 import React from "react";
-
+import { GET_SCENARIOS } from "../queries";
 function Scenarios() {
-  return <div>ddddddTHis is where Scenarios</div>;
+  return <div>Scenarios</div>;
 }
 
 export default Scenarios;

@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 
 export const GET_KEYWORDS = gql`
   query getKeywords {
-    
     Keywords(order_by: { name: asc }) {
       id
       name
@@ -24,17 +23,17 @@ export const ADD_KEYWORD = gql`
 `;
 
 export const DELETE_KEYWORD = gql`
-mutation deleteKeyword($id: uuid) {
-  __typename
-  delete_Keywords(where: {id: {_eq: $id}}) {
-    affected_rows
-    returning {
-      id
-      name
+  mutation deleteKeyword($id: uuid) {
+    __typename
+    delete_Keywords(where: { id: { _eq: $id } }) {
+      affected_rows
+      returning {
+        id
+        name
+      }
     }
   }
-}`
-
+`;
 
 export const GET_ARTICLES = gql`
   query getArticles {
@@ -109,6 +108,21 @@ export const ADD_EVENT_TAG_LINK = gql`
     __typename
     insert_Event_Tag(objects: { event_id: $eventID, tag_id: $tagID }) {
       affected_rows
+    }
+  }
+`;
+
+export const GET_SCENARIOS = gql`
+query getScenarios {
+
+    Scenarios {
+
+          id
+              name
+                  description
+                    }
+                    }
+                    
     }
   }
 `;

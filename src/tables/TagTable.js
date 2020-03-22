@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { StyledTags } from "../styles/common";
 import { Button, Icon } from "semantic-ui-react";
 import { GET_TAGS, DELETE_TAG } from "../queries";
