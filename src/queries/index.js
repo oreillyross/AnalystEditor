@@ -114,15 +114,10 @@ export const ADD_EVENT_TAG_LINK = gql`
 
 export const GET_SCENARIOS = gql`
 query getScenarios {
-
-    Scenarios {
-
-          id
-              name
-                  description
-                    }
-                    }
-                    
-    }
+  Scenarios {
+    id
+    name
+    description
   }
+}
 `;
