@@ -7,8 +7,31 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-function ScenarioTable() {
-  return <div>Scenarios</div>;
+function ScenarioTable({ scenarios }) {
+  console.log(scenarios);
+  return (
+    <div>
+      <TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Event</TableCell>
+              <TableCell>Source</TableCell>
+              <TableCell>Tags</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {scenarios.map(row => (
+              <TableRow key={row.id}>
+                <TableCell>{row.name} </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
+  );
 }
 
 export default ScenarioTable;

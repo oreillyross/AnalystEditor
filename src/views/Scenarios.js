@@ -11,7 +11,7 @@ function Scenarios() {
     return (
       <div>
         Scenarios
-        <ScenarioTable />
+        <ScenarioTable scenarios={data.Scenarios} />
       </div>
     );
 }
