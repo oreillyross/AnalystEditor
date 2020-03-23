@@ -10,22 +10,29 @@ function KeywordTable({ keywords }) {
   const [deleteKeyword] = useMutation(DELETE_KEYWORD);
 
   function deleteTag(id, event) {
-    console.log('should be deleting now')
+    console.log("should be deleting now");
     console.log(id);
-    deleteKeyword({ variables: { id },
+    deleteKeyword({
+      variables: { id },
       update(cache, { data }) {
         console.log(data);
         const getExistingKeywords = cache.readQuery({ query: GET_KEYWORDS });
-        const existingKeywords = getExistingKeywords ? getExistingKeywords.Keywords : [];
+        const existingKeywords = getExistingKeywords
+          ? getExistingKeywords.Keywords
+          : [];
         const deletedKeyword = data.delete_Keywords
           ? data.delete_Keywords.returning[0]
           : {};
         cache.writeQuery({
           query: GET_KEYWORDS,
-          data: { Keywords: existingKeywords.filter(keyword => keyword.id !== deletedKeyword.id) }
+          data: {
+            Keywords: existingKeywords.filter(
+              keyword => keyword.id !== deletedKeyword.id
+            )
+          }
         });
       }
-     });
+    });
   }
 
   return (

@@ -5,7 +5,7 @@ import { StyledHeader } from "../styles/common";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
-import { GET_TAGS, ADD_TAG } from '../queries'
+import { GET_TAGS, ADD_TAG } from "../queries";
 
 const options = {
   shouldSort: true,
@@ -16,7 +16,6 @@ const options = {
   minMatchCharLength: 1,
   keys: ["name"]
 };
-
 
 function Tags() {
   const { data, loading } = useQuery(GET_TAGS);
@@ -51,7 +50,6 @@ function Tags() {
           });
         }
       }).then(() => {
-        
         setValue("");
         reset();
       });
@@ -63,7 +61,7 @@ function Tags() {
       <StyledHeader>Tags </StyledHeader>
 
       <Input
-        style={{margin: '1.2rem'}}
+        style={{ margin: "1.2rem" }}
         autoComplete="off"
         icon="tags"
         iconPosition="left"

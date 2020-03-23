@@ -14,27 +14,24 @@ const options = {
 };
 
 const AddTagBar = ({ initialTags = [], addTag }) => {
-  
   const { result, search, reset } = useFuse({ data: initialTags, options });
-  
-  const [value, setValue] = React.useState('');
+
+  const [value, setValue] = React.useState("");
 
   return (
     <Downshift
       itemToString={value => (value ? value.name : "")}
-      
       onStateChange={changes => {
         if (changes.hasOwnProperty("selectedItem")) {
           setValue(changes.selectedItem.name);
         } else if (changes.hasOwnProperty("inputValue")) {
           setValue(changes.inputValue);
         }
-        if (changes.type === Downshift.stateChangeTypes.keyDownEnter)  {
-          addTag(changes.selectedItem)
-          reset()
-          setValue('')
+        if (changes.type === Downshift.stateChangeTypes.keyDownEnter) {
+          addTag(changes.selectedItem);
+          reset();
+          setValue("");
         }
-
       }}
     >
       {({
@@ -57,8 +54,7 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                 placeholder: "search for a tag here...",
                 type: "text",
                 onKeyUp: e => search(e.target.value),
-                value,
-                
+                value
               })}
             />
 

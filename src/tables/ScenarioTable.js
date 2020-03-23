@@ -1,10 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function ScenarioTable() {
-    return (
-<div>This is the table</div>
-
-    )
+  return <div>This is the table</div>;
 }
 
-export default ScenarioTable
+export default ScenarioTable;

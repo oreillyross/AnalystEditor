@@ -7,16 +7,12 @@ const TextSelectModal = ({
   articleSelectedText,
   article,
   cancelSelection,
-  saveSnippet,
+  saveSnippet
   // onTagDelete,
   // addTag
 }) => {
-  const {
-    title,
-    Article_Source_Link,
-    url,
-  } = article;
-  
+  const { title, Article_Source_Link, url } = article;
+
   return (
     <Modal
       closeIcon
@@ -33,9 +29,7 @@ const TextSelectModal = ({
             {title}
           </a>
         </Header>
-        <p style={{ padding: "1.2rem" }}>
-          by {Article_Source_Link.name}
-        </p>
+        <p style={{ padding: "1.2rem" }}>by {Article_Source_Link.name}</p>
       </Modal.Description>
       <Modal.Content>
         <div style={{ padding: "1.2rem" }}>{articleSelectedText}</div>

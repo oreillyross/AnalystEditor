@@ -18,20 +18,16 @@ function GenericSearchBar({
   onChange
 }) {
   const classes = useStyles();
-  
+
   return (
-    
-      
-      <OutlinedInput
-        className={classes.input}
-        placeholder={placeholder}
-        fullWidth
-        autoFocus
-        value={value}
-        onChange={onChange}
-      />
-      
-    
+    <OutlinedInput
+      className={classes.input}
+      placeholder={placeholder}
+      fullWidth
+      autoFocus
+      value={value}
+      onChange={onChange}
+    />
   );
 }
 

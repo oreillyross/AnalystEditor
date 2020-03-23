@@ -5,9 +5,7 @@ import ArticleTable from "../tables/ArticleTable";
 import ArticleTextSelect from "../components/ArticleTextSelect";
 import { Button } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
-import { GET_ARTICLES } from '../queries'
-
-
+import { GET_ARTICLES } from "../queries";
 
 function Articles({ navigate }) {
   const { loading, error, data } = useQuery(GET_ARTICLES);
@@ -40,9 +38,8 @@ function Articles({ navigate }) {
             onClick={() => {
               navigate("/forms/newarticle");
             }}
-            
             basic
-            color='blue'
+            color="blue"
           >
             Add an Article
           </Button>

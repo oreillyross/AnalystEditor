@@ -1,8 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import KeywordTable from '../tables/KeywordTable'
-
+import KeywordTable from "../tables/KeywordTable";
 
 const Fuse = require("fuse.js");
 
@@ -25,10 +24,8 @@ const reducer = (state, action) => {
   if (action.type === "toggleShowForm") {
     return { showingKeywordForm: !action.payload, ...state };
   }
-  if (action.type === "")
-  return state;
+  if (action.type === "") return state;
 };
-
 
 const GET_KEYWORDS = gql`
   query getKeywords {
@@ -41,22 +38,16 @@ const GET_KEYWORDS = gql`
 `;
 
 function KeywordView() {
-  
   const { loading, data, error } = useQuery(GET_KEYWORDS);
-  
-  
+
   const [state, dispatch] = React.useReducer(reducer, myState);
 
   if (loading) return null;
   if (error) return <div>Oops, something went wrong...</div>;
   if (data) {
-   
-    const keywords = data.Keywords
+    const keywords = data.Keywords;
 
-
-   return (
-       <KeywordTable keywords={keywords} />
-      )
+    return <KeywordTable keywords={keywords} />;
   }
 }
 

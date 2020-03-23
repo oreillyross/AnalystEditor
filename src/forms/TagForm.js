@@ -18,7 +18,7 @@ function showDialog() {
   alert("record added");
 }
 
-const TagForm = ({children}) => {
+const TagForm = ({ children }) => {
   const [addTag] = useMutation(ADD_TAG, {
     onCompleted: () => {
       showDialog();

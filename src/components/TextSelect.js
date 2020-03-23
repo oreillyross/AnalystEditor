@@ -2,7 +2,6 @@ import React from "react";
 import TextSelector from "./TextSelector";
 import TextSelectModal from "./TextSelectModal";
 
-
 function TextSelect({ article = {} }) {
   const [selectedText, setSelectedText] = React.useState("");
 

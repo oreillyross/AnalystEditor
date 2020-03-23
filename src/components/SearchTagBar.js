@@ -14,7 +14,7 @@ const SearchTagBar = () => {
     >
       {props => (
         <Form
-        autoComplete='off'
+          autoComplete="off"
           style={{ backgroundColor: "white" }}
           onSubmit={props.handleSubmit}
         >

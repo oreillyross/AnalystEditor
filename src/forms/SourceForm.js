@@ -14,7 +14,6 @@ import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 const ADD_SOURCE = gql`
   mutation AddSource($name: String!, $description: String, $url: String) {
     insert_Sources(
@@ -27,8 +26,6 @@ const ADD_SOURCE = gql`
   }
 `;
 
-
-
 const useStyles = makeStyles(theme => ({
   root: {
     "& .MuiTextField-root": {
@@ -38,20 +35,21 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
 function showDialog() {
-  alert('added record')
+  alert("added record");
 }
 
 const SourceForm = () => {
   const classes = useStyles();
 
-  const [addSource, { data, error }] = useMutation(ADD_SOURCE, {onCompleted: () => {
-    showDialog()
-  }});
-  if (error) console.log(error)
-  if (data) console.log(data)
- 
+  const [addSource, { data, error }] = useMutation(ADD_SOURCE, {
+    onCompleted: () => {
+      showDialog();
+    }
+  });
+  if (error) console.log(error);
+  if (data) console.log(data);
+
   const formik = useFormik({
     initialValues: {
       sourceName: "",
@@ -66,8 +64,6 @@ const SourceForm = () => {
           url: values.sourceUrl
         }
       }).then(result => console.log(result));
-
-      
     }
   });
   return (

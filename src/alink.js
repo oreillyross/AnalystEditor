@@ -6,7 +6,7 @@ export const alink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'x-hasura-admin-secret': a
+      "x-hasura-admin-secret": a
     }
   };
 });

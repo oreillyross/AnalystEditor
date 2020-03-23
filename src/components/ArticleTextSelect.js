@@ -53,7 +53,7 @@ function ArticleTextSelect({ article, resetArticle }) {
     });
     setisTextSelected(false);
   };
- 
+
   return (
     <div>
       {isTextSelected ? (

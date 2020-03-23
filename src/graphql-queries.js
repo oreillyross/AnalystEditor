@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
+import gql from "graphql-tag";
 export const articles = gql`
-
-query getArticles {
-  Articles {
-    id
-    source
-    title
+  query getArticles {
+    Articles {
+      id
+      source
+      title
+    }
   }
-}`;
+`;

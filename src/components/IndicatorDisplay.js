@@ -1,12 +1,12 @@
-import React from 'react'
-import IndicatorTable from '../tables/IndicatorTable'
+import React from "react";
+import IndicatorTable from "../tables/IndicatorTable";
 
 function IndicatorDisplay() {
   return (
-<div>
-  <IndicatorTable/>
-  </div>
-  )
+    <div>
+      <IndicatorTable />
+    </div>
+  );
 }
 
-export default IndicatorDisplay
+export default IndicatorDisplay;

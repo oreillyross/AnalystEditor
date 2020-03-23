@@ -10,12 +10,10 @@ const StyledDiv = styled.div`
   border: none;
 `;
 
-function AddButton({onClick}) {
+function AddButton({ onClick }) {
   return (
     <StyledDiv>
-      <AddCircleOutlineIcon
-        onClick={onClick}
-      />
+      <AddCircleOutlineIcon onClick={onClick} />
     </StyledDiv>
   );
 }

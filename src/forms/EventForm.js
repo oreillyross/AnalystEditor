@@ -19,7 +19,7 @@ import styled from "styled-components";
 import Tag from "../components/Tag";
 import { GET_TAGS, ADD_EVENT, ADD_EVENT_TAG_LINK } from "../queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import { navigate } from '@reach/router'
+import { navigate } from "@reach/router";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -38,8 +38,7 @@ function EventForm({
       name: "BBC News"
     },
     published: "05 March 2020"
-  },
-
+  }
 }) {
   const [addEvent] = useMutation(ADD_EVENT);
   const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
@@ -80,11 +79,11 @@ function EventForm({
                 tagID: formTag.id
               }
             });
-           
-             return "success";
-          })
-         
-          navigate('/events')
+
+            return "success";
+          });
+
+          navigate("/events");
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => {

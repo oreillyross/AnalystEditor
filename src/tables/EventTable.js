@@ -52,7 +52,7 @@ function EventTable() {
           <TableBody>
             {data.Events.map(row => (
               <TableRow key={row.id}>
-                <TableCell>{format(new Date(row.created_at), 'yyy')}</TableCell>
+                <TableCell>{format(new Date(row.created_at), "yyy")}</TableCell>
                 <TableCell>{row.text}</TableCell>
                 <TableCell>{row.Event_Source_Link.name}</TableCell>
                 <TableCell>{Math.floor(Math.random() * 20)}</TableCell>

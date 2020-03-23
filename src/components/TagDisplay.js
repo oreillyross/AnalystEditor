@@ -8,9 +8,6 @@ const StyledContainer = styled.div`
 `;
 
 export default function TagDisplay({ tags = {}, deleteTag }) {
-  
-  
-
   return (
     <StyledContainer>
       {!tags.length ? (

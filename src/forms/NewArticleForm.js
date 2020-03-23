@@ -27,7 +27,6 @@ const ADD_ARTICLE = gql`
     $text: String
     $source_id: uuid
   ) {
-    
     insert_Articles(
       objects: {
         title: $title
@@ -68,7 +67,7 @@ const newArticleValidSchema = yup.object().shape({
 
 function NewArticleForm({ navigate }) {
   const { data, loading } = useQuery(GET_SOURCES);
-  const [addArticle ] = useMutation(ADD_ARTICLE);
+  const [addArticle] = useMutation(ADD_ARTICLE);
 
   if (loading) return null;
   /*TODO find a better way of pre-loading the sources and keep
@@ -106,23 +105,23 @@ function NewArticleForm({ navigate }) {
                 text: values.text
               },
               update(cache, { data }) {
-                console.table(data)
+                console.table(data);
                 const getExistingArticles = cache.readQuery({
                   query: GET_ARTICLES
                 });
                 const existingArticles = getExistingArticles
                   ? getExistingArticles.Articles
                   : [];
-                console.log(existingArticles.length)
-                  const newArticle = data.insert_Articles
+                console.log(existingArticles.length);
+                const newArticle = data.insert_Articles
                   ? data.insert_Articles.returning[0]
                   : {};
-                  console.log('NEW ARTICLE' + newArticle.title)
+                console.log("NEW ARTICLE" + newArticle.title);
                 cache.writeQuery({
                   query: GET_ARTICLES,
                   data: { Articles: { newArticle, ...existingArticles } }
                 });
-               return null 
+                return null;
               }
             }).then(() => {
               navigate("/articles");
