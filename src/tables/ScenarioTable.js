@@ -8,14 +8,13 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 function ScenarioTable({ scenarios }) {
-  console.log(scenarios);
   return (
     <div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Date</TableCell>
+              <TableCell>Scenario</TableCell>
               <TableCell>Event</TableCell>
               <TableCell>Source</TableCell>
               <TableCell>Tags</TableCell>
