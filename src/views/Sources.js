@@ -23,7 +23,6 @@ function Sources({ navigate }) {
           <SourceTable />
         </div>
       </Paper>
-      ;
     </div>
   );
 }

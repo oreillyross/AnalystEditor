@@ -23,6 +23,7 @@ import EventForm from "./forms/EventForm";
 import { alink } from "./alink.js";
 import Tag from "./views/Tag";
 import Scenarios from "./views/Scenarios";
+import ScenarioForm from "./forms/ScenarioForm";
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
@@ -98,6 +99,7 @@ export default function App() {
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
           <SourceForm path="/forms/newsource" />
+          <ScenarioForm path="/forms/newscenario" />
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
