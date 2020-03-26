@@ -24,6 +24,8 @@ import { alink } from "./alink.js";
 import Tag from "./views/Tag";
 import Scenarios from "./views/Scenarios";
 import ScenarioForm from "./forms/ScenarioForm";
+import Indicators from "./views/Indicators";
+import IndicatorForm from "./forms/IndicatorForm";
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
@@ -99,10 +101,12 @@ export default function App() {
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
           <SourceForm path="/forms/newsource" />
+          <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/newscenario" />
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
+          <Indicators path="/indicators" />
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />

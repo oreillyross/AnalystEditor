@@ -122,6 +122,16 @@ export const GET_SCENARIOS = gql`
   }
 `;
 
+export const ADD_INDICATOR = gql`
+  mutation AddIndicator($name: String!, $description: String) {
+    insert_Indicators(objects: { name: $name, description: $description }) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
 export const GET_INDICATORS = gql`
   query getIndicators {
     Indicators {

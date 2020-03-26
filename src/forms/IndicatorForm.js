@@ -13,16 +13,7 @@ import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
-
-const ADD_INDICATOR = gql`
-  mutation AddIndicator($name: String!, $description: String) {
-    insert_Indicators(objects: { name: $name, description: $description }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
+import { ADD_INDICATOR } from "../queries";
 
 const useStyles = makeStyles(theme => ({
   root: {

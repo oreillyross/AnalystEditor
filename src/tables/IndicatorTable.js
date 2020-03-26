@@ -43,7 +43,7 @@ const useStyles = makeStyles({
   row: {}
 });
 
-function IndicatorTable() {
+function IndicatorTable({ indicators }) {
   const classes = useStyles();
 
   return (
@@ -56,28 +56,26 @@ function IndicatorTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow className={classes.row}>
-            <TableCell className={classes.row}>
-              1. This is an indicator example, Google takes over the world,
-              mwwwahhh
-            </TableCell>
-            <TableCell>
-              <Slider
-                defaultValue={5}
-                aria-labelledby="discrete-slider-always"
-                step={1}
-                min={1}
-                max={10}
-                marks={marks}
-              />
-            </TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>
-              2. This is an indicator example, Google takes over the world,
-              mwwwahhh
-            </TableCell>
-          </TableRow>
+          {indicators.map(indicator => {
+            return (
+              <TableRow className={classes.row}>
+                <TableCell className={classes.row}>
+                  1. This is an indicator example, Google takes over the world,
+                  mwwwahhh
+                </TableCell>
+                <TableCell>
+                  <Slider
+                    defaultValue={5}
+                    aria-labelledby="discrete-slider-always"
+                    step={1}
+                    min={1}
+                    max={10}
+                    marks={marks}
+                  />
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </TableContainer>
