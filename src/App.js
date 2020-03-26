@@ -19,6 +19,7 @@ import Keywords from "./views/Keywords";
 import Sources from "./views/Sources";
 import Search from "./views/Search";
 import SourceForm from "./forms/SourceForm";
+import EventsByTag from "./tables/EventsByTag";
 import EventForm from "./forms/EventForm";
 import { alink } from "./alink.js";
 import Tag from "./views/Tag";
@@ -97,6 +98,7 @@ export default function App() {
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
           <EventForm path="/admin" />
+          <EventsByTag path="events/bytag/:id" />
           <EventTable path="/events" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />

@@ -102,6 +102,16 @@ export const DELETE_TAG = gql`
   }
 `;
 
+export const GET_EVENTS_BY_TAG = gql`
+  query getEventsByTagId($tagid: uuid) {
+    Events(where: { Event_Tags: { Tag: { id: { _eq: $tagid } } } }) {
+      created_at
+      id
+      text
+    }
+  }
+`;
+
 export const ADD_EVENT = gql`
   mutation addEvent($sourceID: uuid, $text: String, $created: timestamptz) {
     __typename
