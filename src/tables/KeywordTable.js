@@ -3,6 +3,7 @@ import Tag from "../components/Tag";
 import { StyledTags } from "../styles/common";
 import { DELETE_KEYWORD, GET_KEYWORDS } from "../queries";
 import { useMutation } from "@apollo/react-hooks";
+import { navigate } from "@reach/router";
 
 function KeywordTable({ keywords }) {
   const [deleteKeyword] = useMutation(DELETE_KEYWORD);
@@ -43,6 +44,7 @@ function KeywordTable({ keywords }) {
               window.confirm("Are you sure you want to delete this tag") &&
               deleteTag(keyword.id)
             }
+            viewKeyword={() => navigate("/view/keyword/:id")}
           />
         ))}
       </StyledTags>

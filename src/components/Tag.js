@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Icon } from "semantic-ui-react";
 
-function Tag({ name, deleteTag }) {
+function Tag({ name, deleteTag, viewKeyword }) {
   if (!name) return null;
   return (
     <Button
@@ -9,6 +9,7 @@ function Tag({ name, deleteTag }) {
       style={{ margin: ".3rem", height: "40px", borderRadius: "20px" }}
       basic
       color="blue"
+      onClick={viewKeyword}
     >
       {name}
 

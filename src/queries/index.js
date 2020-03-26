@@ -63,6 +63,15 @@ export const GET_TAGS = gql`
   }
 `;
 
+export const GET_TAG = gql`
+  query getTag($id: uuid) {
+    Tags(where: { id: { _eq: $id } }) {
+      id
+      name
+    }
+  }
+`;
+
 export const ADD_TAG = gql`
   mutation addTag($name: String) {
     __typename
