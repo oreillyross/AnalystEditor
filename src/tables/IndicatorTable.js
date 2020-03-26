@@ -59,10 +59,7 @@ function IndicatorTable({ indicators }) {
           {indicators.map(indicator => {
             return (
               <TableRow className={classes.row}>
-                <TableCell className={classes.row}>
-                  1. This is an indicator example, Google takes over the world,
-                  mwwwahhh
-                </TableCell>
+                <TableCell className={classes.row}>{indicator.name}</TableCell>
                 <TableCell>
                   <Slider
                     defaultValue={5}
