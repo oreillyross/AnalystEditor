@@ -146,8 +146,8 @@ export const GET_SCENARIOS = gql`
 `;
 
 export const GET_SCENARIO = gql`
-  query getScenario($scenarioId: uuid) {
-    Scenarios(where: { id: { _eq: $scenarioId } }) {
+  query getScenario($id: uuid) {
+    Scenarios(where: { id: { _eq: $id } }) {
       id
       name
       description

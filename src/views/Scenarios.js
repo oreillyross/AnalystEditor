@@ -7,7 +7,6 @@ import { Button } from "semantic-ui-react";
 
 function Scenarios({ navigate }) {
   const { data, loading } = useQuery(GET_SCENARIOS);
-  if (data) console.log(data);
   if (loading) return <div> Loading... </div>;
   if (data)
     return (
