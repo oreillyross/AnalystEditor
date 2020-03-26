@@ -121,3 +121,13 @@ export const GET_SCENARIOS = gql`
     }
   }
 `;
+
+export const GET_INDICATORS = gql`
+  query getIndicators {
+    Indicators {
+      id
+      name
+      description
+    }
+  }
+`;
