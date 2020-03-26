@@ -27,6 +27,7 @@ import Scenarios from "./views/Scenarios";
 import ScenarioForm from "./forms/ScenarioForm";
 import Indicators from "./views/Indicators";
 import IndicatorForm from "./forms/IndicatorForm";
+import Scenario from "./views/Scenario.js";
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
@@ -105,6 +106,7 @@ export default function App() {
           <SourceForm path="/forms/newsource" />
           <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/newscenario" />
+          <Scenario path="/views/scenario/:id" />
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />

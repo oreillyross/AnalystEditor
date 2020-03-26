@@ -6,6 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { GET_SCENARIO } from "../queries";
 
 function ScenarioTable({ scenarios }) {
   return (
@@ -23,7 +24,9 @@ function ScenarioTable({ scenarios }) {
           <TableBody>
             {scenarios.map(row => (
               <TableRow key={row.id}>
-                <TableCell>{row.name} </TableCell>
+                <TableCell>
+                  <a href={`/views/scenario/${row.id}`}>{row.name}i</a>{" "}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

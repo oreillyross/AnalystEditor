@@ -145,6 +145,18 @@ export const GET_SCENARIOS = gql`
   }
 `;
 
+export const GET_SCENARIO = gql`
+  query getScenario($scenarioId: uuid) {
+    Scenarios(where: { id: { _eq: $scenarioId } }) {
+      id
+      name
+      description
+      created_at
+      updated_at
+    }
+  }
+`;
+
 export const ADD_INDICATOR = gql`
   mutation AddIndicator($name: String!, $description: String) {
     insert_Indicators(objects: { name: $name, description: $description }) {
