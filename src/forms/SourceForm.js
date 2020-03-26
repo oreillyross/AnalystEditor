@@ -1,14 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import styled from "styled-components";
-import {
-  TextField,
-  InputLabel,
-  Input,
-  Button,
-  FormLabel,
-  Paper
-} from "@material-ui/core";
+import { TextField, Button, FormLabel, Paper } from "@material-ui/core";
 import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";

@@ -3,7 +3,7 @@ import { Formik, FieldArray } from "formik";
 import { StyledHeader } from "../styles/common";
 import AddTagBar from "../components/AddTagBar";
 import IndicatorDisplay from "../components/IndicatorDisplay";
-import { Divider, Form, Button, TextArea, Message } from "semantic-ui-react";
+import { Divider, Form, Message, Button } from "semantic-ui-react";
 import * as yup from "yup";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";

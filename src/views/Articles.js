@@ -1,6 +1,5 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import ArticleTable from "../tables/ArticleTable";
 import ArticleTextSelect from "../components/ArticleTextSelect";
 import { Button } from "semantic-ui-react";

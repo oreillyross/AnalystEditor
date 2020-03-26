@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "@material-ui/core";
-import TextSelectModal from "./TextSelectModal";
 import TextSelector from "./TextSelector";
 import { useMutation } from "@apollo/react-hooks";
 import EventForm from "../forms/EventForm";

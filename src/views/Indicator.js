@@ -1,20 +1,18 @@
-import React from "react";
 import { useFormik } from "formik";
-import { TextField, Button, FormLabel, Paper } from "@material-ui/core";
+import styled from "styled-components";
+import {
+  TextField,
+  InputLabel,
+  Input,
+  Button,
+  FormLabel,
+  Paper
+} from "@material-ui/core";
 import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
-
-const ADD_SCENARIO = gql`
-  mutation AddScenario($name: String!, $description: String) {
-    insert_Scenarios(objects: { name: $name, description: $description }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
+import { ADD_INDICATOR } from "../queries";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,14 +23,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function showDialog() {
-  alert("added record");
-}
-
-const ScenarioForm = () => {
+const Indicator = ({ indicator }) => {
   const classes = useStyles();
 
-  const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
+  const [addIndicator, { data, error }] = useMutation(ADD_INDICATOR, {
     onCompleted: () => {
       showDialog();
     }
@@ -42,14 +36,14 @@ const ScenarioForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      scenarioName: "",
-      scenarioDescription: ""
+      indicatorName: "",
+      indicatorDescription: ""
     },
     onSubmit: values => {
-      addScenario({
+      addIndicator({
         variables: {
-          name: values.scenarioName,
-          description: values.scenarioDescription
+          name: values.indicatorName,
+          description: values.indicatorDescription
         }
       }).then(result => console.log(result));
     }
@@ -61,25 +55,25 @@ const ScenarioForm = () => {
         autoComplete="off"
         onSubmit={formik.handleSubmit}
       >
-        <FormLabel className="form-label"> Scenario Form</FormLabel>
+        <FormLabel className="form-label"> Indicator Form</FormLabel>
         <div>
           <TextField
-            id="scenarioName"
+            id="indicatorName"
             className={classes.textField}
             margin="dense"
-            name="scenarioName"
+            name="indicatorName"
             variant="outlined"
             required
             label="Name"
             type="text"
             onChange={formik.handleChange}
-            value={formik.values.scenarioName}
+            value={formik.values.indicatorName}
           />
         </div>
         <div>
           <TextField
-            id="scenarioDescription"
-            name="scenarioDescription"
+            id="indicatorDescription"
+            name="indicatorDescription"
             multiline
             rows={4}
             margin="dense"
@@ -87,7 +81,7 @@ const ScenarioForm = () => {
             variant="outlined"
             fullWidth
             onChange={formik.handleChange}
-            value={formik.values.scenarioDescription}
+            value={formik.values.indicatorDescription}
           />
         </div>
         <div style={{ paddingRight: ".8rem", textAlign: "right" }}>
@@ -101,4 +95,4 @@ const ScenarioForm = () => {
   );
 };
 
-export default ScenarioForm;
+export default Indicator;

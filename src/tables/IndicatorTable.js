@@ -7,9 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Select } from "semantic-ui-react";
 import Slider from "@material-ui/core/Slider";
-import { Divider } from "semantic-ui-react";
 
 const marks = [
   {
@@ -24,16 +22,6 @@ const marks = [
     value: 10,
     label: "10"
   }
-];
-
-const indicators = [
-  { value: 1, text: "1" },
-  { value: 2, text: "2" },
-  { value: 3, text: "3" },
-  { value: 4, text: "4" },
-  { value: 5, text: "5" },
-  { value: 6, text: "6" },
-  { value: 7, text: "7" }
 ];
 
 const useStyles = makeStyles({
@@ -52,6 +40,7 @@ function IndicatorTable({ indicators }) {
         <TableHead>
           <TableRow>
             <TableCell>Indication</TableCell>
+            <TableCell>Scenarios</TableCell>
             <TableCell>Strength</TableCell>
           </TableRow>
         </TableHead>
@@ -60,6 +49,8 @@ function IndicatorTable({ indicators }) {
             return (
               <TableRow className={classes.row}>
                 <TableCell className={classes.row}>{indicator.name}</TableCell>
+                <TableCell className={classes.row}>{6}</TableCell>
+
                 <TableCell>
                   <Slider
                     defaultValue={5}

@@ -1,5 +1,4 @@
 import React from "react";
-import { TextArea } from "semantic-ui-react";
 import { TextareaAutosize, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({

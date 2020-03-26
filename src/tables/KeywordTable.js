@@ -4,14 +4,10 @@ import { StyledTags } from "../styles/common";
 import { DELETE_KEYWORD, GET_KEYWORDS } from "../queries";
 import { useMutation } from "@apollo/react-hooks";
 
-const assert = require("assert");
-
 function KeywordTable({ keywords }) {
   const [deleteKeyword] = useMutation(DELETE_KEYWORD);
 
   function deleteTag(id, event) {
-    console.log("should be deleting now");
-    console.log(id);
     deleteKeyword({
       variables: { id },
       update(cache, { data }) {
