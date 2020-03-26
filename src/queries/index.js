@@ -68,10 +68,14 @@ export const GET_TAG = gql`
     Tags(where: { id: { _eq: $id } }) {
       id
       name
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
-
 export const ADD_TAG = gql`
   mutation addTag($name: String) {
     __typename
