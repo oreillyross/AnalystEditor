@@ -2,18 +2,24 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_SCENARIO } from "../queries";
 import Status from "../components/Status";
+import { prettyDate } from "../utils";
 
 function Scenario({ id }) {
   console.log(id);
   const { data, loading } = useQuery(GET_SCENARIO, { variables: { id } });
   if (loading) return null;
   if (data) {
-    console.log(data.Scenarios[0]);
+    const { name, created_at, updated_at, description } = data.Scenarios[0];
+
     return (
       <div>
-        {data.Scenarios[0].name}
+        {name}
 
-        <Status view="Scenario" />
+        <Status
+          view="Scenario"
+          created_at={created_at}
+          updated_at={updated_at}
+        />
       </div>
     );
   }
