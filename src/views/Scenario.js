@@ -11,6 +11,10 @@ const Heading = styled.h3`
   padding: 24px 0 24px 12px;
 
 `;
+const Content = styled.p`
+  border: 1px solid thistle;
+`;
+
 function Scenario({ id }) {
   const { data, loading } = useQuery(GET_SCENARIO, { variables: { id } });
   if (loading) return null;
@@ -20,7 +24,7 @@ function Scenario({ id }) {
     return (
       <div>
         <Heading>{name}</Heading>
-        {description}
+        <Content>{description}</Content>
         <Status
           view="Scenario"
           created_at={created_at}
