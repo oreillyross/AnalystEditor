@@ -3,7 +3,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_SCENARIO } from "../queries";
 import Status from "../components/Status";
 import { prettyDate } from "../utils";
+import styled from "styled-components";
 
+const Heading = styled.h3`
+  font-weight: strong
+  padding: 1rem;
+  padding: 24px 0 24px 12px;
+
+`;
 function Scenario({ id }) {
   const { data, loading } = useQuery(GET_SCENARIO, { variables: { id } });
   if (loading) return null;
@@ -12,7 +19,7 @@ function Scenario({ id }) {
 
     return (
       <div>
-        {name}
+        <Heading>{name}</Heading>
         {description}
         <Status
           view="Scenario"
