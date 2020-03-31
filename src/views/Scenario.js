@@ -5,7 +5,6 @@ import Status from "../components/Status";
 import { prettyDate } from "../utils";
 
 function Scenario({ id }) {
-  console.log(id);
   const { data, loading } = useQuery(GET_SCENARIO, { variables: { id } });
   if (loading) return null;
   if (data) {
@@ -14,7 +13,7 @@ function Scenario({ id }) {
     return (
       <div>
         {name}
-
+        {description}
         <Status
           view="Scenario"
           created_at={created_at}

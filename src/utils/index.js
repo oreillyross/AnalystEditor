@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const prettyDate = isoDate => {
-  return isoDate;
+  return format(new Date(isoDate), "EEE, do, LLL, y");
 };
