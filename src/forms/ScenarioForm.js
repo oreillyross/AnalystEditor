@@ -5,36 +5,17 @@ import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { makeStyles } from "@material-ui/core/styles";
-
-const ADD_SCENARIO = gql`
-  mutation AddScenario($name: String!, $description: String) {
-    insert_Scenarios(objects: { name: $name, description: $description }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: 400
-    }
-  }
-}));
+import { GET_SCENARIOS, ADD_SCENARIO } from "../queries";
 
 function showDialog() {
   alert("added record");
 }
 
-const ScenarioForm = () => {
-  const classes = useStyles();
-
+const ScenarioForm = ({ navigate }) => {
   const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
     onCompleted: () => {
       showDialog();
+      navigate("/scenarios");
     }
   });
   if (error) console.log(error);
@@ -50,54 +31,64 @@ const ScenarioForm = () => {
         variables: {
           name: values.scenarioName,
           description: values.scenarioDescription
+        },
+        update(cache, { data }) {
+          const getExistingScenarios = cache.readQuery({
+            query: GET_SCENARIOS
+          });
+          const existingScenarios = getExistingScenarios
+            ? getExistingScenarios
+            : [];
+          const newScenario = data.insert_Scenarios
+            ? data.insert_Scenarios.returning[0]
+            : {};
+          cache.writeQuery({
+            query: GET_SCENARIOS,
+            data: { Scenarios: [newScenario, ...existingScenarios] }
+          });
         }
       }).then(result => console.log(result));
     }
   });
   return (
-    <Paper>
-      <form
-        className={classes.root}
-        autoComplete="off"
-        onSubmit={formik.handleSubmit}
-      >
-        <FormLabel className="form-label"> Scenario Form</FormLabel>
+    <form autoComplete="off" onSubmit={formik.handleSubmit}>
+      <Paper style={{ backgroundColor: "white", margin: "12px" }}>
         <div>
-          <TextField
-            id="scenarioName"
-            className={classes.textField}
-            margin="dense"
-            name="scenarioName"
-            variant="outlined"
-            required
-            label="Name"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.scenarioName}
-          />
+          <FormLabel className="form-label"> Scenario Form</FormLabel>
         </div>
-        <div>
-          <TextField
-            id="scenarioDescription"
-            name="scenarioDescription"
-            multiline
-            rows={4}
-            margin="dense"
-            label="Description"
-            variant="outlined"
-            fullWidth
-            onChange={formik.handleChange}
-            value={formik.values.scenarioDescription}
-          />
-        </div>
+
+        <TextField
+          id="scenarioName"
+          name="scenarioName"
+          style={{ margin: "24px" }}
+          variant="outlined"
+          required
+          label="Name"
+          type="text"
+          fullWidth
+          onChange={formik.handleChange}
+          value={formik.values.scenarioName}
+        />
+        <TextField
+          id="scenarioDescription"
+          name="scenarioDescription"
+          multiline
+          rows={4}
+          label="Description"
+          variant="outlined"
+          onChange={formik.handleChange}
+          fullWidth
+          style={{ margin: "24px" }}
+          value={formik.values.scenarioDescription}
+        />
         <div style={{ paddingRight: ".8rem", textAlign: "right" }}>
           <Button color="secondary  ">Cancel</Button>
           <Button color="primary" type="submit">
             Submit
           </Button>
         </div>
-      </form>
-    </Paper>
+      </Paper>
+    </form>
   );
 };
 

@@ -9,6 +9,16 @@ export const GET_KEYWORDS = gql`
   }
 `;
 
+export const ADD_SCENARIO = gql`
+  mutation AddScenario($name: String!, $description: String) {
+    insert_Scenarios(objects: { name: $name, description: $description }) {
+      returning {
+        id
+      }
+    }
+  }
+`;
+
 export const ADD_KEYWORD = gql`
   mutation addKeyword($name: String) {
     __typename
