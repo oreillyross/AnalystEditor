@@ -28,6 +28,7 @@ function Articles({ navigate }) {
 
   if (data) {
     const articles = data.Articles;
+    console.log(articles);
     return (
       <div>
         <StyledHeader>Articles</StyledHeader>

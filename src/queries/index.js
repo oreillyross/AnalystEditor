@@ -151,6 +151,11 @@ export const GET_SCENARIOS = gql`
       id
       name
       description
+      Scenario_Indicators_aggregate {
+        aggregate {
+          count(columns: indicator_id)
+        }
+      }
     }
   }
 `;

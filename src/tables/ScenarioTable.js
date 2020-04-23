@@ -9,6 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import { GET_SCENARIO } from "../queries";
 
 function ScenarioTable({ scenarios }) {
+  console.log(scenarios);
   return (
     <div>
       <TableContainer component={Paper}>
@@ -16,9 +17,8 @@ function ScenarioTable({ scenarios }) {
           <TableHead>
             <TableRow>
               <TableCell>Scenario</TableCell>
-              <TableCell>Event</TableCell>
-              <TableCell>Source</TableCell>
-              <TableCell>Tags</TableCell>
+              <TableCell>Indications</TableCell>
+              <TableCell>Events</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -26,6 +26,12 @@ function ScenarioTable({ scenarios }) {
               <TableRow key={row.id}>
                 <TableCell>
                   <a href={`/views/scenario/${row.id}`}>{row.name}i</a>{" "}
+                </TableCell>
+
+                <TableCell>
+                  <a href={`/views/scenario/${row.id}`}>
+                    {row.Scenario_Indicators_aggregate.aggregate.count}
+                  </a>{" "}
                 </TableCell>
               </TableRow>
             ))}

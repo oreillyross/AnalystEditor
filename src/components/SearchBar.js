@@ -11,12 +11,7 @@ const useStyles = makeStyles({
   }
 });
 
-function GenericSearchBar({
-  showAddButton,
-  placeholder = "Search",
-  value,
-  onChange
-}) {
+function SearchBar({ showAddButton, placeholder = "Search", value, onChange }) {
   const classes = useStyles();
 
   return (
@@ -31,4 +26,4 @@ function GenericSearchBar({
   );
 }
 
-export default GenericSearchBar;
+export { SearchBar };
