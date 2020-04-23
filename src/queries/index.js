@@ -191,3 +191,19 @@ export const GET_INDICATORS = gql`
     }
   }
 `;
+
+export const GET_INDICATIONS_BY_SCENARIO = gql`
+  query getIndicatorsByScenario {
+    Indicators(
+      where: {
+        Scenario_Indicators: {
+          scenario_id: { _eq: "3bb5f022-a745-4264-a259-8e9c81a4d583" }
+        }
+      }
+    ) {
+      id
+      name
+      description
+    }
+  }
+`;

@@ -29,7 +29,7 @@ function ScenarioTable({ scenarios }) {
                 </TableCell>
 
                 <TableCell>
-                  <a href={`/views/scenario/${row.id}`}>
+                  <a href={`/indicators/byscenario/${row.id}`}>
                     {row.Scenario_Indicators_aggregate.aggregate.count}
                   </a>{" "}
                 </TableCell>

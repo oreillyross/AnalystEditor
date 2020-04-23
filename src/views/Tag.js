@@ -2,6 +2,7 @@ import React from "react";
 import { GET_TAG } from "../queries";
 import { useQuery } from "@apollo/react-hooks";
 import { Paper, Card, CardHeader, CardContent } from "@material-ui/core";
+
 function Tag({ id }) {
   const { data, loading } = useQuery(GET_TAG, {
     variables: {

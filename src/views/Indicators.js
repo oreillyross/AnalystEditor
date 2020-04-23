@@ -5,7 +5,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { StyledHeader } from "../styles/common";
 import { Button } from "semantic-ui-react";
 
-function Indicators({ navigate }) {
+function Indicators({ navigate, view, id }) {
+  console.log(view, id);
   const { data, loading } = useQuery(GET_INDICATORS);
   if (data) console.log(data);
   if (loading) return <div> Loading... </div>;

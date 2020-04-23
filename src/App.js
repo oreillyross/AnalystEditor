@@ -110,7 +110,7 @@ export default function App() {
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
-          <Indicators path="/indicators" />
+          <Indicators path="/indicators/:view/:id" />
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />
