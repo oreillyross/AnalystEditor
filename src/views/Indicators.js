@@ -12,7 +12,7 @@ function Indicators({ navigate, view, id }) {
   if (view === "byscenario") {
     query = GET_INDICATIONS_BY_SCENARIO;
   }
-  const { data, loading } = useQuery(query);
+  const { data, loading } = useQuery(query, { variables: { id } });
   if (data) console.log(data);
   if (loading) return <div> Loading... </div>;
   if (data)

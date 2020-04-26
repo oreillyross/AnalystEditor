@@ -10,25 +10,12 @@ import Paper from "@material-ui/core/Paper";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { format } from "date-fns";
-
+import { GET_EVENTS } from "../queries";
 const useStyles = makeStyles({
   table: {
     minWidth: 650
   }
 });
-
-const GET_EVENTS = gql`
-  query getEvents {
-    Events(order_by: { created_at: desc }) {
-      id
-      text
-      created_at
-      Event_Source_Link {
-        name
-      }
-    }
-  }
-`;
 
 function EventTable() {
   const classes = useStyles();

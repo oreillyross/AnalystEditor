@@ -47,7 +47,7 @@ export const DELETE_KEYWORD = gql`
 
 export const GET_ARTICLES = gql`
   query getArticles {
-    Articles {
+    Articles(order_by: { published: desc }) {
       __typename
       id
       title
@@ -198,6 +198,19 @@ export const GET_INDICATIONS_BY_SCENARIO = gql`
       id
       name
       description
+    }
+  }
+`;
+
+export const GET_EVENTS = gql`
+  query getEvents {
+    Events(order_by: { created_at: desc }) {
+      id
+      text
+      created_at
+      Event_Source_Link {
+        name
+      }
     }
   }
 `;
