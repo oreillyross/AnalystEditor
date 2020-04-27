@@ -8,7 +8,7 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
-import EventTable from "./tables/EventTable";
+import { Events } from "./views/Events";
 import Articles from "./views/Articles";
 import TextSelect from "./components/TextSelect";
 import { article } from "./components/article";
@@ -100,7 +100,7 @@ export default function App() {
           <Articles path="/articles" />
           <EventForm path="/admin" />
           <EventsByTag path="events/bytag/:id" />
-          <EventTable path="/events" />
+          <Events path="/events" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
           <SourceForm path="/forms/newsource" />
