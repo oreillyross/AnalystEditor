@@ -28,6 +28,8 @@ import ScenarioForm from "./forms/ScenarioForm";
 import Indicators from "./views/Indicators";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
+import { Loading } from "./components/Loading";
+
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
@@ -98,7 +100,7 @@ export default function App() {
         <Router>
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
-          <EventForm path="/admin" />
+          <Loading message="Loading events..." path="/admin" />
           <EventsByTag path="events/bytag/:id" />
           <Events path="/events" />
           <NewArticleForm path="forms/newarticle" />

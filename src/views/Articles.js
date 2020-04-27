@@ -5,6 +5,7 @@ import ArticleTextSelect from "../components/ArticleTextSelect";
 import { Button } from "semantic-ui-react";
 import { StyledHeader } from "../styles/common";
 import { GET_ARTICLES } from "../queries";
+import { Loading } from "../components/Loading";
 
 function Articles({ navigate }) {
   const { loading, error, data } = useQuery(GET_ARTICLES);
@@ -12,7 +13,7 @@ function Articles({ navigate }) {
   const viewArticle = row => {
     setArticle(row);
   };
-  if (loading) return null;
+  if (loading) return <Loading message="getting latest articles..." />;
   if (
     !(Object.entries(article).length === 0 && article.constructor === Object)
   ) {

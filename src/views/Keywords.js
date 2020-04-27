@@ -6,6 +6,7 @@ import { GET_KEYWORDS, ADD_KEYWORD } from "../queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
+import { Loading } from "../components/Loading";
 
 const options = {
   shouldSort: true,
@@ -29,7 +30,7 @@ function Keywords() {
     }
   }, [data]);
 
-  if (loading) return null;
+  if (loading) return <Loading message="getting keywords..." />;
 
   function onChange(e) {
     setValue(e.target.value);

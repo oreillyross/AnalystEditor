@@ -11,6 +11,8 @@ import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { format } from "date-fns";
 import { GET_EVENTS } from "../queries";
+import { Loading } from "../components/Loading";
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650
@@ -22,7 +24,7 @@ function EventTable() {
 
   const { loading, error, data } = useQuery(GET_EVENTS);
 
-  if (loading) return null;
+  if (loading) return <Loading message="getting latest events..." />;
   if (error) return <div>Oops</div>;
   if (data) {
     return (

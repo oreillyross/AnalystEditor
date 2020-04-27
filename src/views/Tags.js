@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Input, Button } from "semantic-ui-react";
 import useFuse from "react-use-fuse";
 import { GET_TAGS, ADD_TAG } from "../queries";
+import { Loading } from "../components/Loading";
 
 const options = {
   shouldSort: true,
@@ -29,7 +30,7 @@ function Tags() {
     }
   }, [data]);
 
-  if (loading) return null;
+  if (loading) return <Loading message="getting tags..." />;
 
   function onChange(e) {
     setValue(e.target.value);
