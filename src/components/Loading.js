@@ -5,6 +5,7 @@ import styled from "styled-components";
 const StyledContainer = styled.div`
   text-align: center;
   margin-top 25px;
+  margin-bottom: 25px;
 `;
 
 const StyledContent = styled.div`
