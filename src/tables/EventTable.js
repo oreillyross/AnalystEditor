@@ -8,6 +8,12 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { format } from "date-fns";
+import { Link } from "@reach/router";
+import styled from "styled-components";
+
+const StyledLink = styled(Link)`
+  color: black;
+`;
 
 const useStyles = makeStyles({
   table: {
@@ -32,8 +38,13 @@ function EventTable({ articles }) {
         <TableBody>
           {articles.map(row => (
             <TableRow key={row.id}>
-              <TableCell>{format(new Date(row.created_at), "yyy")}</TableCell>
-              <TableCell>{row.text}</TableCell>
+              <TableCell>
+                {format(new Date(row.created_at), "d MMM yyyy, H:mm ")}
+              </TableCell>
+              <TableCell>
+                {" "}
+                <StyledLink to="/">{row.text}</StyledLink>
+              </TableCell>
               <TableCell>{row.Event_Source_Link.name}</TableCell>
               <TableCell>{Math.floor(Math.random() * 20)}</TableCell>
             </TableRow>
