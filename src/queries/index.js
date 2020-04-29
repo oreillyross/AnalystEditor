@@ -129,6 +129,12 @@ export const GET_EVENT_BY_ID = gql`
       source_id
       text
       created_at
+      Event_Tags {
+        Tag {
+          id
+          name
+        }
+      }
     }
   }
 `;
