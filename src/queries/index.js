@@ -122,6 +122,17 @@ export const GET_EVENTS_BY_TAG = gql`
   }
 `;
 
+export const GET_EVENT_BY_ID = gql`
+  query getEventById($id: uuid) {
+    Events(where: { id: { _eq: $id } }) {
+      id
+      source_id
+      text
+      created_at
+    }
+  }
+`;
+
 export const ADD_EVENT = gql`
   mutation addEvent($sourceID: uuid, $text: String, $created: timestamptz) {
     __typename

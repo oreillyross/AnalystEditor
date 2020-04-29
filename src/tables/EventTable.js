@@ -43,7 +43,9 @@ function EventTable({ articles }) {
               </TableCell>
               <TableCell>
                 {" "}
-                <StyledLink to="/">{row.text}</StyledLink>
+                <StyledLink to={`/views/event/${row.id}`}>
+                  {row.text}
+                </StyledLink>
               </TableCell>
               <TableCell>{row.Event_Source_Link.name}</TableCell>
               <TableCell>{Math.floor(Math.random() * 20)}</TableCell>

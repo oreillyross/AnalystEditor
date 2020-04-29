@@ -9,6 +9,7 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
 import { Events } from "./views/Events";
+import { Event } from "./views/Event";
 import Articles from "./views/Articles";
 import TextSelect from "./components/TextSelect";
 import { article } from "./components/article";
@@ -109,6 +110,7 @@ export default function App() {
           <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/newscenario" />
           <Scenario path="/views/scenario/:id" />
+          <Event path="/views/event/:id" />
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
