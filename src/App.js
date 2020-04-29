@@ -104,6 +104,7 @@ export default function App() {
           <Loading message="Loading events..." path="/admin" />
           <EventsByTag path="events/bytag/:id" />
           <Events path="/events" />
+          <EventForm path="/event/addevent" />
           <NewArticleForm path="forms/newarticle" />
           <KeywordForm path="forms/newkeyword" />
           <SourceForm path="/forms/newsource" />

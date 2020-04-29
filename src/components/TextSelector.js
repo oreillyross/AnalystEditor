@@ -1,5 +1,6 @@
 import React from "react";
 import { TextareaAutosize, makeStyles } from "@material-ui/core";
+import { navigate } from "@reach/router";
 
 const useStyles = makeStyles({
   textarea: {
@@ -21,12 +22,17 @@ const TextSelector = ({ article, selectText }) => {
   const classes = useStyles();
   const { text } = article;
 
+  function takeSelection() {
+    const selectedText = window.getSelection().toString();
+    if (selectedText.length > 0) {
+      // show the modal dialog asking if to capture this event
+      navigate("/event/addevent", { state: { selectedText } });
+    }
+  }
+
   return (
     <div style={{ textAlign: "left" }}>
-      <div
-        id="txtarea"
-        onClick={() => console.log(window.getSelection().toString())}
-      >
+      <div id="txtarea" onClick={() => takeSelection()}>
         {text}
       </div>
     </div>

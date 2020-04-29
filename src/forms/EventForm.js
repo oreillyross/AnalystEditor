@@ -31,6 +31,7 @@ const StyledContainer = styled.div`
 `;
 
 function EventForm({
+  location,
   articleSelectedText,
   article = {
     title: "Coronavirus is here",
@@ -40,6 +41,7 @@ function EventForm({
     published: "05 March 2020"
   }
 }) {
+  console.log(location.state);
   const [addEvent] = useMutation(ADD_EVENT);
   const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
   const now = new Date();
