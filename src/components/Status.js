@@ -14,12 +14,24 @@ function Status({ view, created_at, updated_at }) {
   return (
     <div>
       <Border variant="outlined">
-        {view} created on: {prettyDate(created_at)} at {prettyTime(created_at)}{" "}
-        and last updated on: {prettyDate(updated_at)}
-        at {prettyTime(updated_at)}
+        {view}
+        {created_at && (
+          <span>
+            {" "}
+            created on: {prettyDate(created_at)} at {prettyTime(created_at)}
+          </span>
+        )}
+
+        {updated_at && (
+          <span>
+            {" "}
+            and last updated on: {prettyDate(updated_at)}
+            at {prettyTime(updated_at)}
+          </span>
+        )}
       </Border>
     </div>
   );
 }
 
-export default Status;
+export { Status };

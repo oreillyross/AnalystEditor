@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_SCENARIO } from "../queries";
-import Status from "../components/Status";
+import { Status } from "../components/Status";
 import { prettyDate } from "../utils";
 import styled from "styled-components";
 

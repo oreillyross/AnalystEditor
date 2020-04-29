@@ -1,5 +1,5 @@
 import React from "react";
-import TagTable from "../tables/TagTable";
+import { TagTable } from "../tables/TagTable";
 import { Paper } from "@material-ui/core";
 import { StyledHeader } from "../styles/common";
 import { useQuery, useMutation } from "@apollo/react-hooks";

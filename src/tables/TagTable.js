@@ -59,4 +59,4 @@ function TagTable({ tags = [] }) {
   );
 }
 
-export default TagTable;
+export { TagTable };
