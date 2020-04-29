@@ -5,14 +5,10 @@ import { GET_TAGS, DELETE_TAG } from "../queries";
 import { useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
 
-const assert = require("assert");
-
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
-
+  console.log(tags[0].Tag.name);
   function deleteTag(id, e) {
-    assert(id);
-
     queryDeleteTag({
       variables: { id },
       update(cache, { data }) {

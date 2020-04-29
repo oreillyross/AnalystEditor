@@ -23,12 +23,12 @@ const TextSelector = ({ article, selectText }) => {
 
   return (
     <div style={{ textAlign: "left" }}>
-      <TextareaAutosize
+      <div
         id="txtarea"
-        onMouseUp={() => selectText(getSelectedText())}
-        value={text}
-        className={classes.textarea}
-      />
+        onClick={() => console.log(window.getSelection().toString())}
+      >
+        {text}
+      </div>
     </div>
   );
 };

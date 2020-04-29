@@ -21,7 +21,7 @@ function Event({ id }) {
         <EventText> {event.text}</EventText>
         <Card.Description style={{ margin: "25px" }}>
           Tags
-          <TagTable tags={["one", "two", "three"]} />
+          <TagTable tags={event.Event_Tags} />
         </Card.Description>
 
         <Status view="Event" created_at={event.created_at} />
