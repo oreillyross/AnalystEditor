@@ -24,13 +24,18 @@ const TextSelector = ({ article, selectText }) => {
       // show the modal dialog asking if to capture this event
       setSelectedText(selectedText);
       setOpen(true);
+      console.log(open);
       //navigate("/event/addevent", { state: { selectedText } });
     }
   }
 
   return (
     <div style={{ textAlign: "left" }}>
-      <SelectTextModal open={open} selectedText={selectedText} />
+      <SelectTextModal
+        open={open}
+        selectedText={selectedText}
+        onCancel={() => setOpen(false)}
+      />
       <div id="txtarea" onClick={() => takeSelection()}>
         {text}
       </div>
