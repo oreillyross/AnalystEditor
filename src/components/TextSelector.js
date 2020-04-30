@@ -15,19 +15,22 @@ const useStyles = makeStyles({
 const TextSelector = ({ article, selectText }) => {
   const classes = useStyles();
   const { text } = article;
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [selectedText, setSelectedText] = React.useState("");
 
   function takeSelection() {
     const selectedText = window.getSelection().toString();
     if (selectedText.length > 0) {
       // show the modal dialog asking if to capture this event
+      setSelectedText(selectedText);
+      setOpen(true);
       //navigate("/event/addevent", { state: { selectedText } });
     }
   }
 
   return (
     <div style={{ textAlign: "left" }}>
-      <SelectTextModal open={open} />
+      <SelectTextModal open={open} selectedText={selectedText} />
       <div id="txtarea" onClick={() => takeSelection()}>
         {text}
       </div>
