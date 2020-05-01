@@ -35,6 +35,9 @@ const TextSelector = ({ article, selectText }) => {
         open={open}
         selectedText={selectedText}
         onCancel={() => setOpen(false)}
+        onCreateEvent={() =>
+          navigate("/event/addevent", { state: { selectedText } })
+        }
       />
       <div id="txtarea" onClick={() => takeSelection()}>
         {text}

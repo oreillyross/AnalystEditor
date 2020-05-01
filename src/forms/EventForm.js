@@ -42,6 +42,7 @@ function EventForm({
   }
 }) {
   console.log(location.state);
+  const eventText = location.state.selectedText;
   const [addEvent] = useMutation(ADD_EVENT);
   const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
   const now = new Date();
@@ -60,7 +61,7 @@ function EventForm({
       <Divider />
       <Formik
         initialValues={{
-          eventText: articleSelectedText,
+          eventText: eventText,
           eventDate: now,
           tags: []
         }}
