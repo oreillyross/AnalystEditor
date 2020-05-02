@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "semantic-ui-react";
+import { Input, Button } from "semantic-ui-react";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
 
@@ -18,7 +18,6 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
   const [value, setValue] = React.useState("");
 
   const inputAndResults = value && result.length !== 0;
-  console.log(inputAndResults);
 
   return (
     <Downshift
@@ -30,9 +29,8 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
           setValue(changes.inputValue);
         }
         if (changes.type === Downshift.stateChangeTypes.keyDownEnter) {
-          addTag(changes.selectedItem);
+          setValue(changes.inputValue);
           reset();
-          setValue("");
         }
       }}
     >
@@ -48,6 +46,10 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
       }) => {
         return (
           <div>
+            isOpen: {isOpen.toString()}, inputValue: {inputValue},
+            highlightedIndex: {highlightedIndex}, selectedItem:{" "}
+            {selectedItem ? selectedItem.name : null}, result.length:{" "}
+            {result.length}
             <Input
               {...getInputProps({
                 icon: "tags",
@@ -55,50 +57,59 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                 fluid: true,
                 placeholder: "search for a tag here...",
                 type: "text",
-                onKeyUp: e => search(e.target.value),
+
+                onKeyUp: e => {
+                  if (e.keyCode === 13 && inputValue) {
+                    if (selectedItem) {
+                      console.log(
+                        "selectedItem: ",
+                        selectedItem.name,
+                        "inputValue: ",
+                        inputValue
+                      );
+                    }
+                  } else {
+                    search(e.target.value);
+                  }
+                },
                 value
               })}
-            />
-
+            />{" "}
+            <span style={{ float: "right" }}>button</span>
             {isOpen && inputAndResults ? (
-              <div>
-                <ul
-                  {...getMenuProps({
-                    style: {
-                      marginLeft: "1rem",
-                      padding: "1rem",
-                      position: "absolute",
-                      zIndex: 10,
-                      border: "1px solid green",
-                      borderRadius: "0 25px 30px 0",
-                      backgroundColor: "#f5f6f7",
-                      width: "50vw"
-                    }
-                  })}
-                >
-                  {result.map((tag, index) => {
-                    return (
-                      <li
-                        {...getItemProps({
-                          key: tag.id,
-                          item: tag,
-                          index,
-                          style: {
-                            backgroundColor:
-                              highlightedIndex === index
-                                ? "lightgray"
-                                : "#f5f6f7",
-                            listStyleType: "none",
-                            position: "relative"
-                          }
-                        })}
-                      >
-                        {tag.name}
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
+              <ul
+                {...getMenuProps({
+                  style: {
+                    marginLeft: "1rem",
+                    padding: "1rem",
+                    position: "absolute",
+                    zIndex: 10,
+                    borderRadius: "0 25px 30px 0",
+                    backgroundColor: "#f5f6f7",
+                    width: "50vw"
+                  }
+                })}
+              >
+                {result.map((tag, index) => {
+                  return (
+                    <li
+                      {...getItemProps({
+                        key: tag.id,
+                        item: tag,
+                        index,
+                        style: {
+                          backgroundColor:
+                            highlightedIndex === index ? "red" : "green",
+                          listStyleType: "none",
+                          position: "relative"
+                        }
+                      })}
+                    >
+                      {tag.name}
+                    </li>
+                  );
+                })}
+              </ul>
             ) : null}
           </div>
         );

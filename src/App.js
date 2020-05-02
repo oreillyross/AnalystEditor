@@ -125,6 +125,7 @@ export default function App() {
               { name: "ande", id: 2 },
               { name: "amd", id: "3" }
             ]}
+            addTag={item => alert(item.name)}
             path="/admin"
           />
           <NotFound default />
