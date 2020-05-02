@@ -15,8 +15,10 @@ const options = {
 
 const AddTagBar = ({ initialTags = [], addTag }) => {
   const { result, search, reset } = useFuse({ data: initialTags, options });
-
   const [value, setValue] = React.useState("");
+
+  const inputAndResults = value && result.length !== 0;
+  console.log(inputAndResults);
 
   return (
     <Downshift
@@ -58,7 +60,7 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
               })}
             />
 
-            {isOpen ? (
+            {isOpen && inputAndResults ? (
               <div>
                 <ul
                   {...getMenuProps({

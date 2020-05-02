@@ -30,19 +30,9 @@ const StyledContainer = styled.div`
   padding: 1rem;
 `;
 
-function EventForm({
-  location,
-  articleSelectedText,
-  article = {
-    title: "Coronavirus is here",
-    Article_Source_Link: {
-      name: "BBC News"
-    },
-    published: "05 March 2020"
-  }
-}) {
-  console.log(location.state);
+function EventForm({ location, articleSelectedText }) {
   const eventText = location.state.selectedText;
+  const article = location.state.article;
   const [addEvent] = useMutation(ADD_EVENT);
   const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
   const now = new Date();

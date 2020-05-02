@@ -79,7 +79,6 @@ function Tags() {
           Add New Tag
         </Button>
       ) : null}
-
       <TagTable tags={result} />
     </Paper>
   );

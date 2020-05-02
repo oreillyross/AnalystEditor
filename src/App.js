@@ -30,6 +30,7 @@ import Indicators from "./views/Indicators";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { Loading } from "./components/Loading";
+import AddTagBar from "./components/AddTagBar";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -101,7 +102,6 @@ export default function App() {
         <Router>
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
-          <Loading message="Loading events..." path="/admin" />
           <EventsByTag path="events/bytag/:id" />
           <Events path="/events" />
           <EventForm path="/event/addevent" />
@@ -119,6 +119,14 @@ export default function App() {
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />
+          <AddTagBar
+            initialTags={[
+              { name: "And", id: "1" },
+              { name: "ande", id: 2 },
+              { name: "amd", id: "3" }
+            ]}
+            path="/admin"
+          />
           <NotFound default />
         </Router>
       </StyledDashboard>

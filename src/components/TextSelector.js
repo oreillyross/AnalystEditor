@@ -21,11 +21,8 @@ const TextSelector = ({ article, selectText }) => {
   function takeSelection() {
     const selectedText = window.getSelection().toString();
     if (selectedText.length > 0) {
-      // show the modal dialog asking if to capture this event
       setSelectedText(selectedText);
       setOpen(true);
-      console.log(open);
-      //navigate("/event/addevent", { state: { selectedText } });
     }
   }
 
@@ -36,7 +33,7 @@ const TextSelector = ({ article, selectText }) => {
         selectedText={selectedText}
         onCancel={() => setOpen(false)}
         onCreateEvent={() =>
-          navigate("/event/addevent", { state: { selectedText } })
+          navigate("/event/addevent", { state: { selectedText, article } })
         }
       />
       <div id="txtarea" onClick={() => takeSelection()}>

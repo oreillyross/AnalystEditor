@@ -7,12 +7,11 @@ import { navigate } from "@reach/router";
 
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
-  console.log(tags[0].Tag.name);
+
   function deleteTag(id, e) {
     queryDeleteTag({
       variables: { id },
       update(cache, { data }) {
-        console.log(data);
         const getExistingTags = cache.readQuery({ query: GET_TAGS });
         const existingTags = getExistingTags ? getExistingTags.Tags : [];
         const deletedTag = data.delete_Tags
