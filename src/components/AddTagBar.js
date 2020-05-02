@@ -29,8 +29,8 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
           setValue(changes.inputValue);
         }
         if (changes.type === Downshift.stateChangeTypes.keyDownEnter) {
-          setValue(changes.inputValue);
-          reset();
+          //setValue(changes.inputValue);
+          //reset();
         }
       }}
     >
@@ -59,7 +59,6 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                     fluid: true,
                     placeholder: "search for a tag here...",
                     type: "text",
-
                     onKeyUp: e => {
                       if (e.keyCode === 13 && inputValue) {
                         if (selectedItem) {
@@ -77,44 +76,47 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                     value
                   })}
                 />{" "}
-                <Form.Button>Button</Form.Button>
+                <Form.Button onClick={() => console.log("button pressed")}>
+                  Button
+                </Form.Button>
               </Form.Group>
+              {isOpen && inputAndResults ? (
+                <ul
+                  {...getMenuProps({
+                    style: {
+                      marginLeft: "1rem",
+                      marginTop: "-15px%",
+                      padding: "1rem",
+                      position: "absolute",
+                      zIndex: 10,
+                      borderRadius: "0 25px 30px 0",
+                      backgroundColor: "#f5f6f7",
+                      width: "50vw"
+                    }
+                  })}
+                >
+                  {result.map((tag, index) => {
+                    return (
+                      <li
+                        {...getItemProps({
+                          key: tag.id,
+                          item: tag,
+                          index,
+                          style: {
+                            backgroundColor:
+                              highlightedIndex === index ? "red" : "green",
+                            listStyleType: "none",
+                            position: "relative"
+                          }
+                        })}
+                      >
+                        {tag.name}
+                      </li>
+                    );
+                  })}
+                </ul>
+              ) : null}
             </Form>
-            {isOpen && inputAndResults ? (
-              <ul
-                {...getMenuProps({
-                  style: {
-                    marginLeft: "1rem",
-                    padding: "1rem",
-                    position: "absolute",
-                    zIndex: 10,
-                    borderRadius: "0 25px 30px 0",
-                    backgroundColor: "#f5f6f7",
-                    width: "50vw"
-                  }
-                })}
-              >
-                {result.map((tag, index) => {
-                  return (
-                    <li
-                      {...getItemProps({
-                        key: tag.id,
-                        item: tag,
-                        index,
-                        style: {
-                          backgroundColor:
-                            highlightedIndex === index ? "red" : "green",
-                          listStyleType: "none",
-                          position: "relative"
-                        }
-                      })}
-                    >
-                      {tag.name}
-                    </li>
-                  );
-                })}
-              </ul>
-            ) : null}
           </div>
         );
       }}
