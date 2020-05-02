@@ -22,16 +22,12 @@ function AddTagBar({ initialTags = [], addTag }) {
 
   return (
     <Downshift
-      itemToString={value => (value ? value.name : "")}
+      itemToString={tag => (tag ? tag.name : "")}
       onStateChange={changes => {
         if (changes.hasOwnProperty("selectedItem")) {
           setValue(changes.selectedItem.name);
         } else if (changes.hasOwnProperty("inputValue")) {
           setValue(changes.inputValue);
-        }
-        if (changes.type === Downshift.stateChangeTypes.keyDownEnter) {
-          //setValue(changes.inputValue);
-          //reset();
         }
       }}
     >
@@ -65,8 +61,20 @@ function AddTagBar({ initialTags = [], addTag }) {
                     value
                   })}
                 />{" "}
-                <Form.Button onClick={() => console.log(value)}>
-                  Button
+                <Form.Button
+                  onClick={() => {
+                    if (value) {
+                      let tagToAdd = initialTags.filter(
+                        initialTag => initialTag.name == value
+                      )[0];
+                      if (!tagToAdd) tagToAdd = { name: value, id: "" };
+
+                      addTag(tagToAdd);
+                      setValue("");
+                    }
+                  }}
+                >
+                  Add
                 </Form.Button>
               </Form.Group>
               {isOpen && inputAndResults ? (
@@ -116,7 +124,8 @@ function AddTagBar({ initialTags = [], addTag }) {
 AddTagBar.propTypes = {
   initialTags: PropTypes.arrayOf(
     PropTypes.shape({ name: PropTypes.string, id: PropTypes.string })
-  )
+  ),
+  addTag: PropTypes.func
 };
 
 export { AddTagBar };

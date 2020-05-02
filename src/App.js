@@ -121,11 +121,11 @@ export default function App() {
           <Tag path="/tag/:id" />
           <AddTagBar
             initialTags={[
-              { name: "And", id: "1" },
-              { name: "ande", id: 2 },
-              { name: "amd", id: "3" }
+              { name: "And", id: "a1" },
+              { name: "ande", id: "b2" },
+              { name: "amd", id: "c3" }
             ]}
-            addTag={tag => alert(tag.name)}
+            addTag={tag => console.log(tag)}
             path="/admin"
           />
           <NotFound default />
