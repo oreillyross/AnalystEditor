@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button } from "semantic-ui-react";
+import { Input, Button, Form } from "semantic-ui-react";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
 
@@ -50,32 +50,36 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
             highlightedIndex: {highlightedIndex}, selectedItem:{" "}
             {selectedItem ? selectedItem.name : null}, result.length:{" "}
             {result.length}
-            <Input
-              {...getInputProps({
-                icon: "tags",
-                iconPosition: "left",
-                fluid: true,
-                placeholder: "search for a tag here...",
-                type: "text",
+            <Form>
+              <Form.Group widths="equal">
+                <Form.Input
+                  {...getInputProps({
+                    icon: "tags",
+                    iconPosition: "left",
+                    fluid: true,
+                    placeholder: "search for a tag here...",
+                    type: "text",
 
-                onKeyUp: e => {
-                  if (e.keyCode === 13 && inputValue) {
-                    if (selectedItem) {
-                      console.log(
-                        "selectedItem: ",
-                        selectedItem.name,
-                        "inputValue: ",
-                        inputValue
-                      );
-                    }
-                  } else {
-                    search(e.target.value);
-                  }
-                },
-                value
-              })}
-            />{" "}
-            <span style={{ float: "right" }}>button</span>
+                    onKeyUp: e => {
+                      if (e.keyCode === 13 && inputValue) {
+                        if (selectedItem) {
+                          console.log(
+                            "selectedItem: ",
+                            selectedItem.name,
+                            "inputValue: ",
+                            inputValue
+                          );
+                        }
+                      } else {
+                        search(e.target.value);
+                      }
+                    },
+                    value
+                  })}
+                />{" "}
+                <Form.Button>Button</Form.Button>
+              </Form.Group>
+            </Form>
             {isOpen && inputAndResults ? (
               <ul
                 {...getMenuProps({
