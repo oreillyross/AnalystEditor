@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, FieldArray } from "formik";
 import { StyledHeader } from "../styles/common";
-import AddTagBar from "../components/AddTagBar";
+import { AddTagBar } from "../components/AddTagBar";
 import IndicatorDisplay from "../components/IndicatorDisplay";
 import { Divider, Form, Message, Button } from "semantic-ui-react";
 import * as yup from "yup";

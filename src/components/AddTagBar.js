@@ -1,5 +1,6 @@
 import React from "react";
 import { Input, Button, Form } from "semantic-ui-react";
+import PropTypes from "prop-types";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
 
@@ -13,7 +14,7 @@ const options = {
   keys: ["name"]
 };
 
-const AddTagBar = ({ initialTags = [], addTag }) => {
+function AddTagBar({ initialTags = [], addTag }) {
   const { result, search, reset } = useFuse({ data: initialTags, options });
   const [value, setValue] = React.useState("");
 
@@ -46,8 +47,8 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
       }) => {
         return (
           <div>
-            isOpen: {isOpen.toString()}, inputValue: {inputValue},
-            highlightedIndex: {highlightedIndex}, selectedItem:{" "}
+            isOpen: {isOpen.toString()}, inputValue: {inputValue}, value:{" "}
+            {value}, highlightedIndex: {highlightedIndex}, selectedItem:{" "}
             {selectedItem ? selectedItem.name : null}, result.length:{" "}
             {result.length}
             <Form>
@@ -59,24 +60,12 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
                     fluid: true,
                     placeholder: "search for a tag here...",
                     type: "text",
-                    onKeyUp: e => {
-                      if (e.keyCode === 13 && inputValue) {
-                        if (selectedItem) {
-                          console.log(
-                            "selectedItem: ",
-                            selectedItem.name,
-                            "inputValue: ",
-                            inputValue
-                          );
-                        }
-                      } else {
-                        search(e.target.value);
-                      }
-                    },
+                    onKeyUp: e => search(e.target.value),
+
                     value
                   })}
                 />{" "}
-                <Form.Button onClick={() => console.log("button pressed")}>
+                <Form.Button onClick={() => console.log(value)}>
                   Button
                 </Form.Button>
               </Form.Group>
@@ -122,6 +111,12 @@ const AddTagBar = ({ initialTags = [], addTag }) => {
       }}
     </Downshift>
   );
+}
+
+AddTagBar.propTypes = {
+  initialTags: PropTypes.arrayOf(
+    PropTypes.shape({ name: PropTypes.string, id: PropTypes.string })
+  )
 };
 
-export default AddTagBar;
+export { AddTagBar };

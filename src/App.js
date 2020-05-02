@@ -30,7 +30,7 @@ import Indicators from "./views/Indicators";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { Loading } from "./components/Loading";
-import AddTagBar from "./components/AddTagBar";
+import { AddTagBar } from "./components/AddTagBar";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -125,7 +125,7 @@ export default function App() {
               { name: "ande", id: 2 },
               { name: "amd", id: "3" }
             ]}
-            addTag={item => alert(item.name)}
+            addTag={tag => alert(tag.name)}
             path="/admin"
           />
           <NotFound default />
