@@ -6,6 +6,8 @@ import { Loading } from "../components/Loading";
 import { Status } from "../components/Status";
 import styled from "styled-components";
 import { Card } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
+import { ControlPanel } from "../components/ControlPanel";
 
 const EventText = styled.div`
   margin: 25px;
@@ -32,8 +34,10 @@ function Event({ id }) {
     const event = data.Events[0];
     console.log(event);
     const tags = removeTag(event.Event_Tags);
+
     return (
-      <Card style={{ margin: "25px" }} fluid raised>
+      <div>
+        <ControlPanel color="blue" show={["edit", "delete"]} />
         <EventText> {event.text}</EventText>
         <Card.Description style={{ margin: "25px" }}>
           Tags
@@ -41,7 +45,7 @@ function Event({ id }) {
         </Card.Description>
 
         <Status view="Event" created_at={event.created_at} />
-      </Card>
+      </div>
     );
   }
 }

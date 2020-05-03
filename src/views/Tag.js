@@ -2,6 +2,7 @@ import React from "react";
 import { GET_TAG } from "../queries";
 import { useQuery } from "@apollo/react-hooks";
 import { Paper, Card, CardHeader, CardContent } from "@material-ui/core";
+import { Icon } from "semantic-ui-react";
 
 function Tag({ id }) {
   const { data, loading } = useQuery(GET_TAG, {
@@ -14,7 +15,7 @@ function Tag({ id }) {
     return (
       <div>
         <Paper>
-          <Card variant="outlined">
+          <div>
             <CardHeader title={data.Tags[0].name} />
 
             <CardContent>
@@ -25,7 +26,7 @@ function Tag({ id }) {
               </a>
               Events.{" "}
             </CardContent>
-          </Card>
+          </div>
         </Paper>
       </div>
     );

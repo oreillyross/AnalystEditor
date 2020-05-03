@@ -17,8 +17,6 @@ TagTable.propTypes = {
 
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
-  const [deleteFlag, setDeleteFlag] = React.useState(false);
-  console.log(tags);
   function deleteTag(id, e) {
     queryDeleteTag({
       variables: { id },
@@ -45,30 +43,11 @@ function TagTable({ tags = [] }) {
             style={{ margin: ".3rem", height: "40px", borderRadius: "20px" }}
             basic
             color="blue"
+            onClick={() => {
+              navigate(`/tag/${tag.id}`);
+            }}
           >
             {tag.name}
-
-            <Icon
-              onClick={e => {
-                if (
-                  window.confirm("Are you sure you want to delete this tag")
-                ) {
-                  deleteTag(tag.id);
-                  setDeleteFlag(true);
-                }
-              }}
-              corner="top right"
-              size="small"
-              name="delete"
-            />
-            <Icon
-              corner="top right"
-              size="small"
-              name="edit"
-              onClick={() => {
-                navigate(`/tag/${tag.id}`);
-              }}
-            />
           </Button>
         </React.Fragment>
       ))}
