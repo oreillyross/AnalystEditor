@@ -228,6 +228,11 @@ export const GET_EVENTS = gql`
       Event_Source_Link {
         name
       }
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;

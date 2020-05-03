@@ -48,7 +48,7 @@ function EventTable({ articles }) {
                 </StyledLink>
               </TableCell>
               <TableCell>{row.Event_Source_Link.name}</TableCell>
-              <TableCell>{Math.floor(Math.random() * 20)}</TableCell>
+              <TableCell>{row.Event_Tags_aggregate.aggregate.count}</TableCell>
             </TableRow>
           ))}
         </TableBody>

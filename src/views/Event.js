@@ -9,6 +9,9 @@ import { Card } from "semantic-ui-react";
 import { Icon } from "semantic-ui-react";
 import { ControlPanel } from "../components/ControlPanel";
 
+const EventContainer = styled.div`
+  display: grid;
+`;
 const EventText = styled.div`
   margin: 25px;
 `;
@@ -36,16 +39,19 @@ function Event({ id }) {
     const tags = removeTag(event.Event_Tags);
 
     return (
-      <div>
-        <ControlPanel color="blue" show={["edit", "delete"]} />
+      <EventContainer>
         <EventText> {event.text}</EventText>
         <Card.Description style={{ margin: "25px" }}>
           Tags
           <TagTable tags={tags} />
         </Card.Description>
 
+        <div style={{ textAlign: "right", padding: "25px" }}>
+          {" "}
+          <ControlPanel color="blue" show={["edit", "delete"]} />{" "}
+        </div>
         <Status view="Event" created_at={event.created_at} />
-      </div>
+      </EventContainer>
     );
   }
 }
