@@ -3,6 +3,7 @@ import { Input, Button, Form } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
+import styled from "styled-components";
 
 const options = {
   shouldSort: true,
@@ -13,6 +14,11 @@ const options = {
   minMatchCharLength: 1,
   keys: ["name"]
 };
+
+const TagBarContainer = styled.div`
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+`;
 
 function AddTagBar({ initialTags = [], addTag }) {
   const { result, search, reset } = useFuse({ data: initialTags, options });
@@ -47,9 +53,9 @@ function AddTagBar({ initialTags = [], addTag }) {
             {value}, highlightedIndex: {highlightedIndex}, selectedItem:{" "}
             {selectedItem ? selectedItem.name : null}, result.length:{" "}
             {result.length}
-            <Form>
-              <Form.Group widths="equal">
-                <Form.Input
+            <div>
+              <TagBarContainer>
+                <Input
                   {...getInputProps({
                     icon: "tags",
                     iconPosition: "left",
@@ -61,7 +67,7 @@ function AddTagBar({ initialTags = [], addTag }) {
                     value
                   })}
                 />{" "}
-                <Form.Button
+                <Button
                   onClick={() => {
                     if (value) {
                       let tagToAdd = initialTags.filter(
@@ -75,8 +81,8 @@ function AddTagBar({ initialTags = [], addTag }) {
                   }}
                 >
                   Add
-                </Form.Button>
-              </Form.Group>
+                </Button>
+              </TagBarContainer>
               {isOpen && inputAndResults ? (
                 <ul
                   {...getMenuProps({
@@ -113,7 +119,7 @@ function AddTagBar({ initialTags = [], addTag }) {
                   })}
                 </ul>
               ) : null}
-            </Form>
+            </div>
           </div>
         );
       }}
