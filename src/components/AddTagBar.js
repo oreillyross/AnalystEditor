@@ -25,6 +25,7 @@ function AddTagBar({ initialTags = [], addTag }) {
   const [value, setValue] = React.useState("");
 
   const inputAndResults = value && result.length !== 0;
+  const addTagRef = React.createRef();
 
   return (
     <Downshift
@@ -63,11 +64,17 @@ function AddTagBar({ initialTags = [], addTag }) {
                     placeholder: "search for a tag here...",
                     type: "text",
                     onKeyUp: e => search(e.target.value),
+                    onBlur: () => {
+                      console.log("lost focus of input by tabbing");
+                      addTagRef.current.focus();
+                    },
 
                     value
                   })}
                 />{" "}
                 <Button
+                  ref={addTagRef}
+                  type="button"
                   onClick={() => {
                     if (value) {
                       let tagToAdd = initialTags.filter(

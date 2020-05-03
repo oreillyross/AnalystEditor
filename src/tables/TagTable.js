@@ -4,11 +4,21 @@ import { Button, Icon } from "semantic-ui-react";
 import { GET_TAGS, DELETE_TAG } from "../queries";
 import { useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
+import PropTypes from "prop-types";
+
+TagTable.propTypes = {
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
+};
 
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
   const [deleteFlag, setDeleteFlag] = React.useState(false);
-
+  console.log(tags);
   function deleteTag(id, e) {
     queryDeleteTag({
       variables: { id },

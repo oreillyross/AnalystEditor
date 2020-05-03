@@ -11,17 +11,33 @@ const EventText = styled.div`
   margin: 25px;
 `;
 
+function removeTag(obj) {
+  if (!obj) return [];
+  // this below line might not be necessary
+
+  let keys = Object.keys(obj);
+  keys.map(key => {
+    if (obj[key].hasOwnProperty("Tag")) {
+      Object.assign(obj[key], obj[key]["Tag"]);
+      delete obj[key]["Tag"];
+    }
+  });
+  return obj;
+}
+
 function Event({ id }) {
   const { data, loading } = useQuery(GET_EVENT_BY_ID, { variables: { id } });
   if (loading) return <Loading message="getting event..." />;
   if (data) {
     const event = data.Events[0];
+    console.log(event);
+    const tags = removeTag(event.Event_Tags);
     return (
       <Card style={{ margin: "25px" }} fluid raised>
         <EventText> {event.text}</EventText>
         <Card.Description style={{ margin: "25px" }}>
           Tags
-          <TagTable tags={event.Event_Tags} />
+          <TagTable tags={tags} />
         </Card.Description>
 
         <Status view="Event" created_at={event.created_at} />
