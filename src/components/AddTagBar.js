@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Button, Form } from "semantic-ui-react";
+import { Input, Button } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import Downshift from "downshift";
 import useFuse from "react-use-fuse";
@@ -21,7 +21,7 @@ const TagBarContainer = styled.div`
 `;
 
 function AddTagBar({ initialTags = [], addTag }) {
-  const { result, search, reset } = useFuse({ data: initialTags, options });
+  const { result, search } = useFuse({ data: initialTags, options });
   const [value, setValue] = React.useState("");
 
   const inputAndResults = value && result.length !== 0;
@@ -78,7 +78,7 @@ function AddTagBar({ initialTags = [], addTag }) {
                   onClick={() => {
                     if (value) {
                       let tagToAdd = initialTags.filter(
-                        initialTag => initialTag.name == value
+                        initialTag => initialTag.name === value
                       )[0];
                       if (!tagToAdd) tagToAdd = { name: value, id: "" };
 

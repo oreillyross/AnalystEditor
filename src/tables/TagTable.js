@@ -17,6 +17,7 @@ TagTable.propTypes = {
 
 function TagTable({ tags = [] }) {
   const [queryDeleteTag] = useMutation(DELETE_TAG);
+
   function deleteTag(id, e) {
     queryDeleteTag({
       variables: { id },

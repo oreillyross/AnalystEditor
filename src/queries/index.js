@@ -118,10 +118,35 @@ export const GET_EVENTS_BY_TAG = gql`
       created_at
       id
       text
+      Event_Source_Link {
+        name
+      }
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
 
+export const GET_EVENTS = gql`
+  query getEvents {
+    Events(order_by: { created_at: desc }) {
+      id
+      text
+      created_at
+      Event_Source_Link {
+        name
+      }
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+`;
 export const GET_EVENT_BY_ID = gql`
   query getEventById($id: uuid) {
     Events(where: { id: { _eq: $id } }) {
@@ -129,6 +154,15 @@ export const GET_EVENT_BY_ID = gql`
       source_id
       text
       created_at
+      Event_Source_Link {
+        name
+      }
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
+
       Event_Tags {
         Tag {
           id
@@ -154,9 +188,20 @@ export const ADD_EVENT = gql`
 `;
 
 export const ADD_EVENT_TAG_LINK = gql`
-  mutation addEventTag($eventID: uuid, $tagID: uuid) {
+  mutation addEventTag($eventId: uuid, $tagId: uuid) {
     __typename
-    insert_Event_Tag(objects: { event_id: $eventID, tag_id: $tagID }) {
+    insert_Event_Tag(objects: { event_id: $eventId, tag_id: $tagId }) {
+      affected_rows
+    }
+  }
+`;
+
+export const ADD_ARTICLE_EVENT_LINK = gql`
+  mutation addArticleEventLink($articleId: uuid, $eventId: uuid) {
+    __typename
+    insert_Article_Event(
+      objects: { article_id: $articleId, event_id: $eventId }
+    ) {
       affected_rows
     }
   }
@@ -215,24 +260,6 @@ export const GET_INDICATIONS_BY_SCENARIO = gql`
       id
       name
       description
-    }
-  }
-`;
-
-export const GET_EVENTS = gql`
-  query getEvents {
-    Events(order_by: { created_at: desc }) {
-      id
-      text
-      created_at
-      Event_Source_Link {
-        name
-      }
-      Event_Tags_aggregate {
-        aggregate {
-          count
-        }
-      }
     }
   }
 `;

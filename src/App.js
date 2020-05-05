@@ -27,9 +27,9 @@ import Tag from "./views/Tag";
 import Scenarios from "./views/Scenarios";
 import ScenarioForm from "./forms/ScenarioForm";
 import Indicators from "./views/Indicators";
+import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
-import { Loading } from "./components/Loading";
 import { AddTagBar } from "./components/AddTagBar";
 
 const link = new ApolloLink.from([errorlink, httplink]);
@@ -115,7 +115,8 @@ export default function App() {
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
-          <Indicators path="/indicators/:view/:id?" />
+          <Indicators path="/indicators" />
+          <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />

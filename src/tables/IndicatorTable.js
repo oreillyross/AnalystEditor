@@ -47,7 +47,7 @@ function IndicatorTable({ indicators }) {
         <TableBody>
           {indicators.map(indicator => {
             return (
-              <TableRow className={classes.row}>
+              <TableRow key={indicator.id} className={classes.row}>
                 <TableCell className={classes.row}>{indicator.name}</TableCell>
                 <TableCell className={classes.row}>{6}</TableCell>
 

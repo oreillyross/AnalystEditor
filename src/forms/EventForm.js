@@ -17,7 +17,12 @@ import {
 } from "@material-ui/pickers";
 import styled from "styled-components";
 import Tag from "../components/Tag";
-import { GET_TAGS, ADD_EVENT, ADD_EVENT_TAG_LINK } from "../queries";
+import {
+  GET_TAGS,
+  ADD_EVENT,
+  ADD_EVENT_TAG_LINK,
+  ADD_ARTICLE_EVENT_LINK
+} from "../queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
 import PropTypes from "prop-types";
@@ -40,11 +45,13 @@ EventForm.propTypes = {
 };
 
 function EventForm({ location }) {
-  console.log(location.state);
   const eventText = location.state.selectedText;
   const article = location.state.article;
+  const articleId = location.state.article.id;
   const [addEvent] = useMutation(ADD_EVENT);
   const [addEventTag] = useMutation(ADD_EVENT_TAG_LINK);
+  const [addArticleEventLink] = useMutation(ADD_ARTICLE_EVENT_LINK);
+
   const now = new Date();
   const { data: tagData } = useQuery(GET_TAGS);
   const [tags, setTags] = React.useState([]);
@@ -74,12 +81,20 @@ function EventForm({ location }) {
               created: values.eventDate
             }
           });
-          const eventID = data.insert_Events.returning[0].id;
+          const eventId = data.insert_Events.returning[0].id;
+          console.log("addArticleLink", eventId, articleId);
+          addArticleEventLink({
+            variables: {
+              eventId,
+              articleId
+            }
+          });
+
           values.tags.map(formTag => {
             addEventTag({
               variables: {
-                eventID,
-                tagID: formTag.id
+                eventId,
+                tagId: formTag.id
               }
             });
 

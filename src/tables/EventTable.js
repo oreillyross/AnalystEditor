@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import { format } from "date-fns";
 import { Link } from "@reach/router";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledLink = styled(Link)`
   color: black;
@@ -21,9 +22,16 @@ const useStyles = makeStyles({
   }
 });
 
-function EventTable({ articles }) {
-  const classes = useStyles();
+EventTable.propTypes = {
+  events: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string
+    })
+  )
+};
 
+function EventTable({ events }) {
+  const classes = useStyles();
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -36,7 +44,7 @@ function EventTable({ articles }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {articles.map(row => (
+          {events.map(row => (
             <TableRow key={row.id}>
               <TableCell>
                 {format(new Date(row.created_at), "d MMM yyyy, H:mm ")}
@@ -57,4 +65,4 @@ function EventTable({ articles }) {
   );
 }
 
-export default EventTable;
+export { EventTable };

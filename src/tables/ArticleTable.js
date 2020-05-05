@@ -18,7 +18,6 @@ const useStyles = makeStyles({
 
 function ArticleTable({ articles, viewArticle }) {
   const classes = useStyles();
-
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -27,6 +26,7 @@ function ArticleTable({ articles, viewArticle }) {
             <TableCell>Date</TableCell>
             <TableCell>Article</TableCell>
             <TableCell align="left">Source</TableCell>
+            <TableCell align="right">Events</TableCell>
             <TableCell align="right">Indications</TableCell>
             <TableCell align="right">Scenarios</TableCell>
           </TableRow>
@@ -50,6 +50,7 @@ function ArticleTable({ articles, viewArticle }) {
                 {row.Article_Source_Link ? row.Article_Source_Link.name : ""}
               </TableCell>
               <TableCell align="right" />
+              <TableCell align="right">{row.ArticleIndicationCount}</TableCell>
               <TableCell align="right">{row.ArticleIndicationCount}</TableCell>
               <TableCell align="right">{row.articleScenarioCount}</TableCell>
             </TableRow>

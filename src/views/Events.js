@@ -1,6 +1,6 @@
 import React from "react";
 import { Paper } from "@material-ui/core";
-import EventTable from "../tables/EventTable";
+import { EventTable } from "../tables/EventTable";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { GET_EVENTS } from "../queries";
@@ -16,7 +16,7 @@ function Events() {
       <Paper>
         Events view
         <div>
-          <EventTable articles={data.Events} />
+          <EventTable events={data.Events} />
         </div>
       </Paper>
     );
