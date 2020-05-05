@@ -16,6 +16,12 @@ const EventText = styled.div`
   margin: 25px;
 `;
 
+const InfoText = styled.div`
+  font-size: 0.9rem;
+  color: gray;
+  margin: 25px;
+`;
+
 function removeTag(obj) {
   if (!obj) return [];
   // this below line might not be necessary
@@ -31,24 +37,42 @@ function removeTag(obj) {
 }
 
 function Event({ id }) {
+  function deleteEvent() {
+    console.log("delete");
+  }
+
+  function editEvent() {
+    console.log("edit");
+  }
+
   const { data, loading } = useQuery(GET_EVENT_BY_ID, { variables: { id } });
+
   if (loading) return <Loading message="getting event..." />;
   if (data) {
     const event = data.Events[0];
-    console.log(event);
     const tags = removeTag(event.Event_Tags);
-
     return (
       <EventContainer>
         <EventText> {event.text}</EventText>
         <Card.Description style={{ margin: "25px" }}>
           Tags
-          <TagTable tags={tags} />
+          {tags.length !== 0 ? (
+            <TagTable tags={tags} />
+          ) : (
+            <InfoText>
+              This event currently has no tags associated with it{" "}
+            </InfoText>
+          )}
         </Card.Description>
 
         <div style={{ textAlign: "right", padding: "25px" }}>
           {" "}
-          <ControlPanel color="blue" show={["edit", "delete"]} />{" "}
+          <ControlPanel
+            color="blue"
+            onEdit={editEvent}
+            onDelete={deleteEvent}
+            show={["edit", "delete"]}
+          />{" "}
         </div>
         <Status view="Event" created_at={event.created_at} />
       </EventContainer>

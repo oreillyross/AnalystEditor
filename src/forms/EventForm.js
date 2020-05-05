@@ -20,6 +20,7 @@ import Tag from "../components/Tag";
 import { GET_TAGS, ADD_EVENT, ADD_EVENT_TAG_LINK } from "../queries";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
+import PropTypes from "prop-types";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -30,7 +31,16 @@ const StyledContainer = styled.div`
   padding: 1rem;
 `;
 
-function EventForm({ location, articleSelectedText }) {
+EventForm.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      selectedText: PropTypes.string.isRequired
+    })
+  })
+};
+
+function EventForm({ location }) {
+  console.log(location.state);
   const eventText = location.state.selectedText;
   const article = location.state.article;
   const [addEvent] = useMutation(ADD_EVENT);

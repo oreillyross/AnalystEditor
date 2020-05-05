@@ -3,6 +3,7 @@ import { GET_TAG } from "../queries";
 import { useQuery } from "@apollo/react-hooks";
 import { Paper, Card, CardHeader, CardContent } from "@material-ui/core";
 import { Icon } from "semantic-ui-react";
+import { Loading } from "../components/Loading";
 
 function Tag({ id }) {
   const { data, loading } = useQuery(GET_TAG, {
@@ -10,7 +11,7 @@ function Tag({ id }) {
       id
     }
   });
-  if (loading) return null;
+  if (loading) return <Loading message="Loading event..." />;
   if (data) {
     return (
       <div>
