@@ -1,3 +1,4 @@
+src/alink.js
 node_modules
 *.swp
 *.log
