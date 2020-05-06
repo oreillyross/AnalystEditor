@@ -21,6 +21,7 @@ import Sources from "./views/Sources";
 import Search from "./views/Search";
 import SourceForm from "./forms/SourceForm";
 import EventsByTag from "./tables/EventsByTag";
+import { EventsByArticle } from "./views/EventsByArticle";
 import EventForm from "./forms/EventForm";
 import { alink } from "./alink.js";
 import Tag from "./views/Tag";
@@ -102,7 +103,8 @@ export default function App() {
         <Router>
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
-          <EventsByTag path="events/bytag/:id" />
+          <EventsByTag path="/events/bytag/:id" />
+          <EventsByArticle path="/events/byarticle/:id" />
           <Events path="/events" />
           <EventForm path="/event/addevent" />
           <NewArticleForm path="forms/newarticle" />

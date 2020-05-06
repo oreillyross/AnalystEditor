@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
   table: {
@@ -25,6 +26,14 @@ const GET_SOURCES = gql`
     }
   }
 `;
+
+SourceTable.propTypes = {
+  sources: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string
+    })
+  )
+};
 
 function SourceTable() {
   const classes = useStyles();

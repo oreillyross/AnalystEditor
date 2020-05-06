@@ -16,12 +16,8 @@ const useStyles = makeStyles({
   }
 });
 
-function ArticleTable({ articles, viewArticle }) {
+function ArticleTable({ articles, viewArticle, navigate }) {
   console.log(articles);
-  console.log(
-    articles[0].Article_Events[0].Article.Article_Events_aggregate.aggregate
-      .count
-  );
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -55,10 +51,15 @@ function ArticleTable({ articles, viewArticle }) {
                 {row.Article_Source_Link ? row.Article_Source_Link.name : ""}
               </TableCell>
               <TableCell align="right">
-                {row.Article_Events.length !== 0
-                  ? row.Article_Events[0].Article.Article_Events_aggregate
-                      .aggregate.count
-                  : null}
+                {row.Article_Events.length !== 0 ? (
+                  <a href={`/events/byarticle/${row.id}`}>
+                    {" "}
+                    {
+                      row.Article_Events[0].Article.Article_Events_aggregate
+                        .aggregate.count
+                    }{" "}
+                  </a>
+                ) : null}
               </TableCell>
               <TableCell align="right">{row.ArticleIndicationCount}</TableCell>
               <TableCell align="right">{row.articleScenarioCount}</TableCell>

@@ -25,10 +25,15 @@ const useStyles = makeStyles({
 EventTable.propTypes = {
   events: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string
+      id: PropTypes.string,
+      created_at: PropTypes.date
     })
   )
 };
+
+const StyledTableRow = styled(TableRow)`
+  background-color: Tan;
+`;
 
 function EventTable({ events }) {
   const classes = useStyles();
@@ -36,12 +41,20 @@ function EventTable({ events }) {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Event</TableCell>
-            <TableCell>Source</TableCell>
-            <TableCell>Tags</TableCell>
-          </TableRow>
+          <StyledTableRow>
+            <TableCell>
+              <strong>Date</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Event</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Source</strong>
+            </TableCell>
+            <TableCell>
+              <strong>Tags</strong>
+            </TableCell>
+          </StyledTableRow>
         </TableHead>
         <TableBody>
           {events.map(row => (

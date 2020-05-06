@@ -121,6 +121,26 @@ export const DELETE_TAG = gql`
   }
 `;
 
+export const GET_EVENTS_BY_ARTICLE = gql`
+  query getEventsByArticleId($articleId: uuid) {
+    Events(
+      where: { Article_Events: { Article: { id: { _eq: $articleId } } } }
+    ) {
+      created_at
+      id
+      text
+      Event_Source_Link {
+        name
+      }
+      Event_Tags_aggregate {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+`;
+
 export const GET_EVENTS_BY_TAG = gql`
   query getEventsByTagId($tagid: uuid) {
     Events(where: { Event_Tags: { Tag: { id: { _eq: $tagid } } } }) {
