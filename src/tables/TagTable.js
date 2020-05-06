@@ -1,8 +1,6 @@
 import React from "react";
 import { StyledTags } from "../styles/common";
-import { Button, Icon } from "semantic-ui-react";
-import { GET_TAGS, DELETE_TAG } from "../queries";
-import { useMutation } from "@apollo/react-hooks";
+import { Button } from "semantic-ui-react";
 import { navigate } from "@reach/router";
 import PropTypes from "prop-types";
 
@@ -16,25 +14,6 @@ TagTable.propTypes = {
 };
 
 function TagTable({ tags = [] }) {
-  const [queryDeleteTag] = useMutation(DELETE_TAG);
-
-  function deleteTag(id, e) {
-    queryDeleteTag({
-      variables: { id },
-      update(cache, { data }) {
-        const getExistingTags = cache.readQuery({ query: GET_TAGS });
-        const existingTags = getExistingTags ? getExistingTags.Tags : [];
-        const deletedTag = data.delete_Tags
-          ? data.delete_Tags.returning[0]
-          : {};
-        cache.writeQuery({
-          query: GET_TAGS,
-          data: { Tags: existingTags.filter(tag => tag.id !== deletedTag.id) }
-        });
-      }
-    });
-  }
-
   return (
     <StyledTags>
       {tags.map(tag => (

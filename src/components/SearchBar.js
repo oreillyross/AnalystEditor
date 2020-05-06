@@ -1,7 +1,6 @@
 import React from "react";
 import { OutlinedInput } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Formik } from "formik";
 
 const useStyles = makeStyles({
   input: {

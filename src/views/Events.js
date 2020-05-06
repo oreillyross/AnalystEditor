@@ -2,7 +2,6 @@ import React from "react";
 import { Paper } from "@material-ui/core";
 import { EventTable } from "../tables/EventTable";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { GET_EVENTS } from "../queries";
 import { Loading } from "../components/Loading";
 

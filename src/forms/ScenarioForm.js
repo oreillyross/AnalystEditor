@@ -3,8 +3,6 @@ import { useFormik } from "formik";
 import { TextField, Button, FormLabel, Paper } from "@material-ui/core";
 import "../style.css";
 import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import { makeStyles } from "@material-ui/core/styles";
 import { GET_SCENARIOS, ADD_SCENARIO } from "../queries";
 
 function showDialog() {

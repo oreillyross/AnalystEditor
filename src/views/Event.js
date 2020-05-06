@@ -6,7 +6,6 @@ import { Loading } from "../components/Loading";
 import { Status } from "../components/Status";
 import styled from "styled-components";
 import { Card } from "semantic-ui-react";
-import { Icon } from "semantic-ui-react";
 import { ControlPanel } from "../components/ControlPanel";
 
 const EventContainer = styled.div`
@@ -27,6 +26,7 @@ function removeTag(obj) {
   // this below line might not be necessary
 
   let keys = Object.keys(obj);
+  // eslint-disable-next-line
   keys.map(key => {
     if (obj[key].hasOwnProperty("Tag")) {
       Object.assign(obj[key], obj[key]["Tag"]);

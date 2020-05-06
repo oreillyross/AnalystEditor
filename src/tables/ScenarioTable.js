@@ -6,10 +6,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { GET_SCENARIO } from "../queries";
 
 function ScenarioTable({ scenarios }) {
-  console.log(scenarios);
   return (
     <div>
       <TableContainer component={Paper}>

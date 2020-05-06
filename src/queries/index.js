@@ -55,6 +55,15 @@ export const GET_ARTICLES = gql`
       published
       author
       url
+      Article_Events {
+        Article {
+          Article_Events_aggregate {
+            aggregate {
+              count
+            }
+          }
+        }
+      }
       Article_Source_Link {
         __typename
         id
