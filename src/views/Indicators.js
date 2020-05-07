@@ -4,17 +4,15 @@ import IndicatorTable from "../tables/IndicatorTable";
 import { useQuery } from "@apollo/react-hooks";
 import { StyledHeader } from "../styles/common";
 import { Button } from "semantic-ui-react";
+import { Loading } from "../components/Loading";
 
 function Indicators({ navigate, view, id }) {
-  console.log(view, id);
-  console.log(id === undefined);
   let query = GET_INDICATORS;
   if (view === "byscenario") {
     query = GET_INDICATIONS_BY_SCENARIO;
   }
   const { data, loading } = useQuery(query, { variables: { id } });
-  if (data) console.log(data);
-  if (loading) return <div> Loading... </div>;
+  if (loading) return <Loading message="getting indicators..." />;
   if (data)
     return (
       <div>

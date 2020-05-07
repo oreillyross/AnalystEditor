@@ -8,6 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Slider from "@material-ui/core/Slider";
+import { Link } from "@reach/router";
 
 const marks = [
   {
@@ -48,7 +49,11 @@ function IndicatorTable({ indicators }) {
           {indicators.map(indicator => {
             return (
               <TableRow key={indicator.id} className={classes.row}>
-                <TableCell className={classes.row}>{indicator.name}</TableCell>
+                <TableCell className={classes.row}>
+                  <Link to={`/views/indicator/${indicator.id}`}>
+                    {indicator.name}
+                  </Link>
+                </TableCell>
                 <TableCell className={classes.row}>{6}</TableCell>
 
                 <TableCell>

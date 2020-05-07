@@ -7,8 +7,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles({
@@ -17,56 +15,41 @@ const useStyles = makeStyles({
   }
 });
 
-const GET_SOURCES = gql`
-  query getSources {
-    Sources {
-      id
-      name
-      url
-    }
-  }
-`;
-
 SourceTable.propTypes = {
   sources: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string
+      id: PropTypes.string,
+      url: PropTypes.string,
+      name: PropTypes.name
     })
   )
 };
 
-function SourceTable() {
+function SourceTable(sources) {
   const classes = useStyles();
 
-  const { loading, error, data } = useQuery(GET_SOURCES);
-
-  if (loading) return null;
-  if (error) return <div>Oops</div>;
-
-  if (data) {
-    return (
-      <TableContainer component={Paper}>
-        <Table className={classes.table} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Source Name</TableCell>
+  return (
+    <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Source Name</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {sources.sources.map(row => (
+            <TableRow key={row.id}>
+              <TableCell>
+                <a href={row.url} target="_blank" rel="noopener noreferrer">
+                  {row.name}
+                </a>
+              </TableCell>
             </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.Sources.map(row => (
-              <TableRow key={row.name}>
-                <TableCell>
-                  <a href={row.url} target="_blank" rel="noopener noreferrer">
-                    {row.name}
-                  </a>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
 }
 
 export default SourceTable;

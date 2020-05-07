@@ -9,6 +9,16 @@ export const GET_KEYWORDS = gql`
   }
 `;
 
+export const GET_SOURCES = gql`
+  query getSources {
+    Sources {
+      id
+      name
+      url
+    }
+  }
+`;
+
 export const ADD_SCENARIO = gql`
   mutation AddScenario($name: String!, $description: String) {
     insert_Scenarios(objects: { name: $name, description: $description }) {
@@ -269,6 +279,17 @@ export const ADD_INDICATOR = gql`
       returning {
         id
       }
+    }
+  }
+`;
+
+export const GET_INDICATOR = gql`
+  query getIndicator($id: uuid) {
+    Indicators(where: { id: { _eq: $id } }) {
+      id
+      name
+      description
+      created_at
     }
   }
 `;

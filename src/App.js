@@ -32,6 +32,7 @@ import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { AddTagBar } from "./components/AddTagBar";
+import { Indicator } from "./views/Indicator";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -117,6 +118,7 @@ export default function App() {
           <Tags path="/tags" />
           <Keywords path="/keywords" />
           <Sources path="/sources" />
+          <Indicator path="/views/indicator/:id" />
           <Indicators path="/indicators" />
           <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
           <Scenarios path="/scenarios" />

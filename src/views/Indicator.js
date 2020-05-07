@@ -1,98 +1,45 @@
-import { useFormik } from "formik";
+import React from "react";
+import PropTypes from "prop-types";
+import { GET_INDICATOR } from "../queries";
+import { useQuery } from "@apollo/react-hooks";
+import { Loading } from "../components/Loading";
 import styled from "styled-components";
-import {
-  TextField,
-  InputLabel,
-  Input,
-  Button,
-  FormLabel,
-  Paper
-} from "@material-ui/core";
-import "../style.css";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import { makeStyles } from "@material-ui/core/styles";
-import { ADD_INDICATOR } from "../queries";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: 400
-    }
-  }
-}));
-
-const Indicator = ({ indicator }) => {
-  const classes = useStyles();
-
-  const [addIndicator, { data, error }] = useMutation(ADD_INDICATOR, {
-    onCompleted: () => {
-      showDialog();
-    }
-  });
-  if (error) console.log(error);
-  if (data) console.log(data);
-
-  const formik = useFormik({
-    initialValues: {
-      indicatorName: "",
-      indicatorDescription: ""
-    },
-    onSubmit: values => {
-      addIndicator({
-        variables: {
-          name: values.indicatorName,
-          description: values.indicatorDescription
-        }
-      }).then(result => console.log(result));
-    }
-  });
-  return (
-    <Paper>
-      <form
-        className={classes.root}
-        autoComplete="off"
-        onSubmit={formik.handleSubmit}
-      >
-        <FormLabel className="form-label"> Indicator Form</FormLabel>
-        <div>
-          <TextField
-            id="indicatorName"
-            className={classes.textField}
-            margin="dense"
-            name="indicatorName"
-            variant="outlined"
-            required
-            label="Name"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.indicatorName}
-          />
-        </div>
-        <div>
-          <TextField
-            id="indicatorDescription"
-            name="indicatorDescription"
-            multiline
-            rows={4}
-            margin="dense"
-            label="Description"
-            variant="outlined"
-            fullWidth
-            onChange={formik.handleChange}
-            value={formik.values.indicatorDescription}
-          />
-        </div>
-        <div style={{ paddingRight: ".8rem", textAlign: "right" }}>
-          <Button color="secondary  ">Cancel</Button>
-          <Button color="primary" type="submit">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </Paper>
-  );
+import { ControlPanel } from "../components/ControlPanel";
+import { Status } from "../components/Status";
+const StyledContent = styled.div`
+  margin: 25px;
+  padding: 1rem;
+`;
+Indicator.propTypes = {
+  id: PropTypes.string
 };
 
-export default Indicator;
+function Indicator({ id }) {
+  const editEvent = () => null;
+  const deleteEvent = () => null;
+
+  const { loading, data, error } = useQuery(GET_INDICATOR, {
+    variables: { id }
+  });
+  if (loading) return <Loading message="getting indicator..." />;
+  if (data) {
+    const { name, created_at } = data.Indicators[0];
+    return (
+      <div>
+        <StyledContent>{name}</StyledContent>
+        <div style={{ textAlign: "right", padding: "25px" }}>
+          {" "}
+          <ControlPanel
+            color="blue"
+            onEdit={editEvent}
+            onDelete={deleteEvent}
+            show={["edit", "delete"]}
+          />{" "}
+        </div>
+        <Status view="Indicator" created_at={created_at} />
+      </div>
+    );
+  }
+}
+
+export { Indicator };
