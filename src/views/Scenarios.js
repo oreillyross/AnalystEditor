@@ -4,10 +4,11 @@ import ScenarioTable from "../tables/ScenarioTable";
 import { useQuery } from "@apollo/react-hooks";
 import { StyledHeader } from "../styles/common";
 import { Button } from "semantic-ui-react";
+import { Loading } from "../components/Loading";
 
 function Scenarios({ navigate }) {
   const { data, loading } = useQuery(GET_SCENARIOS);
-  if (loading) return <div> Loading... </div>;
+  if (loading) return <Loading message="getting scenarios..." />;
   if (data)
     return (
       <div>

@@ -296,10 +296,14 @@ export const GET_INDICATOR = gql`
 
 export const GET_INDICATORS = gql`
   query getIndicators {
-    Indicators {
+    Indicators(order_by: { created_at: desc }) {
       id
       name
       description
+      created_at
+      Scenario_Indicators {
+        id
+      }
     }
   }
 `;
