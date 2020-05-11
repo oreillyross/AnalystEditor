@@ -112,7 +112,7 @@ export default function App() {
           <KeywordForm path="forms/newkeyword" />
           <SourceForm path="/forms/newsource" />
           <IndicatorForm path="/forms/newindicator" />
-          <ScenarioForm path="/forms/newscenario" />
+          <ScenarioForm path="/forms/scenario" />
           <Scenario path="/views/scenario/:id" />
           <Event path="/views/event/:id" />
           <Tags path="/tags" />

@@ -16,7 +16,7 @@ function Scenarios({ navigate }) {
         <Button
           style={{ margin: "0 2rem" }}
           onClick={() => {
-            navigate("/forms/newscenario");
+            navigate("/forms/scenario");
           }}
           basic
           color="blue"

@@ -252,6 +252,13 @@ export const GET_SCENARIOS = gql`
       id
       name
       description
+      Scenario_Indicators {
+        Indicator {
+          id
+          name
+        }
+        strength
+      }
       Scenario_Indicators_aggregate {
         aggregate {
           count(columns: indicator_id)
@@ -269,6 +276,13 @@ export const GET_SCENARIO = gql`
       description
       created_at
       updated_at
+      Scenario_Indicators {
+        Indicator {
+          id
+          name
+        }
+        strength
+      }
     }
   }
 `;

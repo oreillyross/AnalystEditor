@@ -46,7 +46,16 @@ const marks = [
   }
 ];
 
-const ScenarioForm = ({ navigate }) => {
+const ScenarioForm = ({ navigate, location }) => {
+  console.log(location.state);
+  let scenarioName = "";
+  let scenarioDescription = "";
+  let indicators = [];
+  if (location.state.scenario) {
+    scenarioName = location.state.scenario.name;
+    scenarioDescription = location.state.scenario.description;
+    indicators = location.state.scenario.Scenario_Indicators;
+  }
   const { loading, data: indicatorData } = useQuery(GET_INDICATORS);
 
   const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
@@ -58,12 +67,13 @@ const ScenarioForm = ({ navigate }) => {
 
   if (error) console.log(error);
   if (data) console.log(data);
+  console.log(indicators);
   return (
     <Formik
       initialValues={{
-        scenarioName: "",
-        scenarioDescription: "",
-        indicators: [{ id: "", strength: 5 }]
+        scenarioName,
+        scenarioDescription,
+        indicators
       }}
       onSubmit={values => {
         alert(JSON.stringify(values, null, 2));
@@ -141,38 +151,40 @@ const ScenarioForm = ({ navigate }) => {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {indicatorData
-                            ? indicatorData.Indicators.map(
-                                (indicator, index) => {
-                                  return (
-                                    <TableRow key={indicator.id}>
-                                      <TableCell>
-                                        <FormControlLabel
-                                          control={
-                                            <Checkbox
-                                              name="indicators"
-                                              value={indicator.id}
-                                              onChange={handleChange}
-                                            />
-                                          }
-                                          label={indicator.name}
-                                        />
-                                      </TableCell>
-                                      <TableCell>
-                                        <Slider
-                                          defaultValue={5}
-                                          aria-labelledby="discrete-slider-always"
-                                          step={1}
-                                          min={1}
-                                          max={10}
-                                          marks={marks}
-                                        />
-                                      </TableCell>
-                                    </TableRow>
-                                  );
-                                }
-                              )
-                            : null}
+                          <FieldArray
+                            name="indicators"
+                            render={arrayHelpers =>
+                              values.indicators.map((indicator, index) => {
+                                return (
+                                  <TableRow>
+                                    <TableCell key={indicator.id}>
+                                      <FormControlLabel
+                                        control={
+                                          <Checkbox
+                                            name={`indicators.${index}.name`}
+                                            value={`indicators.${index}.id`}
+                                            onChange={handleChange}
+                                          />
+                                        }
+                                        label={`indicators.${index}.name`}
+                                      />
+                                    </TableCell>
+                                    <TableCell>
+                                      <Slider
+                                        name="strength"
+                                        defaultValue={5}
+                                        aria-labelledby="discrete-slider-always"
+                                        step={1}
+                                        min={1}
+                                        max={10}
+                                        marks={marks}
+                                      />
+                                    </TableCell>
+                                  </TableRow>
+                                );
+                              })
+                            }
+                          />
                         </TableBody>
                       </Table>
                     </TableContainer>

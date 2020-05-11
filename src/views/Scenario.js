@@ -5,30 +5,63 @@ import { Status } from "../components/Status";
 import styled from "styled-components";
 import { ControlPanel } from "../components/ControlPanel";
 import { Loading } from "../components/Loading";
-import { LinkBar } from "../components/LinkBar";
+import PropTypes from "prop-types";
+import { Table } from "semantic-ui-react";
 
 const Heading = styled.h3`
   font-weight: strong
   padding: 1rem;
-  padding: 24px 0 24px 12px;
-
+  padding: 24px 0 24px 12px
 `;
+
 const Content = styled.p`
   border: 1px solid thistle;
 `;
 
-function Scenario({ id }) {
-  const editScenario = () => null;
+Scenario.propTypes = {
+  id: PropTypes.string
+};
+
+function Scenario({ id, navigate }) {
+  const editScenario = () =>
+    navigate(`/forms/scenario`, { state: { scenario: data.Scenarios[0] } });
+
   const deleteScenario = () => null;
   const { data, loading } = useQuery(GET_SCENARIO, { variables: { id } });
   if (loading) return <Loading message="getting scenario..." />;
   if (data) {
-    const { name, created_at, updated_at, description } = data.Scenarios[0];
-
+    const {
+      name,
+      created_at,
+      updated_at,
+      description,
+      Scenario_Indicators: indicators
+    } = data.Scenarios[0];
     return (
       <div>
         <Heading>{name}</Heading>
         <Content>{description}</Content>
+        <div>Linked Indicators</div>
+        <Table>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Indicator name</Table.HeaderCell>
+              <Table.HeaderCell>Indicator strength</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {indicators.map(({ Indicator: indicator, strength }) => {
+              console.log(indicator, strength);
+              return (
+                <Table.Row>
+                  <Table.Cell key={indicator.id}>{indicator.name}</Table.Cell>
+
+                  <Table.Cell>{strength}</Table.Cell>
+                </Table.Row>
+              );
+            })}
+          </Table.Body>
+        </Table>
         <div style={{ textAlign: "right", padding: "25px" }}>
           <ControlPanel
             color="blue"
@@ -37,7 +70,6 @@ function Scenario({ id }) {
             show={["edit", "delete"]}
           />{" "}
         </div>
-        <LinkBar />
         <Status
           view="Scenario"
           created_at={created_at}
