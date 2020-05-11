@@ -59,9 +59,7 @@ const ScenarioForm = ({ navigate, location }) => {
     GET_INDICATORS
   );
   if (indicatorError) console.log(indicatorError);
-  if (indicatorData) {
-    isLinked(indicatorData.Indicators[4].id);
-  }
+
   const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
     onCompleted: () => {
       showDialog();
@@ -163,44 +161,9 @@ const ScenarioForm = ({ navigate, location }) => {
                         <TableBody>
                           <FieldArray
                             name="indicators"
-                            render={arrayHelpers =>
-                              values.indicators.map(
-                                ({ Indicator: indicator }, index) => {
-                                  return (
-                                    <TableRow>
-                                      <TableCell key={indicator.id}>
-                                        <FormControlLabel
-                                          control={
-                                            <Checkbox
-                                              checked={true}
-                                              name={`indicators.${index}.name`}
-                                              value={`indicators.${index}.id`}
-                                              onChange={e => {
-                                                console.log(e.target.checked);
-                                                if (!e.target.checked)
-                                                  arrayHelpers.pop(index);
-                                              }}
-                                            />
-                                          }
-                                          label={indicator.name}
-                                        />
-                                      </TableCell>
-                                      <TableCell>
-                                        <Slider
-                                          name="strength"
-                                          defaultValue={5}
-                                          aria-labelledby="discrete-slider-always"
-                                          step={1}
-                                          min={1}
-                                          max={10}
-                                          marks={marks}
-                                        />
-                                      </TableCell>
-                                    </TableRow>
-                                  );
-                                }
-                              )
-                            }
+                            render={arrayHelpers => {
+                              return <div>indicators</div>;
+                            }}
                           />
                         </TableBody>
                       </Table>

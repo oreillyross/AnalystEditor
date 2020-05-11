@@ -1,4 +1,6 @@
 src/alink.js
+src/temp.js
+
 node_modules
 *.swp
 *.log
