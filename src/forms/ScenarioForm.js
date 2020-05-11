@@ -159,12 +159,11 @@ const ScenarioForm = ({ navigate, location }) => {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          <FieldArray
-                            name="indicators"
-                            render={arrayHelpers => {
-                              return <div>indicators</div>;
-                            }}
-                          />
+                          {indicatorData && (
+                            <FieldArray name="indicators">
+                              {arrayHelpers => <div>Dus</div>}
+                            </FieldArray>
+                          )}
                         </TableBody>
                       </Table>
                     </TableContainer>
