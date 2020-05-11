@@ -58,6 +58,9 @@ const ScenarioForm = ({ navigate, location }) => {
   const { loading, data: indicatorData, error: indicatorError } = useQuery(
     GET_INDICATORS
   );
+  const unlinkedIndicators = indicatorData
+    ? indicatorData.Indicators.filter(indicator => !isLinked(indicator.id))
+    : [];
   if (indicatorError) console.log(indicatorError);
 
   const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
@@ -163,20 +166,26 @@ const ScenarioForm = ({ navigate, location }) => {
                             <React.Fragment>
                               <FieldArray name="indicators">
                                 {arrayHelpers => {
-                                  return values.indicators.map(
-                                    ({ Indicator: indicator }, index) => (
-                                      <div>{indicator.name}</div>
-                                    )
+                                  return (
+                                    <div>
+                                      <div>
+                                        {values.indicators.map(
+                                          ({ Indicator: indicator }) => (
+                                            <div>{indicator.name}</div>
+                                          )
+                                        )}
+                                        Linked Indicators mapped go here{" "}
+                                      </div>{" "}
+                                      <div>unlinked indicators go here</div>
+                                      <div>
+                                        {unlinkedIndicators.map(indicator => (
+                                          <div>{indicator.name}</div>
+                                        ))}
+                                      </div>
+                                    </div>
                                   );
                                 }}
                               </FieldArray>
-                              <div>Unlinked Indicators</div>
-                              {indicatorData.Indicators.map(
-                                indicator =>
-                                  !isLinked(indicator.id) && (
-                                    <div>{indicator.name}</div>
-                                  )
-                              )}
                             </React.Fragment>
                           )}
                         </TableBody>
