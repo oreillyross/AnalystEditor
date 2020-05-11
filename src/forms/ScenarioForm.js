@@ -161,7 +161,20 @@ const ScenarioForm = ({ navigate, location }) => {
                         <TableBody>
                           {indicatorData && (
                             <FieldArray name="indicators">
-                              {arrayHelpers => <div>Dus</div>}
+                              {arrayHelpers => {
+                                return indicatorData.Indicators.map(
+                                  indicator => (
+                                    <FormControlLabel
+                                      control={
+                                        <Checkbox
+                                          checked={isLinked(indicator.id)}
+                                        />
+                                      }
+                                      label={indicator.name}
+                                    />
+                                  )
+                                );
+                              }}
                             </FieldArray>
                           )}
                         </TableBody>
