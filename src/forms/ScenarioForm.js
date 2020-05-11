@@ -160,22 +160,24 @@ const ScenarioForm = ({ navigate, location }) => {
                         </TableHead>
                         <TableBody>
                           {indicatorData && (
-                            <FieldArray name="indicators">
-                              {arrayHelpers => {
-                                return indicatorData.Indicators.map(
-                                  indicator => (
-                                    <FormControlLabel
-                                      control={
-                                        <Checkbox
-                                          checked={isLinked(indicator.id)}
-                                        />
-                                      }
-                                      label={indicator.name}
-                                    />
+                            <React.Fragment>
+                              <FieldArray name="indicators">
+                                {arrayHelpers => {
+                                  return values.indicators.map(
+                                    ({ Indicator: indicator }, index) => (
+                                      <div>{indicator.name}</div>
+                                    )
+                                  );
+                                }}
+                              </FieldArray>
+                              <div>Unlinked Indicators</div>
+                              {indicatorData.Indicators.map(
+                                indicator =>
+                                  !isLinked(indicator.id) && (
+                                    <div>{indicator.name}</div>
                                   )
-                                );
-                              }}
-                            </FieldArray>
+                              )}
+                            </React.Fragment>
                           )}
                         </TableBody>
                       </Table>
