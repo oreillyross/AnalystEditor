@@ -54,13 +54,12 @@ const ScenarioForm = ({ navigate, location }) => {
     scenarioName = location.state.scenario.name;
     scenarioDescription = location.state.scenario.description;
     indicators = location.state.scenario.Scenario_Indicators;
+    console.log("what is shape", indicators);
   }
   const { loading, data: indicatorData, error: indicatorError } = useQuery(
     GET_INDICATORS
   );
-  const unlinkedIndicators = indicatorData
-    ? indicatorData.Indicators.filter(indicator => !isLinked(indicator.id))
-    : [];
+
   if (indicatorError) console.log(indicatorError);
 
   const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
@@ -69,14 +68,6 @@ const ScenarioForm = ({ navigate, location }) => {
       navigate("/scenarios");
     }
   });
-
-  function isLinked(id) {
-    return Boolean(
-      indicators.filter(({ Indicator: indicator }) => {
-        return indicator.id === id;
-      }).length
-    );
-  }
 
   if (error) console.log(error);
   return (
@@ -169,18 +160,25 @@ const ScenarioForm = ({ navigate, location }) => {
                                   return (
                                     <div>
                                       <div>
+                                        Linked Indicators mapped go here{" "}
                                         {values.indicators.map(
                                           ({ Indicator: indicator }) => (
                                             <div>{indicator.name}</div>
                                           )
                                         )}
-                                        Linked Indicators mapped go here{" "}
                                       </div>{" "}
-                                      <div>unlinked indicators go here</div>
+                                      <div>Unlinked indicators go here</div>
                                       <div>
-                                        {unlinkedIndicators.map(indicator => (
-                                          <div>{indicator.name}</div>
-                                        ))}
+                                        {indicatorData &&
+                                          indicatorData.Indicators.filter(
+                                            ind =>
+                                              !values.indicators.find(
+                                                ({ Indicator: val }) =>
+                                                  ind.id === val.id
+                                              )
+                                          ).map(indicator => (
+                                            <div>{indicator.name}</div>
+                                          ))}
                                       </div>
                                     </div>
                                   );
