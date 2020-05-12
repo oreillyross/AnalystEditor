@@ -17,6 +17,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "@reach/router";
+import { latestIndicatorsOnly } from "../utils";
 
 const StyledIndicatorLink = styled.div`
   padding: 15px;
@@ -54,7 +55,7 @@ const ScenarioForm = ({ navigate, location }) => {
     scenarioName = location.state.scenario.name;
     scenarioDescription = location.state.scenario.description;
     indicators = location.state.scenario.Scenario_Indicators;
-    console.log("what is shape", indicators);
+    console.log("latest indicators", latestIndicatorsOnly(indicators));
   }
   const { loading, data: indicatorData, error: indicatorError } = useQuery(
     GET_INDICATORS
@@ -79,27 +80,29 @@ const ScenarioForm = ({ navigate, location }) => {
       }}
       onSubmit={values => {
         alert(JSON.stringify(values, null, 2));
-        /*  addScenario({
-        variables: {
-          name: values.scenarioName,
-          description: values.scenarioDescription
-        },
-        update(cache, { data }) {
-          const getExistingScenarios = cache.readQuery({
-            query: GET_SCENARIOS
-          });
-          const existingScenarios = getExistingScenarios
-            ? getExistingScenarios
-            : [];
-          const newScenario = data.insert_Scenarios
-            ? data.insert_Scenarios.returning[0]
-            : {};
-          cache.writeQuery({
-            query: GET_SCENARIOS,
-            data: { Scenarios: [newScenario, ...existingScenarios] }
-          });
-        }
-      }).then(result => console.log(result)); */
+        addScenario({
+          variables: {
+            name: values.scenarioName,
+            description: values.scenarioDescription
+          },
+          update(cache, { data }) {
+            const getExistingScenarios = cache.readQuery({
+              query: GET_SCENARIOS
+            });
+            const existingScenarios = getExistingScenarios
+              ? getExistingScenarios
+              : [];
+            const newScenario = data.insert_Scenarios
+              ? data.insert_Scenarios.returning[0]
+              : {};
+            cache.writeQuery({
+              query: GET_SCENARIOS,
+              data: { Scenarios: [newScenario, ...existingScenarios] }
+            });
+          }
+        }).then(result => {
+          console.log(result);
+        });
       }}
     >
       {({
@@ -158,29 +161,47 @@ const ScenarioForm = ({ navigate, location }) => {
                               <FieldArray name="indicators">
                                 {arrayHelpers => {
                                   return (
-                                    <div>
-                                      <div>
-                                        Linked Indicators mapped go here{" "}
-                                        {values.indicators.map(
-                                          ({ Indicator: indicator }) => (
-                                            <div>{indicator.name}</div>
-                                          )
-                                        )}
-                                      </div>{" "}
-                                      <div>Unlinked indicators go here</div>
-                                      <div>
-                                        {indicatorData &&
-                                          indicatorData.Indicators.filter(
-                                            ind =>
-                                              !values.indicators.find(
-                                                ({ Indicator: val }) =>
-                                                  ind.id === val.id
-                                              )
-                                          ).map(indicator => (
-                                            <div>{indicator.name}</div>
-                                          ))}
-                                      </div>
-                                    </div>
+                                    <React.Fragment>
+                                      {values.indicators.map(
+                                        ({ Indicator: indicator }) => (
+                                          <TableRow key={indicator.id}>
+                                            <TableCell>
+                                              {indicator.name}
+                                            </TableCell>
+                                          </TableRow>
+                                        )
+                                      )}
+                                      <TableRow>
+                                        <TableCell>
+                                          Unlinked Indicators
+                                        </TableCell>
+                                        <TableCell></TableCell>
+                                      </TableRow>
+                                      {indicatorData &&
+                                        indicatorData.Indicators.filter(
+                                          ind =>
+                                            !values.indicators.find(
+                                              ({ Indicator: val }) =>
+                                                ind.id === val.id
+                                            )
+                                        ).map(indicator => (
+                                          <TableRow key={indicator.id}>
+                                            <TableCell>
+                                              {indicator.name}{" "}
+                                              <button
+                                                onClick={() => {
+                                                  arrayHelpers.push({
+                                                    Indicator: indicator
+                                                  });
+                                                }}
+                                              >
+                                                Add
+                                              </button>
+                                            </TableCell>
+                                            <TableCell>5</TableCell>
+                                          </TableRow>
+                                        ))}
+                                    </React.Fragment>
                                   );
                                 }}
                               </FieldArray>

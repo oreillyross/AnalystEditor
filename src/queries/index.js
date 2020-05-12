@@ -19,11 +19,40 @@ export const GET_SOURCES = gql`
   }
 `;
 
+export const ADD_SCENARIO_INDICATOR = gql`
+  mutation addScenarioIndicator($indicator_id: uuid, $scenario_id: uuid) {
+    __typename
+    insert_Scenario_Indicator(
+      objects: {
+        indicator_id: $indicator_id
+        scenario_id: $scenario_id
+        strength: 5
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
 export const ADD_SCENARIO = gql`
   mutation AddScenario($name: String!, $description: String) {
     insert_Scenarios(objects: { name: $name, description: $description }) {
       returning {
         id
+        name
+        description
+        Scenario_Indicators {
+          Indicator {
+            id
+            name
+          }
+          strength
+        }
+        Scenario_Indicators_aggregate {
+          aggregate {
+            count(columns: indicator_id)
+          }
+        }
       }
     }
   }
