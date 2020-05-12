@@ -6,7 +6,12 @@ import { spacing } from "@material-ui/system";
 import Checkbox from "@material-ui/core/Checkbox";
 import "../style.css";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { GET_SCENARIOS, ADD_SCENARIO, GET_INDICATORS } from "../queries";
+import {
+  GET_SCENARIOS,
+  ADD_SCENARIO,
+  GET_INDICATORS,
+  ADD_SCENARIO_INDICATOR
+} from "../queries";
 import styled from "styled-components";
 import { LinkedIndicators } from "../views/LinkedIndicators";
 import Slider from "@material-ui/core/Slider";
@@ -69,6 +74,7 @@ const ScenarioForm = ({ navigate, location }) => {
       navigate("/scenarios");
     }
   });
+  const [addScenarioIndicator] = useMutation(ADD_SCENARIO_INDICATOR);
 
   if (error) console.log(error);
   return (
@@ -79,7 +85,6 @@ const ScenarioForm = ({ navigate, location }) => {
         indicators
       }}
       onSubmit={values => {
-        alert(JSON.stringify(values, null, 2));
         addScenario({
           variables: {
             name: values.scenarioName,
@@ -101,7 +106,14 @@ const ScenarioForm = ({ navigate, location }) => {
             });
           }
         }).then(result => {
-          console.log(result);
+          values.indicators.map(({ Indicator: indicator }) =>
+            addScenarioIndicator({
+              variables: {
+                indicator_id: indicator.id,
+                scenario_id: result.data.insert_Scenarios.returning[0].id
+              }
+            })
+          );
         });
       }}
     >
