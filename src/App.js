@@ -33,6 +33,7 @@ import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { AddTagBar } from "./components/AddTagBar";
 import { Indicator } from "./views/Indicator";
+import { EventIndicatorForm } from "./forms/EventIndicatorForm";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -124,15 +125,7 @@ export default function App() {
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />
-          <AddTagBar
-            initialTags={[
-              { name: "And", id: "a1" },
-              { name: "ande", id: "b2" },
-              { name: "amd", id: "c3" }
-            ]}
-            addTag={tag => console.log(tag)}
-            path="/admin"
-          />
+          <EventIndicatorForm path="/admin" />
           <NotFound default />
         </Router>
       </StyledDashboard>

@@ -55,12 +55,12 @@ const marks = [
 const ScenarioForm = ({ navigate, location }) => {
   let scenarioName = "";
   let scenarioDescription = "";
-  let indicators = [];
+  let indicators = [{ Indicator: { id: "", name: "", strength: 2 } }];
   if (location.state.scenario) {
     scenarioName = location.state.scenario.name;
     scenarioDescription = location.state.scenario.description;
     indicators = location.state.scenario.Scenario_Indicators;
-    console.log("latest indicators", latestIndicatorsOnly(indicators));
+    console.log("latest indicators", indicators);
   }
   const { loading, data: indicatorData, error: indicatorError } = useQuery(
     GET_INDICATORS
@@ -130,9 +130,6 @@ const ScenarioForm = ({ navigate, location }) => {
           <div>
             <form onSubmit={handleSubmit}>
               <Paper style={{ backgroundColor: "white", padding: "12px" }}>
-                <div>
-                  <FormLabel className="form-label"> Scenario Form</FormLabel>
-                </div>
                 <StyledForm>
                   <TextField
                     id="scenarioName"
@@ -226,11 +223,7 @@ const ScenarioForm = ({ navigate, location }) => {
 
                   <div style={{ paddingRight: ".8rem", textAlign: "right" }}>
                     <Button>Cancel</Button>
-                    <Button
-                      color="primary"
-                      type="submit"
-                      enabled={isSubmitting}
-                    >
+                    <Button color="primary" type="submit">
                       Submit
                     </Button>
                   </div>
