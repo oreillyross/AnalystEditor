@@ -1,28 +1,20 @@
 import React from "react";
-import { useFormik, Formik, FieldArray } from "formik";
-import { TextField, Button, FormLabel, Paper } from "@material-ui/core";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { spacing } from "@material-ui/system";
-import Checkbox from "@material-ui/core/Checkbox";
+import { Formik, FieldArray, Form } from "formik";
+import { TextField, Button, Paper } from "@material-ui/core";
 import "../style.css";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery, useApolloClient } from "@apollo/react-hooks";
 import {
-  GET_SCENARIOS,
   ADD_SCENARIO,
-  GET_INDICATORS,
-  ADD_SCENARIO_INDICATOR
+  ADD_SCENARIO_INDICATOR,
+  GET_INDICATORS
 } from "../queries";
 import styled from "styled-components";
-import { LinkedIndicators } from "../views/LinkedIndicators";
-import Slider from "@material-ui/core/Slider";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { Link } from "@reach/router";
-import { latestIndicatorsOnly } from "../utils";
 
 const StyledIndicatorLink = styled.div`
   padding: 15px;
@@ -33,88 +25,63 @@ const StyledForm = styled.div`
   padding: 24px;
 `;
 
-function showDialog() {
-  alert("added record");
-}
-
-const marks = [
-  {
-    value: 0,
-    label: "0"
-  },
-  {
-    value: 5,
-    label: "5"
-  },
-  {
-    value: 10,
-    label: "10"
-  }
-];
-
 const ScenarioForm = ({ navigate, location }) => {
+  const client = useApolloClient();
+
   let scenarioName = "";
   let scenarioDescription = "";
-  let indicators = [{ Indicator: { id: "", name: "", strength: 2 } }];
+  let prevIndicators = [];
+
   if (location.state.scenario) {
     scenarioName = location.state.scenario.name;
     scenarioDescription = location.state.scenario.description;
-    indicators = location.state.scenario.Scenario_Indicators;
-    console.log("latest indicators", indicators);
+    prevIndicators = location.state.scenario.Scenario_Indicators.map(prev => {
+      return { ...prev["Indicator"], strength: prev["strength"] };
+    });
   }
-  const { loading, data: indicatorData, error: indicatorError } = useQuery(
-    GET_INDICATORS
-  );
 
-  if (indicatorError) console.log(indicatorError);
+  const [indicators, setIndicators] = React.useState([]);
 
-  const [addScenario, { data, error }] = useMutation(ADD_SCENARIO, {
+  const { data } = useQuery(GET_INDICATORS, {
+    onCompleted: data => {
+      const indWithStSr = data.Indicators.map(ind => ({
+        ...ind,
+        strength: 5,
+        status: "toLink"
+      }));
+      const mergedWithPrev = indWithStSr.map(curr => {
+        const prevInd = prevIndicators.find(prev => prev.id === curr.id);
+        return prevInd ? { ...prevInd, status: "linkedToDb" } : curr;
+      });
+      setIndicators(mergedWithPrev);
+    }
+  });
+
+  const [addScenario] = useMutation(ADD_SCENARIO, {
     onCompleted: () => {
-      showDialog();
       navigate("/scenarios");
     }
   });
-  const [addScenarioIndicator] = useMutation(ADD_SCENARIO_INDICATOR);
 
-  if (error) console.log(error);
+  const initialValues = {
+    name: scenarioName,
+    description: scenarioDescription,
+    indicators: prevIndicators
+  };
+
   return (
     <Formik
-      initialValues={{
-        scenarioName,
-        scenarioDescription,
-        indicators
-      }}
+      initialValues={initialValues}
       onSubmit={values => {
-        addScenario({
+        console.log(values);
+        /*addScenario({
           variables: {
-            name: values.scenarioName,
-            description: values.scenarioDescription
-          },
-          update(cache, { data }) {
-            const getExistingScenarios = cache.readQuery({
-              query: GET_SCENARIOS
-            });
-            const existingScenarios = getExistingScenarios
-              ? getExistingScenarios
-              : [];
-            const newScenario = data.insert_Scenarios
-              ? data.insert_Scenarios.returning[0]
-              : {};
-            cache.writeQuery({
-              query: GET_SCENARIOS,
-              data: { Scenarios: [newScenario, ...existingScenarios] }
-            });
+            name: values.name,
+            description: values.description
           }
         }).then(result => {
-          values.indicators.map(({ Indicator: indicator }) =>
-            addScenarioIndicator({
-              variables: {
-                indicator_id: indicator.id,
-                scenario_id: result.data.insert_Scenarios.returning[0].id
-              }
-            })
-          );
-        });
+          console.log("this is the scenario that was added:", result);
+	});*/
       }}
     >
       {({
@@ -128,94 +95,52 @@ const ScenarioForm = ({ navigate, location }) => {
       }) => {
         return (
           <div>
-            <form onSubmit={handleSubmit}>
+            <Form>
               <Paper style={{ backgroundColor: "white", padding: "12px" }}>
                 <StyledForm>
                   <TextField
-                    id="scenarioName"
-                    name="scenarioName"
+                    id="name"
+                    name="name"
                     variant="outlined"
                     required
                     label="Name"
                     type="text"
                     fullWidth
                     onChange={handleChange}
-                    value={values.scenarioName}
+                    value={values.name}
                   />
                   <div style={{ padding: "14px" }} />
                   <TextField
-                    id="scenarioDescription"
-                    name="scenarioDescription"
+                    id="description"
+                    name="description"
                     multiline
                     rows={4}
                     label="Description"
                     variant="outlined"
                     onChange={handleChange}
                     fullWidth
-                    value={values.scenarioDescription}
+                    value={values.description}
                   />
                   <StyledIndicatorLink>
-                    Linked Indicators
                     <TableContainer component={Paper}>
                       <Table aria-label="simple table">
                         <TableHead>
                           <TableRow>
-                            <TableCell>Indication</TableCell>
-                            <TableCell>Strength</TableCell>
+                            <TableCell>Indicators</TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {indicatorData && (
-                            <React.Fragment>
-                              <FieldArray name="indicators">
-                                {arrayHelpers => {
-                                  return (
-                                    <React.Fragment>
-                                      {values.indicators.map(
-                                        ({ Indicator: indicator }) => (
-                                          <TableRow key={indicator.id}>
-                                            <TableCell>
-                                              {indicator.name}
-                                            </TableCell>
-                                          </TableRow>
-                                        )
-                                      )}
-                                      <TableRow>
-                                        <TableCell>
-                                          Unlinked Indicators
-                                        </TableCell>
-                                        <TableCell></TableCell>
-                                      </TableRow>
-                                      {indicatorData &&
-                                        indicatorData.Indicators.filter(
-                                          ind =>
-                                            !values.indicators.find(
-                                              ({ Indicator: val }) =>
-                                                ind.id === val.id
-                                            )
-                                        ).map(indicator => (
-                                          <TableRow key={indicator.id}>
-                                            <TableCell>
-                                              {indicator.name}{" "}
-                                              <button
-                                                onClick={() => {
-                                                  arrayHelpers.push({
-                                                    Indicator: indicator
-                                                  });
-                                                }}
-                                              >
-                                                Add
-                                              </button>
-                                            </TableCell>
-                                            <TableCell>5</TableCell>
-                                          </TableRow>
-                                        ))}
-                                    </React.Fragment>
-                                  );
-                                }}
-                              </FieldArray>
-                            </React.Fragment>
-                          )}
+                          <FieldArray name="indicators">
+                            {arrayHelpers => {
+                              return indicators.map(indicator => {
+                                return (
+                                  <TableRow key={indicator.id}>
+                                    <TableCell>{indicator.name} </TableCell>
+                                  </TableRow>
+                                );
+                              });
+                            }}
+                          </FieldArray>
                         </TableBody>
                       </Table>
                     </TableContainer>
@@ -229,7 +154,7 @@ const ScenarioForm = ({ navigate, location }) => {
                   </div>
                 </StyledForm>
               </Paper>
-            </form>
+            </Form>
           </div>
         );
       }}
@@ -238,3 +163,29 @@ const ScenarioForm = ({ navigate, location }) => {
 };
 
 export default ScenarioForm;
+
+/*
+ *<input
+                                            type="checkbox"
+                                            checked={
+                                              values.indicators.findIndex(
+                                                ind => ind.id === indicator.id
+                                              ) !== -1
+                                            }
+                                            onChange={e => {
+                                              if (e.target.checked) {
+                                                arrayHelpers.push(indicator);
+                                              } else {
+                                                arrayHelpers.remove(
+                                                  values.indicators.findIndex(
+                                                    ind =>
+                                                      ind.id === indicator.id
+                                                  )
+                                                );
+                                              }
+                                            }}
+                                          />
+ *
+ *
+ *
+ * */

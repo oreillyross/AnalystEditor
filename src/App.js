@@ -31,9 +31,11 @@ import Indicators from "./views/Indicators";
 import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
-import { AddTagBar } from "./components/AddTagBar";
 import { Indicator } from "./views/Indicator";
-import { EventIndicatorForm } from "./forms/EventIndicatorForm";
+import { IndicatorItem } from "./components/IndicatorItem";
+import { useReducer } from "react";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_INDICATORS } from "./queries";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -125,7 +127,6 @@ export default function App() {
           <Scenarios path="/scenarios" />
           <Search path="/search" />
           <Tag path="/tag/:id" />
-          <EventIndicatorForm path="/admin" />
           <NotFound default />
         </Router>
       </StyledDashboard>

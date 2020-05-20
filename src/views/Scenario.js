@@ -50,10 +50,9 @@ function Scenario({ id, navigate }) {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {indicators.map(({ Indicator: indicator, strength }) => {
-              console.log(indicator, strength);
+            {indicators.map(({ Indicator: indicator, strength }, index) => {
               return (
-                <Table.Row>
+                <Table.Row key={index}>
                   <Table.Cell key={indicator.id}>{indicator.name}</Table.Cell>
 
                   <Table.Cell>{strength}</Table.Cell>
