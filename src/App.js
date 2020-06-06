@@ -32,10 +32,7 @@ import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { Indicator } from "./views/Indicator";
-import { IndicatorItem } from "./components/IndicatorItem";
-import { useReducer } from "react";
-import { useQuery } from "@apollo/react-hooks";
-import { GET_INDICATORS } from "./queries";
+import SignInScreen from "./components/Login";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 

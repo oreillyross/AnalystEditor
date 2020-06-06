@@ -45,5 +45,34 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCBh-dWkDxskCWL7JNpvzoyIPQogLJEH1U",
+    authDomain: "horizon-e9c14.firebaseapp.com",
+    databaseURL: "https://horizon-e9c14.firebaseio.com",
+    projectId: "horizon-e9c14",
+    storageBucket: "horizon-e9c14.appspot.com",
+    messagingSenderId: "682125302409",
+    appId: "1:682125302409:web:65e76db791cc844d438458",
+    measurementId: "G-4Q9KCNFRKE"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth()
+// Initialize the FirebaseUI Widget using Firebase.
+  const ui = new firebaseui.auth.AuthUI(auth);
+  const db = firebase.firestore()
+</script>
+
   </body>
 </html>

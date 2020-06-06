@@ -2,12 +2,8 @@ import React from "react";
 import { Formik, FieldArray, Form } from "formik";
 import { TextField, Button, Paper } from "@material-ui/core";
 import "../style.css";
-import { useMutation, useQuery, useApolloClient } from "@apollo/react-hooks";
-import {
-  ADD_SCENARIO,
-  ADD_SCENARIO_INDICATOR,
-  GET_INDICATORS
-} from "../queries";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { ADD_SCENARIO, GET_INDICATORS } from "../queries";
 import styled from "styled-components";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -26,8 +22,6 @@ const StyledForm = styled.div`
 `;
 
 const ScenarioForm = ({ navigate, location }) => {
-  const client = useApolloClient();
-
   let scenarioName = "";
   let scenarioDescription = "";
   let prevIndicators = [];
