@@ -33,6 +33,7 @@ import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { Indicator } from "./views/Indicator";
 import SignInScreen from "./components/Login";
+import Navigation from "./components/Navigation";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -69,38 +70,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <StyledDashboard>
         <StyledHeader>Horizon Analyst Dashboard</StyledHeader>
-        <StyledNavigation>
-          <Link to="/">
-            <Button>Home</Button>
-          </Link>
-          <Link to="/admin">
-            <Button>Admin</Button>
-          </Link>
-          <Link to="/articles">
-            <Button>Articles</Button>
-          </Link>
-          <Link to="/events">
-            <Button>Events</Button>
-          </Link>
-          <Link to="/tags">
-            <Button>Tags</Button>
-          </Link>
-          <Link to="/keywords">
-            <Button>Keywords</Button>
-          </Link>
-          <Link to="/sources">
-            <Button>Sources</Button>
-          </Link>
-          <Link to="/search">
-            <Button>Search</Button>
-          </Link>
-          <Link to="/scenarios">
-            <Button>Scenarios</Button>
-          </Link>
-          <Link to="/indicators">
-            <Button>Indicators</Button>
-          </Link>
-        </StyledNavigation>
+
         <Router>
           <TextSelect article={article} path="/" />
           <Articles path="/articles" />
