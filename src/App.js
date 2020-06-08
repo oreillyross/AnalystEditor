@@ -33,6 +33,7 @@ import Scenario from "./views/Scenario.js";
 import { Indicator } from "./views/Indicator";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/Landing";
+import SignUpPage from "./components/SignUp";
 import * as ROUTES from "./constants/routes";
 import Firebase, { FirebaseContext } from "./components/Firebase";
 
@@ -71,6 +72,7 @@ export default function App() {
           <Navigation />
           <Router>
             <LandingPage path={ROUTES.LANDING} />
+            <SignUpPage path={ROUTES.SIGN_UP} />
             <Articles path="/articles" />
             <EventsByTag path="/events/bytag/:id" />
             <EventsByArticle path="/events/byarticle/:id" />
