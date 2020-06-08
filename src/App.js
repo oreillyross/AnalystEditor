@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
-import { Router, Link } from "@reach/router";
+import { Router } from "@reach/router";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -32,8 +31,8 @@ import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
 import IndicatorForm from "./forms/IndicatorForm";
 import Scenario from "./views/Scenario.js";
 import { Indicator } from "./views/Indicator";
-import SignInScreen from "./components/Login";
 import Navigation from "./components/Navigation";
+import * as ROUTES from "./constants/routes";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -57,10 +56,6 @@ const StyledHeader = styled.div`
   padding: 0.5rem;
 `;
 
-const StyledNavigation = styled.div`
-  border-bottom: 1px solid lightgray;
-`;
-
 function NotFound() {
   return <div>Not found</div>;
 }
@@ -70,9 +65,9 @@ export default function App() {
     <ApolloProvider client={client}>
       <StyledDashboard>
         <StyledHeader>Horizon Analyst Dashboard</StyledHeader>
-
+        <Navigation />
         <Router>
-          <TextSelect article={article} path="/" />
+          <TextSelect article={article} path={ROUTES.LANDING} />
           <Articles path="/articles" />
           <EventsByTag path="/events/bytag/:id" />
           <EventsByArticle path="/events/byarticle/:id" />
