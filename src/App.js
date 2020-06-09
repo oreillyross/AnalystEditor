@@ -38,7 +38,7 @@ import SignInPage from "./components/SignIn";
 import SignOutButton from "./components/SignOut";
 import Home from "./components/Home";
 import * as ROUTES from "./constants/routes";
-import Firebase, { FirebaseContext } from "./components/Firebase";
+import Firebase, { withFirebase } from "./components/Firebase";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
@@ -66,46 +66,54 @@ function NotFound() {
   return <div>Not found</div>;
 }
 
-export default function App() {
+function App({ firebase }) {
+  const { authUser, setAuthUser } = React.useState(null);
+
+  React.useEffect(() => {
+    firebase.auth.onAuthStateChanged(authUser => {
+      authUser ? setAuthUser(authUser) : setAuthUser(null);
+    });
+  }, []);
+
   return (
-    <FirebaseContext.Provider value={new Firebase()}>
-      <ApolloProvider client={client}>
-        <StyledDashboard>
-          <StyledHeader>
-            Horizon Analyst Dashboard
-            <SignOutButton />
-          </StyledHeader>
-          <Navigation />
-          <Router>
-            <LandingPage path={ROUTES.LANDING} />
-            <Home path={ROUTES.HOME} />
-            <SignUpPage path={ROUTES.SIGN_UP} />
-            <SignInPage path={ROUTES.SIGN_IN} />
-            <Articles path="/articles" />
-            <EventsByTag path="/events/bytag/:id" />
-            <EventsByArticle path="/events/byarticle/:id" />
-            <Events path="/events" />
-            <EventForm path="/event/addevent" />
-            <NewArticleForm path="forms/newarticle" />
-            <KeywordForm path="forms/newkeyword" />
-            <SourceForm path="/forms/newsource" />
-            <IndicatorForm path="/forms/newindicator" />
-            <ScenarioForm path="/forms/scenario" />
-            <Scenario path="/views/scenario/:id" />
-            <Event path="/views/event/:id" />
-            <Tags path="/tags" />
-            <Keywords path="/keywords" />
-            <Sources path="/sources" />
-            <Indicator path="/views/indicator/:id" />
-            <Indicators path="/indicators" />
-            <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
-            <Scenarios path="/scenarios" />
-            <Search path="/search" />
-            <Tag path="/tag/:id" />
-            <NotFound default />
-          </Router>
-        </StyledDashboard>
-      </ApolloProvider>
-    </FirebaseContext.Provider>
+    <ApolloProvider client={client}>
+      <StyledDashboard>
+        <StyledHeader>
+          Horizon Analyst Dashboard
+          {authUser && <SignOutButton />}{" "}
+        </StyledHeader>
+        <Navigation />
+        <Router>
+          <LandingPage path={ROUTES.LANDING} />
+          <Home path={ROUTES.HOME} />
+          <SignUpPage path={ROUTES.SIGN_UP} />
+          <SignInPage path={ROUTES.SIGN_IN} />
+          <Articles path="/articles" />
+          <EventsByTag path="/events/bytag/:id" />
+          <EventsByArticle path="/events/byarticle/:id" />
+          <Events path="/events" />
+          <EventForm path="/event/addevent" />
+          <NewArticleForm path="forms/newarticle" />
+          <KeywordForm path="forms/newkeyword" />
+          <SourceForm path="/forms/newsource" />
+          <IndicatorForm path="/forms/newindicator" />
+          <ScenarioForm path="/forms/scenario" />
+          <Scenario path="/views/scenario/:id" />
+          <Event path="/views/event/:id" />
+          <Tags path="/tags" />
+          <Keywords path="/keywords" />
+          <Sources path="/sources" />
+          <Indicator path="/views/indicator/:id" />
+          <Indicators path="/indicators" />
+          <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
+          <Scenarios path="/scenarios" />
+          <Search path="/search" />
+          <Tag path="/tag/:id" />
+          <NotFound default />
+        </Router>
+      </StyledDashboard>
+    </ApolloProvider>
   );
 }
+
+export default withFirebase(App);
