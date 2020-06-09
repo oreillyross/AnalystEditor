@@ -1,55 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Router } from "@reach/router";
-import ApolloClient from "apollo-client";
-import { ApolloLink } from "apollo-link";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import httplink from "./http-link";
-import errorlink from "./error-link";
-import { Events } from "./views/Events";
-import { Event } from "./views/Event";
-import Articles from "./views/Articles";
-import TextSelect from "./components/TextSelect";
-import { article } from "./components/article";
-import NewArticleForm from "./forms/NewArticleForm";
-import KeywordForm from "./forms/KeywordForm";
-import Tags from "./views/Tags";
-import Keywords from "./views/Keywords";
-import Sources from "./views/Sources";
-import Search from "./views/Search";
-import SourceForm from "./forms/SourceForm";
-import EventsByTag from "./tables/EventsByTag";
-import { EventsByArticle } from "./views/EventsByArticle";
-import EventForm from "./forms/EventForm";
-import { alink } from "./alink.js";
-import Tag from "./views/Tag";
-import Scenarios from "./views/Scenarios";
-import ScenarioForm from "./forms/ScenarioForm";
-import Indicators from "./views/Indicators";
-import { IndicatorsByScenarioId } from "./views/IndicatorsByScenarioId";
-import IndicatorForm from "./forms/IndicatorForm";
-import Scenario from "./views/Scenario.js";
-import { Indicator } from "./views/Indicator";
-import Navigation from "./components/Navigation";
-import LandingPage from "./components/Landing";
-import SignUpPage from "./components/SignUp";
-import SignInPage from "./components/SignIn";
-import SignOutButton from "./components/SignOut";
-import Home from "./components/Home";
-import * as ROUTES from "./constants/routes";
 import Firebase, { withFirebase } from "./components/Firebase";
-
-const link = new ApolloLink.from([errorlink, httplink]);
-
-// the Apollo cache is set up automatically
-const client = new ApolloClient({
-  link: alink.concat(link),
-  cache: new InMemoryCache(),
-  fetchOptions: {
-    mode: "cors"
-  }
-});
+import AuthApp from "./AuthApp";
+import UnAuthApp from "./UnAuthApp";
+import SignOutButton from "./components/SignOut";
 
 const StyledDashboard = styled.div`
   display: grid;
@@ -62,12 +16,8 @@ const StyledHeader = styled.div`
   padding: 0.5rem;
 `;
 
-function NotFound() {
-  return <div>Not found</div>;
-}
-
 function App({ firebase }) {
-  const { authUser, setAuthUser } = React.useState(null);
+  const [authUser, setAuthUser] = React.useState(null);
 
   React.useEffect(() => {
     firebase.auth.onAuthStateChanged(authUser => {
@@ -76,43 +26,16 @@ function App({ firebase }) {
   }, []);
 
   return (
-    <ApolloProvider client={client}>
-      <StyledDashboard>
-        <StyledHeader>
-          Horizon Analyst Dashboard
-          {authUser && <SignOutButton />}{" "}
-        </StyledHeader>
-        <Navigation />
-        <Router>
-          <LandingPage path={ROUTES.LANDING} />
-          <Home path={ROUTES.HOME} />
-          <SignUpPage path={ROUTES.SIGN_UP} />
-          <SignInPage path={ROUTES.SIGN_IN} />
-          <Articles path="/articles" />
-          <EventsByTag path="/events/bytag/:id" />
-          <EventsByArticle path="/events/byarticle/:id" />
-          <Events path="/events" />
-          <EventForm path="/event/addevent" />
-          <NewArticleForm path="forms/newarticle" />
-          <KeywordForm path="forms/newkeyword" />
-          <SourceForm path="/forms/newsource" />
-          <IndicatorForm path="/forms/newindicator" />
-          <ScenarioForm path="/forms/scenario" />
-          <Scenario path="/views/scenario/:id" />
-          <Event path="/views/event/:id" />
-          <Tags path="/tags" />
-          <Keywords path="/keywords" />
-          <Sources path="/sources" />
-          <Indicator path="/views/indicator/:id" />
-          <Indicators path="/indicators" />
-          <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
-          <Scenarios path="/scenarios" />
-          <Search path="/search" />
-          <Tag path="/tag/:id" />
-          <NotFound default />
-        </Router>
-      </StyledDashboard>
-    </ApolloProvider>
+    <StyledDashboard>
+      <StyledHeader>
+        Horizon Analyst Dashboard
+        <span style={{ float: "right" }}>
+          {authUser ? <SignOutButton /> : null}
+        </span>
+      </StyledHeader>
+
+      {authUser ? <AuthApp /> : <UnAuthApp />}
+    </StyledDashboard>
   );
 }
 
