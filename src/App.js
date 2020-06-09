@@ -34,6 +34,9 @@ import { Indicator } from "./views/Indicator";
 import Navigation from "./components/Navigation";
 import LandingPage from "./components/Landing";
 import SignUpPage from "./components/SignUp";
+import SignInPage from "./components/SignIn";
+import SignOutButton from "./components/SignOut";
+import Home from "./components/Home";
 import * as ROUTES from "./constants/routes";
 import Firebase, { FirebaseContext } from "./components/Firebase";
 
@@ -68,11 +71,16 @@ export default function App() {
     <FirebaseContext.Provider value={new Firebase()}>
       <ApolloProvider client={client}>
         <StyledDashboard>
-          <StyledHeader>Horizon Analyst Dashboard</StyledHeader>
+          <StyledHeader>
+            Horizon Analyst Dashboard
+            <SignOutButton />
+          </StyledHeader>
           <Navigation />
           <Router>
             <LandingPage path={ROUTES.LANDING} />
+            <Home path={ROUTES.HOME} />
             <SignUpPage path={ROUTES.SIGN_UP} />
+            <SignInPage path={ROUTES.SIGN_IN} />
             <Articles path="/articles" />
             <EventsByTag path="/events/bytag/:id" />
             <EventsByArticle path="/events/byarticle/:id" />

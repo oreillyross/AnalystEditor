@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "@reach/router";
+import { Link, navigate } from "@reach/router";
 import * as ROUTES from "../../constants/routes";
 import { Formik } from "formik";
+import { withFirebase } from "../Firebase";
 
 function SignUpPage() {
   return (
@@ -20,21 +21,25 @@ const INITIAL_STATE = {
   error: null
 };
 
-class SignUpForm extends React.Component {
+class SignUpFormBase extends React.Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
   }
 
   onSubmit = event => {
+    event.preventDefault();
     const { email, username, passwordOne } = this.state;
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
+        navigate(ROUTES.HOME);
       })
-      .catch(error => this.setState({ error }));
-    event.preventDefault();
+      .catch(error => {
+        console.log(error);
+        this.setState({ error });
+      });
   };
 
   onChange = event => {
@@ -57,28 +62,28 @@ class SignUpForm extends React.Component {
           value={username}
           onChange={this.onChange}
           type="text"
-          placeHolder="Full Name"
+          placeholder="Full Name"
         />
         <input
           name="email"
           value={email}
           onChange={this.onChange}
           type="email"
-          placeHolder="Email Address"
+          placeholder="Email Address"
         />
         <input
           name="passwordOne"
           value={passwordOne}
           onChange={this.onChange}
           type="password"
-          placeHolder="Password"
+          placeholder="Password"
         />
         <input
           name="passwordTwo"
           value={passwordTwo}
           onChange={this.onChange}
           type="password"
-          placeHolder="Confirm Password"
+          placeholder="Confirm Password"
         />
 
         <button disabled={isInvalid} type="submit">
@@ -97,6 +102,8 @@ function SignUpLink() {
     </p>
   );
 }
+
+const SignUpForm = withFirebase(SignUpFormBase);
 
 export default SignUpPage;
 
