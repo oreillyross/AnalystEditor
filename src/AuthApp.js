@@ -27,36 +27,55 @@ import SignOutButton from "./components/SignOut";
 import Home from "./components/Home";
 import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound";
+import styled from "styled-components";
+import Navigation from "./components/Navigation";
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+`;
+
+const Main = styled.div`
+  grid-column: 4 / 13;
+`;
+const StyledNavigation = styled.div`
+  grid-column: 1 / 4;
+`;
 
 function AuthApp() {
   return (
-    <div>
-      <Router>
-        <Home path={ROUTES.HOME} />
-        <Articles path="/articles" />
-        <EventsByTag path="/events/bytag/:id" />
-        <EventsByArticle path="/events/byarticle/:id" />
-        <Events path="/events" />
-        <EventForm path="/event/addevent" />
-        <NewArticleForm path="forms/newarticle" />
-        <KeywordForm path="forms/newkeyword" />
-        <SourceForm path="/forms/newsource" />
-        <IndicatorForm path="/forms/newindicator" />
-        <ScenarioForm path="/forms/scenario" />
-        <Scenario path="/views/scenario/:id" />
-        <Event path="/views/event/:id" />
-        <Tags path="/tags" />
-        <Keywords path="/keywords" />
-        <Sources path="/sources" />
-        <Indicator path="/views/indicator/:id" />
-        <Indicators path="/indicators" />
-        <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
-        <Scenarios path="/scenarios" />
-        <Search path="/search" />
-        <Tag path="/tag/:id" />
-        <NotFound default />
-      </Router>
-    </div>
+    <Container>
+      <StyledNavigation>
+        <Navigation />
+      </StyledNavigation>
+      <Main>
+        <Router>
+          <Home path={ROUTES.HOME} />
+          <Articles path="/articles" />
+          <EventsByTag path="/events/bytag/:id" />
+          <EventsByArticle path="/events/byarticle/:id" />
+          <Events path="/events" />
+          <EventForm path="/event/addevent" />
+          <NewArticleForm path="forms/newarticle" />
+          <KeywordForm path="forms/newkeyword" />
+          <SourceForm path="/forms/newsource" />
+          <IndicatorForm path="/forms/newindicator" />
+          <ScenarioForm path="/forms/scenario" />
+          <Scenario path="/views/scenario/:id" />
+          <Event path="/views/event/:id" />
+          <Tags path="/tags" />
+          <Keywords path="/keywords" />
+          <Sources path="/sources" />
+          <Indicator path="/views/indicator/:id" />
+          <Indicators path="/indicators" />
+          <IndicatorsByScenarioId path="/indicators/byscenario/:id" />
+          <Scenarios path="/scenarios" />
+          <Search path="/search" />
+          <Tag path="/tag/:id" />
+          <NotFound default />
+        </Router>
+      </Main>
+    </Container>
   );
 }
 

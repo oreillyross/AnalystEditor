@@ -1,17 +1,29 @@
 import React from "react";
+import { Button } from "semantic-ui-react";
+import styled from "styled-components";
+
+const StyledMain = styled.div`
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+`;
+
+const StyledButton = styled(Button)`
+  valign: center;
+  width: 80px;
+  padding: 15px;
+`;
 
 function LandingPage() {
   return (
-    <div>
-      <h1> Horizon</h1>
-      <pre>Investigating the future</pre>
-      <p>
-        Horizon is a platform which gathers live news feeds / articles and
-        allows crowdsourced analysis to provide you with insights and trends
-        into what might be happening based on simple trend statements or more
-        formally hypothesis.
-      </p>
-    </div>
+    <StyledMain>
+      <div>1</div>
+      <div>
+        {" "}
+        <StyledButton>Sign Up</StyledButton>{" "}
+      </div>
+      <div>3</div>
+      <div>4</div>
+    </StyledMain>
   );
 }
 

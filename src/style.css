@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 body {
-  max-width: 800px;
+  max-width: 90%;
   font-family: Roboto, sans-serif;
   line-height: 1.4;
-  margin: 0 auto;
+  margin: 0 auto !important;
   font-size: 1.2rem;
 }
 
@@ -25,7 +25,7 @@ padding: 1rem;
 
 
 
-/** * { background-color: rgba(255,0,0,.2); }
+* * { background-color: rgba(255,0,0,.2); }
 * * { background-color: rgba(0,255,0,.2); }
 * * * { background-color: rgba(0,0,255,.2); }
 * * * * { background-color: rgba(255,0,255,.2); }
@@ -33,4 +33,4 @@ padding: 1rem;
 * * * * * * { background-color: rgba(255,255,0,.2); }
 * * * * * * * { background-color: rgba(255,0,0,.2); }
 * * * * * * * * { background-color: rgba(0,255,0,.2); }
-* * * * * * * * * { background-color: rgba(0,0,255,.2); } */
+* * * * * * * * * { background-color: rgba(0,0,255,.2); } 
