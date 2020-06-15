@@ -9,6 +9,14 @@ export const GET_KEYWORDS = gql`
   }
 `;
 
+export const ADD_USER = gql`
+  mutation addUser($email: String, $name: String, $uid: String) {
+    insert_Users(objects: { email: $email, name: $name, uid: $uid }) {
+      affected_rows
+    }
+  }
+`;
+
 export const GET_SOURCES = gql`
   query getSources {
     Sources {

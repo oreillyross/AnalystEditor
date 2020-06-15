@@ -29,6 +29,7 @@ import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound";
 import styled from "styled-components";
 import Navigation from "./components/Navigation";
+import Project from "./components/Project";
 
 const Container = styled.div`
   display: grid;
@@ -42,11 +43,11 @@ const StyledNavigation = styled.div`
   grid-column: 1 / 4;
 `;
 
-function AuthApp() {
+function AuthApp({ authUser }) {
   return (
     <Container>
       <StyledNavigation>
-        <Navigation />
+        <Navigation authUser={authUser} />
       </StyledNavigation>
       <Main>
         <Router>
@@ -61,6 +62,7 @@ function AuthApp() {
           <SourceForm path="/forms/newsource" />
           <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/scenario" />
+          <Project path="/project/:id" />
           <Scenario path="/views/scenario/:id" />
           <Event path="/views/event/:id" />
           <Tags path="/tags" />

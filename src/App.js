@@ -29,7 +29,7 @@ function App({ firebase }) {
   return (
     <StyledDashboard>
       <UserBar authUser={authUser} />
-      {authUser ? <AuthApp /> : <UnAuthApp />}
+      {authUser ? <AuthApp authUser={authUser} /> : <UnAuthApp />}
     </StyledDashboard>
   );
 }
