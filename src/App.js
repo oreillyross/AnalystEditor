@@ -20,6 +20,8 @@ const StyledHeader = styled.div`
 function App({ firebase }) {
   const [authUser, setAuthUser] = React.useState(null);
 
+  const [userId, setUserId] = React.useState(null);
+
   React.useEffect(() => {
     firebase.auth.onAuthStateChanged(authUser => {
       authUser ? setAuthUser(authUser) : setAuthUser(null);

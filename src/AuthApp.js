@@ -30,6 +30,8 @@ import NotFound from "./components/NotFound";
 import styled from "styled-components";
 import Navigation from "./components/Navigation";
 import Project from "./components/Project";
+import { useQuery } from "@apollo/react-hooks";
+import { GET_USER } from "./queries";
 
 const Container = styled.div`
   display: grid;
@@ -44,12 +46,28 @@ const StyledNavigation = styled.div`
 `;
 
 function AuthApp({ authUser }) {
+  const { data, loading, error } = useQuery(GET_USER, {
+    variables: { uid: authUser.uid }
+  });
+
+  // store the logged in userId here
+  const [userId, setUserId] = React.useState(null);
+
+  React.useEffect(() => {
+    if (data) {
+      setUserId(data.Users[0].id);
+    }
+  }, [data]);
+  console.log(userId);
   return (
     <Container>
       <StyledNavigation>
         <Navigation authUser={authUser} />
       </StyledNavigation>
       <Main>
+        <div>
+          {data && <span>Current logged in user is: {data.Users[0].name}</span>}
+        </div>
         <Router>
           <Home path={ROUTES.HOME} />
           <Articles path="/articles" />

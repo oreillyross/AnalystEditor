@@ -17,6 +17,15 @@ export const ADD_USER = gql`
   }
 `;
 
+export const GET_USER = gql`
+  query getUser($uid: String = "") {
+    Users(where: { uid: { _eq: $uid } }) {
+      id
+      name
+    }
+  }
+`;
+
 export const GET_SOURCES = gql`
   query getSources {
     Sources {
