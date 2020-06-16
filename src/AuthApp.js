@@ -58,11 +58,10 @@ function AuthApp({ authUser }) {
       setUserId(data.Users[0].id);
     }
   }, [data]);
-  console.log(userId);
   return (
     <Container>
       <StyledNavigation>
-        <Navigation authUser={authUser} />
+        <Navigation userId={userId} />
       </StyledNavigation>
       <Main>
         <div>
@@ -80,7 +79,7 @@ function AuthApp({ authUser }) {
           <SourceForm path="/forms/newsource" />
           <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/scenario" />
-          <Project path="/project/:id" />
+          <Project path="/project/:userId" />
           <Scenario path="/views/scenario/:id" />
           <Event path="/views/event/:id" />
           <Tags path="/tags" />

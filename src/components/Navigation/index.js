@@ -10,10 +10,10 @@ const StyledNavigation = styled.div`
   padding: 12px;
 `;
 
-function Navigation({ authUser }) {
+function Navigation({ userId }) {
   return (
     <StyledNavigation>
-      <Link to={`/project/${authUser.uid}`}>
+      <Link to={`/project/${userId}`}>
         Project <Icon name="settings" />
       </Link>
     </StyledNavigation>

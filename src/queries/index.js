@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const GET_PROJECT = gql`
+  query getProject($user_id: uuid = "") {
+    Projects(where: { admin_id: { _eq: $user_id } }) {
+      id
+      title
+      description
+    }
+  }
+`;
+
 export const GET_KEYWORDS = gql`
   query getKeywords {
     Keywords(order_by: { name: asc }) {
