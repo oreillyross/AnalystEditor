@@ -32,6 +32,7 @@ import Navigation from "./components/Navigation";
 import Project from "./components/Project";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USER } from "./queries";
+import Projects from "./views/Projects";
 
 const Container = styled.div`
   display: grid;
@@ -80,6 +81,7 @@ function AuthApp({ authUser }) {
           <IndicatorForm path="/forms/newindicator" />
           <ScenarioForm path="/forms/scenario" />
           <Project path="/project/:userId" />
+          <Projects path={ROUTES.PROJECTS_BY_USER} />
           <Scenario path="/views/scenario/:id" />
           <Event path="/views/event/:id" />
           <Tags path="/tags" />

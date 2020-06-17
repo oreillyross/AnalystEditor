@@ -1,22 +1,40 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
-import { Form as UIForm, Input, Button, TextArea } from "semantic-ui-react";
-import { useQuery } from "@apollo/react-hooks";
-import { GET_PROJECT } from "../../queries";
+import {
+  Form as UIForm,
+  Input,
+  Button,
+  TextArea,
+  Checkbox,
+  Icon
+} from "semantic-ui-react";
+import { useQuery, useMutation } from "@apollo/react-hooks";
+import { GET_PROJECT, GET_SOURCES, GET_SCRAPING } from "../../queries";
 
-function ProjectForm({ userId }) {
-  const { loading, error, data } = useQuery(GET_PROJECT, {
-    variables: { user_id: userId }
+function ProjectForm({ project }) {
+  const {
+    loading: sourceLoading,
+    error: sourceError,
+    data: sourceData
+  } = useQuery(GET_SOURCES);
+
+  const {
+    loading: scrapingLoading,
+    error: scrapingError,
+    data: scrapingData
+  } = useQuery(GET_SCRAPING, {
+    variables: { projectId: project ? project.id : null }
   });
-  if (data) {
+
+  if (sourceData && scrapingData) {
     const adminOptions = [{ text: "", value: "" }];
-    console.log(data.Projects[0]);
+    console.log("never gets here");
     return (
       <div>
         <Formik
           initialValues={{
-            title: data.Projects[0].title,
-            description: data.Projects[0].description
+            title: project.title,
+            description: project.description
           }}
           onSubmit={(values, actions) => {
             console.log(values);
@@ -46,13 +64,19 @@ function ProjectForm({ userId }) {
                     onChange={handleChange}
                   />
                 </UIForm.Field>
-                <UIForm.Dropdown
-                  label="Administrator"
-                  placeholder="Assign an admin to manage the project"
-                  name="admin"
-                  selection
-                  options={adminOptions}
-                />
+                <h3> Source scraping </h3>
+                <ul>
+                  {sourceData.Sources.map(source => {
+                    return (
+                      <li key={source.id}>
+                        <Checkbox />
+                        {source.name}
+                        <Icon name="delete" />
+                      </li>
+                    );
+                  })}
+                </ul>
+                ); }} );
                 <Button type="submit">Save</Button>
               </UIForm>
             );

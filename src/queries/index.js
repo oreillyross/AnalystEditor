@@ -9,6 +9,16 @@ export const GET_PROJECT = gql`
     }
   }
 `;
+export const GET_SCRAPING = gql`
+  query getScraping($projectId: uuid = "") {
+    Source_Scraping(where: { project_id: { _eq: $projectId } }) {
+      id
+      frequency
+      scraping
+      source_id
+    }
+  }
+`;
 
 export const GET_KEYWORDS = gql`
   query getKeywords {
