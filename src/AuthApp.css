@@ -8,7 +8,12 @@
 }
 
 .nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
   grid-area: n;
+  padding: 1rem;
+
 }
 
 .main {

@@ -1,11 +1,12 @@
 import React from "react";
-import { Router } from "@reach/router";
+import { Router, Link } from "@reach/router";
 import Home from "./components/Home";
 import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound";
 import Navigation from "./components/Navigation";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USER } from "./queries";
+import { Button } from "semantic-ui-react";
 import "./AuthApp.css";
 
 function AuthApp({ authUser }) {
@@ -29,7 +30,7 @@ function AuthApp({ authUser }) {
     <div className="container">
       <header className="header"></header>
       <aside className="nav">
-        <Navigation userId={userId} />
+        <Navigation />
       </aside>
       <main className="main">
         <div>
