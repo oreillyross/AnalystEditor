@@ -1,0 +1,25 @@
+.container {
+  display: grid;
+  grid-template: 1fr 3fr 1fr / repeat(12, 1fr);
+  grid-template-areas:
+  " h h h h h h h h h h h h"
+  " n n c c c c c c c c c c"
+  " n n f f f f f f f f f f";
+}
+
+.nav {
+  grid-area: n;
+}
+
+.main {
+  grid-area: c;
+
+}
+
+.header {
+  grid-area: h;
+}
+
+.footer {
+  grid-area: f
+}
