@@ -4,15 +4,8 @@
   "private": true,
   "dependencies": {
     "@apollo/react-hooks": "3.1.3",
-    "@auth0/auth0-spa-js": "1.6.4",
     "@date-io/date-fns": "1.3.2",
-    "@material-ui/core": "4.9.1",
-    "@material-ui/icons": "4.9.1",
-    "@material-ui/pickers": "3.2.10",
     "@reach/router": "1.3.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^10.0.2",
-    "@testing-library/user-event": "^7.1.2",
     "apollo-boost": "0.4.7",
     "apollo-cache-inmemory": "1.6.5",
     "apollo-client": "2.6.8",
@@ -51,9 +44,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "pre-commit": "lint-staged",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "pre-commit": "lint-staged"
   },
   "pre-commit": [
     "pre-commit"
@@ -79,12 +70,6 @@
     ]
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.3.18",
-    "@storybook/addon-links": "^5.3.18",
-    "@storybook/addons": "^5.3.18",
-    "@storybook/preset-create-react-app": "^2.1.1",
-    "@storybook/react": "^5.3.18",
-    "@testing-library/react": "^7.2.1",
     "lint-staged": "^10.0.8",
     "pre-commit": "^1.2.2",
     "prettier": "1.19.1"
