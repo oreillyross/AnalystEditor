@@ -13,6 +13,7 @@ function Navigation({ userId }) {
           Create a new project
         </Button>
         <Link to={`/projects/${userId}`}>Projects </Link>
+        <Link to={`/forms/source-form`}>Source Management </Link>
       </div>
     </>
   );
