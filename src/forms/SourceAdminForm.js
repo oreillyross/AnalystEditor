@@ -6,9 +6,13 @@ export default function SourceAdminForm() {
   return (
     <div>
       <form>
-        <input name="name" />
-        <input type="url" name="url" />
-        <textarea name="keywords" name="keywords" />
+        <input placeholder="source name" name="name" />
+        <input type="url" name="url" placeholder="homepage of website" />
+        <textarea
+          name="keywords"
+          name="keywords"
+          placeholder="list of keywords delimited by a comma"
+        />
         <select>
           <option>every 5 mins</option>
           <option>every 1 hour</option>
