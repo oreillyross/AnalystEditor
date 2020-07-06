@@ -1,11 +1,12 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
+import styles from "./SourceAdminForm.module.css";
 
 //TODO needs to show name, url, keywords, frequency (1hr, 3hrs, 6hrs etc.)
 export default function SourceAdminForm() {
   return (
     <div>
-      <form>
+      <form className={styles.form}>
         <input placeholder="source name" name="name" />
         <input type="url" name="url" placeholder="homepage of website" />
         <textarea

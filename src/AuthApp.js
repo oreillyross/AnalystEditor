@@ -4,7 +4,7 @@ import Home from "./components/Home";
 import * as ROUTES from "./constants/routes";
 import NotFound from "./components/NotFound";
 import Navigation from "./components/Navigation";
-import SourceAdminForm from "./forms/SourceAdminForm";
+import SourceAdmin from "./Source/SourceAdmin";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_USER } from "./queries";
 import { Button } from "semantic-ui-react";
@@ -39,7 +39,7 @@ function AuthApp({ authUser }) {
         </div>
         <Router>
           <Home path={ROUTES.HOME} />
-          <SourceAdminForm path={ROUTES.SOURCE_ADMIN_FORM} />
+          <SourceAdmin path={ROUTES.SOURCE_ADMIN_FORM} />
           <NotFound default />
         </Router>
       </main>
