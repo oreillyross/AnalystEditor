@@ -28,26 +28,31 @@ function AuthApp({ authUser }) {
   }, [data]);
 
   return (
-    <div className="container">
-      <header className="header"></header>
-      <aside className="nav">
-        <Navigation />
-      </aside>
-      <main className="main">
-        <div>
-          {data && <span>Current logged in user is: {data.Users[0].name}</span>}
-        </div>
-        <Router>
-          <Home path={ROUTES.HOME} />
-          <SourceAdmin path={ROUTES.SOURCE_ADMIN_FORM} />
-          <NotFound default />
-        </Router>
-      </main>
-      <footer className="footer">
-        Used to show metadata information on what is presented in the main
-        screen
-      </footer>
-    </div>
+    <>
+      <div className="spinner-border text-primary"></div>
+      <div className="container">
+        <header className="header"></header>
+        <aside className="nav">
+          <Navigation />
+        </aside>
+        <main className="main">
+          <div>
+            {data && (
+              <span>Current logged in user is: {data.Users[0].name}</span>
+            )}
+          </div>
+          <Router>
+            <Home path={ROUTES.HOME} />
+            <SourceAdmin path={ROUTES.SOURCE_ADMIN_FORM} />
+            <NotFound default />
+          </Router>
+        </main>
+        <footer className="footer">
+          Used to show metadata information on what is presented in the main
+          screen
+        </footer>
+      </div>
+    </>
   );
 }
 

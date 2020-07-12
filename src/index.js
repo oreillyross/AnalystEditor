@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import "bootstrap/dist/css/bootstrap.css";
 import Firebase, { FirebaseContext } from "./components/Firebase";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
