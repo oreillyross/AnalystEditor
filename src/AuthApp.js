@@ -29,7 +29,6 @@ function AuthApp({ authUser }) {
 
   return (
     <>
-      <div className="spinner-border text-primary"></div>
       <div className="container">
         <header className="header"></header>
         <aside className="nav">
