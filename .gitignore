@@ -6,3 +6,4 @@ src/temp.js
 node_modules
 *.swp
 *.log
+dist/

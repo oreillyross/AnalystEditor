@@ -75,5 +75,12 @@
     "lint-staged": "^10.0.8",
     "pre-commit": "^1.2.2",
     "prettier": "1.19.1"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/compilers/react@1.0.20"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
   }
 }

@@ -2,31 +2,34 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import styles from "./SourceAdminForm.module.css";
 
-//TODO needs to show name, url, keywords, frequency (1hr, 3hrs, 6hrs etc.)
 export default function SourceAdminForm() {
   return (
     <div>
       <Formik
-        initialValues={{ name: "", url: "", keywords: "" }}
-        onSubmit={e => {
-          console.log("in submit form");
+        initialValues={{ name: "", url: "", keywords: "", frequency: "5 mins" }}
+        onSubmit={values => {
+          console.log(values);
         }}
       >
-        {({ handleSubmit }) => (
-          <form onSubmit={handleSubmit} className={styles.form}>
+        {({ handleSubmit, handleChange, values }) => (
+          <Form className={styles.form}>
             <div className="form-group">
-              <label for="name"> Souce Name</label>
+              <label htmlFor="name"> Source Name</label>
               <input
+                onChange={handleChange}
+                value={values.name}
                 className="form-control"
                 placeholder="source name"
                 name="name"
               />
             </div>
             <div className="form-group">
-              <label for="url">Website url</label>
+              <label htmlFor="url">Website url</label>
               <input
+                onChange={handleChange}
+                value={values.url}
                 className="form-control"
-                type="url"
+                // type="url"
                 name="url"
                 placeholder="homepage of website"
               />
@@ -34,6 +37,8 @@ export default function SourceAdminForm() {
             <div className="form-group">
               <label>Keywords</label>
               <textarea
+                onChange={handleChange}
+                value={values.keywords}
                 className="form-control"
                 name="keywords"
                 name="keywords"
@@ -41,9 +46,11 @@ export default function SourceAdminForm() {
               />
             </div>
             <div className="form-group">
-              <label for="frequency">Enter a search frequency</label>
+              <label htmlFor="frequency">Enter a search frequency</label>
               <select
                 name="frequency"
+                onChange={handleChange}
+                value={values.frequency}
                 className="custom-select custom-select-sm"
               >
                 <option>every 5 mins</option>
@@ -59,7 +66,7 @@ export default function SourceAdminForm() {
                 Submit{" "}
               </button>
             </div>
-          </form>
+          </Form>
         )}
       </Formik>
     </div>
