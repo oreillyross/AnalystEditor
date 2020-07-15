@@ -22,6 +22,25 @@ export const GET_SOURCE_SCRAPING = gql`
   }
 `;
 
+export const ADD_SOURCE_SCRAPING = gql`
+  mutation addSourceScraping(
+    $frequency: Int = 10
+    $project_id: uuid = ""
+    $source_id: uuid = ""
+  ) {
+    insert_Source_Scraping(
+      objects: {
+        project_id: $project_id
+        scraping: false
+        frequency: $frequency
+        source_id: $source_id
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
+
 export const GET_KEYWORDS = gql`
   query getKeywords {
     Keywords(order_by: { name: asc }) {

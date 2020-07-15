@@ -11,6 +11,9 @@ import { Button } from "semantic-ui-react";
 import "./AuthApp.css";
 
 function AuthApp({ authUser }) {
+  //TODO Remove hardcoded projectID and use the auth user projects instead
+  const authAppContext = React.createContext();
+
   //TODO Hardcoded the uid for a user to ease completion of UI etc.
 
   const authenticatedUser = authUser || { uid: "PPLUT0mIGZbGZlOnZ4qFAmPzO9H2" };
@@ -28,7 +31,11 @@ function AuthApp({ authUser }) {
   }, [data]);
 
   return (
-    <>
+    <authAppContext.Provider
+      value={{
+        projectId: "ec214cf2-ba69-4d70-9bb6-43c91ad2fda7"
+      }}
+    >
       <div className="container">
         <header className="header"></header>
         <aside className="nav">
@@ -51,7 +58,7 @@ function AuthApp({ authUser }) {
           screen
         </footer>
       </div>
-    </>
+    </authAppContext.Provider>
   );
 }
 
