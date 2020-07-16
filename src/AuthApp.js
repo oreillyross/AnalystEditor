@@ -12,9 +12,6 @@ import "./AuthApp.css";
 import { AuthAppProvider } from "./utils/context";
 
 function AuthApp({ authUser }) {
-  //TODO Remove hardcoded projectID and use the auth user projects instead
-  const authAppContext = React.createContext();
-
   //TODO Hardcoded the uid for a user to ease completion of UI etc.
 
   const authenticatedUser = authUser || { uid: "PPLUT0mIGZbGZlOnZ4qFAmPzO9H2" };
