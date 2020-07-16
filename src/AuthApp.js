@@ -9,6 +9,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_USER } from "./queries";
 import { Button } from "semantic-ui-react";
 import "./AuthApp.css";
+import { AuthAppProvider } from "./utils/context";
 
 function AuthApp({ authUser }) {
   //TODO Remove hardcoded projectID and use the auth user projects instead
@@ -31,11 +32,7 @@ function AuthApp({ authUser }) {
   }, [data]);
 
   return (
-    <authAppContext.Provider
-      value={{
-        projectId: "ec214cf2-ba69-4d70-9bb6-43c91ad2fda7"
-      }}
-    >
+    <AuthAppProvider>
       <div className="container">
         <header className="header"></header>
         <aside className="nav">
@@ -58,7 +55,7 @@ function AuthApp({ authUser }) {
           screen
         </footer>
       </div>
-    </authAppContext.Provider>
+    </AuthAppProvider>
   );
 }
 
