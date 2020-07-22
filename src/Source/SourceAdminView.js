@@ -17,7 +17,12 @@ export default function SourceAdminView() {
     if (source_data && source_data.Source_Scraping) {
       const rows = source_data.Source_Scraping.map(sc => ({
         col1: sc.Source.name,
-        col2: sc.frequency
+        col2: sc.frequency,
+        col3: sc.scraping ? "On" : "Off",
+        col4: sc.Source_Scraping_Keywords.reduce(
+          (acc, keyword) => acc + ", " + keyword.Keyword.name,
+          ""
+        )
       }));
       setData(rows);
     }
@@ -32,6 +37,14 @@ export default function SourceAdminView() {
       {
         Header: "Frequency",
         accessor: "col2"
+      },
+      {
+        Header: "On/Off",
+        accessor: "col3"
+      },
+      {
+        Header: "Keywords",
+        accessor: "col4"
       }
     ],
     []

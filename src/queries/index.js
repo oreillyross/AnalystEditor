@@ -18,6 +18,11 @@ export const GET_SOURCE_SCRAPING = gql`
       Source {
         name
       }
+      Source_Scraping_Keywords {
+        Keyword {
+          name
+        }
+      }
     }
   }
 `;
