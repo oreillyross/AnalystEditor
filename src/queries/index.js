@@ -158,6 +158,7 @@ export const GET_ARTICLES = gql`
       published
       author
       url
+      status
       Article_Events {
         Article {
           Article_Events_aggregate {

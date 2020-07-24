@@ -26,6 +26,7 @@ import {
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { navigate } from "@reach/router";
 import PropTypes from "prop-types";
+import * as ROUTES from "../constants/routes";
 
 const eventValidationSchema = new yup.object({
   eventText: yup.string().required()
@@ -45,7 +46,6 @@ EventForm.propTypes = {
 };
 
 function EventForm({ location }) {
-  console.log("am I really getting called");
   const eventText = location.state.selectedText;
   const article = location.state.article;
   const articleId = location.state.article.id;
@@ -102,7 +102,7 @@ function EventForm({ location }) {
             return "success";
           });
 
-          navigate("/events");
+          navigate(ROUTES.EVENTS);
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => {

@@ -7,7 +7,8 @@ import { StyledHeader } from "../styles/common";
 import { GET_ARTICLES } from "../queries";
 import { Loading } from "../components/Loading";
 
-function Articles({ navigate }) {
+function Articles(props) {
+  console.log("PROPS: ", props);
   const { loading, error, data } = useQuery(GET_ARTICLES);
   const [article, setArticle] = React.useState({});
   const viewArticle = row => {
@@ -36,7 +37,7 @@ function Articles({ navigate }) {
           <Button
             style={{ margin: "0 2rem" }}
             onClick={() => {
-              navigate("/forms/newarticle");
+              props.navigate("/forms/newarticle");
             }}
             basic
             color="blue"
