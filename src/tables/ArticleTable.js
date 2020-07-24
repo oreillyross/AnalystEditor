@@ -6,7 +6,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
+import { Button } from "reactstrap";
 import { makeStyles } from "@material-ui/core/styles";
 import Moment from "react-moment";
 
@@ -39,11 +39,7 @@ function ArticleTable({ articles, viewArticle, navigate }) {
                 <Moment>{row.published}</Moment>
               </TableCell>
               <TableCell>
-                <Button
-                  onClick={() => viewArticle(row)}
-                  component="a"
-                  fullWidth
-                >
+                <Button onClick={() => viewArticle(row)} component="a">
                   {row.title}
                 </Button>
               </TableCell>

@@ -32,11 +32,12 @@ export const ADD_SOURCE_SCRAPING = gql`
     $frequency: Int = 10
     $project_id: uuid = ""
     $source_id: uuid = ""
+    $scraping: Boolean = false
   ) {
     insert_Source_Scraping(
       objects: {
         project_id: $project_id
-        scraping: false
+        scraping: $scraping
         frequency: $frequency
         source_id: $source_id
       }

@@ -51,7 +51,8 @@ export default function SourceAdminForm() {
             variables: {
               project_id: prj.project_id,
               source_id: values.source_id,
-              frequency: values.frequency.value
+              frequency: values.frequency.value,
+              scraping: values.scraping
             }
           });
         }}

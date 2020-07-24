@@ -45,6 +45,7 @@ EventForm.propTypes = {
 };
 
 function EventForm({ location }) {
+  console.log("am I really getting called");
   const eventText = location.state.selectedText;
   const article = location.state.article;
   const articleId = location.state.article.id;

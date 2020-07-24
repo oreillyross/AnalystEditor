@@ -10,6 +10,9 @@ import { GET_USER } from "./queries";
 import { Button } from "semantic-ui-react";
 import "./AuthApp.css";
 import { AuthAppProvider } from "./utils/context";
+import Articles from "./views/Articles";
+import { Events } from "./views/Events";
+import EventForm from "./forms/EventForm";
 
 function AuthApp({ authUser }) {
   //TODO Hardcoded the uid for a user to ease completion of UI etc.
@@ -31,7 +34,7 @@ function AuthApp({ authUser }) {
   return (
     <AuthAppProvider>
       <div className="container">
-        <header className="header"></header>
+        <header className="header">Horizon - investigating the future</header>
         <aside className="nav">
           <Navigation />
         </aside>
@@ -44,6 +47,9 @@ function AuthApp({ authUser }) {
           <Router>
             <Home path={ROUTES.HOME} />
             <SourceAdmin path={ROUTES.SOURCE_ADMIN_FORM} />
+            <Articles path={ROUTES.SCRAPED_ARTICLES} />
+            <Events path={ROUTES.EVENTS} />
+            <EventForm path={ROUTES.EVENT_FORM} />
             <NotFound default />
           </Router>
         </main>

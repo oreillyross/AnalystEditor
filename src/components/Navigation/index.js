@@ -12,8 +12,10 @@ function Navigation({ userId }) {
         <Button basic color="blue">
           Create a new project
         </Button>
-        <Link to={`/projects/${userId}`}>Projects </Link>
-        <Link to={`/forms/source-form`}>Source Management </Link>
+        <Link to={ROUTES.SOURCE_ADMIN_FORM}>Source Management </Link>
+        <Link to={ROUTES.SCRAPED_ARTICLES}>Scraped Articles </Link>
+        <Link to={ROUTES.EVENTS}>Events </Link>
+        <Link to={ROUTES.EVENT_FORM}>Event form </Link>
       </div>
     </>
   );

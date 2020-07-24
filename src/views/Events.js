@@ -11,6 +11,7 @@ function Events() {
   if (loading) return <Loading message="getting latest events..." />;
   if (error) return <div>Oops</div>;
   if (data) {
+    console.log("events: ", data);
     return (
       <Paper>
         Events view

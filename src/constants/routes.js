@@ -7,3 +7,6 @@ export const ADMIN = "/admin";
 export const PASSWORD_FORGET = "/pw-forget";
 export const PROJECTS_BY_USER = "/projects/:userId";
 export const SOURCE_ADMIN_FORM = "/forms/source-form";
+export const SCRAPED_ARTICLES = "/views/scraped-articles";
+export const EVENTS = "/views/events";
+export const EVENT_FORM = "/forms/event-form";
