@@ -1,0 +1,27 @@
+.form_body {
+	border: 2px solid gold;
+	min-height: 200px;
+	margin: 12px;
+	padding: 12px;
+}
+
+table { 
+  border: solid 1px blue; 
+}
+
+th {
+	border-bottom: solid 3px red;
+	background-color: aliceblue;
+	color: black;
+	font-weight: bold;
+}
+
+td { 
+	padding: 10px;
+	border:  solid 1px grey;
+	background: papayawhip;
+}
+
+.sort {
+	background: 'red'
+}

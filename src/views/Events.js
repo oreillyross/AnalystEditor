@@ -1,5 +1,4 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
 import { EventTable } from "../tables/EventTable";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_EVENTS } from "../queries";
@@ -11,15 +10,7 @@ function Events() {
   if (loading) return <Loading message="getting latest events..." />;
   if (error) return <div>Oops</div>;
   if (data) {
-    console.log("events: ", data);
-    return (
-      <Paper>
-        Events view
-        <div>
-          <EventTable events={data.Events} />
-        </div>
-      </Paper>
-    );
+    return <EventTable events={data.Events} />;
   }
 }
 
