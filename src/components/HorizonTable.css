@@ -16,6 +16,11 @@ th {
 	font-weight: bold;
 }
 
+th svg { 
+	float: right;
+	margin: 3px 3px;
+}
+
 td { 
 	padding: 10px;
 	border:  solid 1px grey;
