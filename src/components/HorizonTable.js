@@ -1,7 +1,12 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
 import "./HorizonTable.css";
-import { FaSortAlphaDown, FaSortAlphaUp } from "react-icons/fa";
+import {
+  FaSortAlphaDown,
+  FaSortAlphaUp,
+  FaCaretDown,
+  FaCaretRight
+} from "react-icons/fa";
 import { IconContext } from "react-icons";
 
 function HorizonTable(props) {
@@ -17,7 +22,6 @@ function HorizonTable(props) {
   } = tableInstance;
   return (
     <div className="form_body">
-      {" "}
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map(headerGroup => {

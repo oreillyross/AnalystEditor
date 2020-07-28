@@ -1,6 +1,6 @@
 .container {
   display: grid;
-  grid-template: 200px 1fr 1fr / repeat(12, 1fr);
+  grid-template: 80px 1fr 1fr / repeat(12, 1fr);
   grid-template-areas:
   " h h h h h h h h h h h h"
   " n n c c c c c c c c c c"
@@ -22,6 +22,9 @@
 }
 
 .header {
+  text-align: center;
+  font-size: 24px;
+  padding: 12px;
   grid-area: h;
 }
 

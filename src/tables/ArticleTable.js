@@ -15,11 +15,11 @@ function getData(articles) {
 function getColumns() {
   const columns = [
     { Header: "Status", accessor: "status" },
+    { Header: "Published", accessor: "published" },
     {
       Header: "Title",
       accessor: "title"
-    },
-    { Header: "Published", accessor: "published" }
+    }
   ];
   return columns;
 }
