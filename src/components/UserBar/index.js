@@ -35,7 +35,7 @@ function UserBar({ authUser, firebase }) {
           Sign out{" "}
         </StyledA>
       ) : (
-        <StyledA href="/signin"> Sign in </StyledA>
+        <>Sign In</>
       )}
       <Spacer />{" "}
     </StyledBar>

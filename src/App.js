@@ -18,8 +18,8 @@ function App({ firebase }) {
 
   return (
     <>
-      <UserBar authUser={authUser} />
-      <AuthApp authUser={authUser} />
+      <UserBar />
+      <AuthApp />
     </>
   );
 }

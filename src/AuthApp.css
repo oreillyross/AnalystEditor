@@ -1,4 +1,4 @@
-.container {
+.main_container {
   display: grid;
   grid-template: 80px 1fr 1fr / repeat(12, 1fr);
   grid-template-areas:
@@ -13,11 +13,14 @@
   justify-content: top;
   grid-area: n;
   padding: 1rem;
+  border: 1px solid red;
 
 }
 
 .main {
   grid-area: c;
+  min-height: 80vh;
+  border: 1px solid green;
 
 }
 
@@ -26,8 +29,10 @@
   font-size: 24px;
   padding: 12px;
   grid-area: h;
+  border: 1px solid yellow;
 }
 
 .footer {
-  grid-area: f
+  grid-area: f;
+  border: 1px solid purple;
 }

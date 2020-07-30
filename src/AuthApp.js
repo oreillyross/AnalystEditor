@@ -33,17 +33,10 @@ function AuthApp({ authUser }) {
 
   return (
     <AuthAppProvider>
-      <div className="container">
+      <div className="main_container">
         <header className="header">Horizon - investigating the future</header>
-        <aside className="nav">
-          <Navigation />
-        </aside>
+        <aside className="nav"></aside>
         <main className="main">
-          <div>
-            {data && (
-              <span>Current logged in user is: {data.Users[0].name}</span>
-            )}
-          </div>
           <Router>
             <Home path={ROUTES.HOME} />
             <SourceAdmin path={ROUTES.SOURCE_ADMIN_FORM} />
