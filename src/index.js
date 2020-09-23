@@ -21,16 +21,15 @@ const client = new ApolloClient({
   link: alink.concat(link),
   cache: new InMemoryCache(),
   fetchOptions: {
-    mode: "cors"
+    mo
+    de: "cors"
   }
 });
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <FirebaseContext.Provider value={new Firebase()}>
-    <ApolloProvider client={client}>
+ 
       <App />
-    </ApolloProvider>
-  </FirebaseContext.Provider>,
+  ,
   rootElement
 );
