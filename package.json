@@ -19,7 +19,7 @@
     "apollo-link-schema": "1.2.4",
     "bootstrap": "^4.5.0",
     "bootstrap4-toggle": "^3.6.1",
-    "downshift": "5.0.3",
+    "downshift": "6.1.1",
     "firebase": "^7.15.0",
     "firebaseui": "^4.6.1",
     "formik": "2.1.4",
