@@ -12,19 +12,18 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import httplink from "./http-link";
 import errorlink from "./error-link";
-import { alink } from "./alink.js";
+//import { alink } from "./alink.js";
 
 const link = new ApolloLink.from([errorlink, httplink]);
 
 // the Apollo cache is set up automatically
-const client = new ApolloClient({
-  link: alink.concat(link),
-  cache: new InMemoryCache(),
-  fetchOptions: {
-    mo
-    de: "cors"
-  }
-});
+// const client = new ApolloClient({
+//   link: alink.concat(link),
+//   cache: new InMemoryCache(),
+//   fetchOptions: {
+//     mode: "cors"
+//   }
+// });
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

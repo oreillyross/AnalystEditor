@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-    <div>What the fuck</div>
+    <div>App is back up</div>
     </>
   );
 }
